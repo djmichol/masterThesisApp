@@ -1,0 +1,27 @@
+<div class="panel-login text-center">
+	<form name="singUpForm" class="col-sm-12 text-center">
+		<p class="row">
+			Name:
+		</p>
+		<p class="row">
+			<input type="text" ng-model="name"></input>
+		</p>
+		<p class="row">
+			E-mail:
+		</p>
+		<p class="row">
+			<input name="singInMail" type="email" ng-model="mail"></input>
+		</p>
+		<p class="row">
+			<span ng-show="!singUpForm.singInMail.$valid">E-mail wrong format</span></p>
+		<p class="row">
+			Password:
+		</p>
+		<p class="row">
+			<input type="password" ng-model="password"></input>
+		</p>
+		<p class="row">
+			<button ng-click="singUp()" ng-disabled="!singUpForm.singInMail.$valid || name==null || mail==null || password==null ">Sing Up</button>
+		</p>
+	</form>
+</div>

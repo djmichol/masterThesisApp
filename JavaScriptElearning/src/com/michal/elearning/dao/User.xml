@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="User">
+
+	<typeAlias alias="User" type="com.michal.elearning.dao.User" />	
+	
+	<resultMap id="UserMap" class="User" >
+		<result property="name" column="usr_name" />
+		<result property="mail" column="usr_mail" />
+		<result property="password" column="usr_password" />	
+		<result property="id" column="usr_id" />	
+	</resultMap>
+
+	<select id="getUser" resultMap="UserMap" parameterClass="java.util.Map">
+	   select 
+	   	* 
+	   from 
+	   	users 
+	   where 
+	    usr_mail = #mail#
+	   	and usr_password = #password#
+	</select>
+	
+	<select id="getUserRoles" resultClass="String" parameterClass="int">
+	   	select 
+	   		rol_name
+	   	from 
+	   		roles
+	   	join users_in_roles on rol_id=usr_rol_rol_id
+		where usr_rol_usr_id=#id#
+	</select>
+	
+</sqlMap>

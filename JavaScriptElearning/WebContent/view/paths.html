@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+	<banner-directive name="banner.jpg"></banner-directive>
+	<div class="panel-default text-center">
+		<div class="grid-col-12">
+			<h2>Language Skills</h2>
+			<p>Learn core programming concepts and syntax for the world's most popular languages.</p>
+			<div class="grid-row" ng-init="getAllPath()">
+				<path-card-directive ng-repeat="pathCard in pathCards" path="pathCard"></path-card-directive>
+			</div>
+		</div>
+	</div>
+</html>

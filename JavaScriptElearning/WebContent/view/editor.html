@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<div class="lesson">	
+		<div id="mySidenav" class="sidenav" uib-collapse="isCollapsedHorizontal">
+		  <a href="javascript:void(0)" class="closebtn" ng-click="isCollapsedHorizontal = !isCollapsedHorizontal">&times;</a>
+		  <a ng-repeat="lesson in lessons">{{lesson.lesson_title}}</a>
+		</div>
+
+		<div class="lesson-left-bar col-lg-2 col-md-3 col-sd-2 text-center">
+			<div class="lesson-left-bar-title">
+				{{lesson.path_title}}
+			</div>
+			<div class="lesson-left-bar-wraper">
+				<h3>{{lesson.lesson_title}}</h3>
+				<div class="lesson-left-bar-article">
+					{{lesson.article}}
+				</div>
+				<div class="lesson-left-bar-instruction">
+					<div class="instruction-header">Instrukcja</div>
+					<div class="instruction-element" ng-repeat="instruction in lesson.instructions">{{instruction}}</div>
+				</div>
+			</div>
+		</div>
+		<div class="lesson-middle col-lg-10 col-md-9 col-sd-10">
+			<uib-tabset active="active" class="editor-tabset" >
+				<uib-tab index="$index + 1" ng-repeat="tab in lesson.tabs" heading="{{tab.title}}" disable="tab.disabled">
+					<editor-directive content="tab" ng-init="initEditor(tab.editor_content)"></editor-directive>
+					<div class="action-bar">
+						<div class="btn-primary submit-button" ng-click="saveEditor(tab.editor_content_edited)">Save and submit</div>
+						<div class="btn-default reset-button" ng-click="clearEditor(tab.editor_content)">Clear</div>
+					</div>
+					<div class="lesson-right-bar">
+						RESULT
+					</div>
+				</uib-tab>
+			</uib-tabset>				
+		</div>
+		<div class="sidebar-toogle">
+			<span class="glyphicon glyphicon-menu-hamburger" ng-click="isCollapsedHorizontal = !isCollapsedHorizontal"></span>
+		</div>
+	</div>
+</html>

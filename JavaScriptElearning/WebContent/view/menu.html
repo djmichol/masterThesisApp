@@ -1,0 +1,17 @@
+<header class="navbar" ng-controller="MenuController">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="#">LOGO</a>
+	</div>
+	<ul class="nav navbar-nav">
+		<li ng-repeat="menuElement in menuElements">
+			<a href="{{ menuElement.value }}">{{ menuElement.label }}</a>
+		</li>
+	</ul>
+	 <ul class="nav navbar-nav navbar-right" ng-show="!isUserLoged()">
+      <li><a href="#/singUp"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="#/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+     <ul class="nav navbar-nav navbar-right" ng-show="isUserLoged()">
+      <li><a href="" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+    </ul>
+</header>	

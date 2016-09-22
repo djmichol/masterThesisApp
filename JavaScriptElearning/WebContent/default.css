@@ -1,0 +1,327 @@
+body{
+	background-color: #fafafa;
+	overflow-y: auto;
+}
+
+.footer {
+	background-color: #263F3F;
+	border: none;
+	color: #FFF8F4;
+	display: block;
+	padding: 1px 30px 1px 30px;
+	margin-left: 0px;
+	margin-right: 0px;
+	max-height: 22px;
+}
+
+.footer-list {
+	list-style-type: none;
+	padding-left: 0;
+	margin-bottom: 1px;
+}
+
+.footer-list a{
+	color: #FFF8F4; 	
+}
+
+.footer-copyright{
+	margin: 0 0 0px;
+}
+
+.banner img {
+	max-height:180px;
+	width:100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.navbar{
+	border: none;
+	border-radius: 0px;
+	padding: 0px 30px 0px 30px;
+	box-shadow: 0 3px 3px rgba(0,0,0,0.175);
+	margin-bottom: 1px;
+	background-color: #00bcd4;
+}
+
+.navbar-right{
+	margin-right:30px;
+}
+
+.navbar-menu-element{
+	color: #ffffff;
+}
+
+.navbar- .navbar-brand{
+	color: #ffffff;
+}
+
+.navbar .navbar-nav li a{ 
+	color: #ffffff;
+}
+
+.navbar .navbar-nav li a:focus{
+	color: #000000;
+	background-color: #408080;
+	
+}
+
+.nav > li > a:hover{
+	background-color: #408080;
+}
+
+.panel-default{
+	width:90%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 0px;
+	border: none;
+	box-shadow: none;
+	border-radius: 0px;
+	padding-bottom:15px;
+	background-color: #fafafa;
+}
+
+.panel-login{
+	width:70%;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 18px;
+ 	min-height: 200px;
+ 	padding-top: 30px; 	
+	background-color: #fafafa;
+}
+
+.content{
+	margin-top:1px;
+	padding-bottom:15px;
+	overflow-y: auto;
+	overflow-x: auto;
+}
+
+.card{
+	position: relative;
+	cursor: pointer;
+	background-color: #ffffff;
+	width: 48%;
+	height:100%;
+	float: left;
+	box-shadow: 0 3px 3px rgba(0,0,0,0.175);
+	margin: 1%;
+}
+
+.card:hover{
+	background-color: #00bcd4;
+	color: #ffffff;
+}
+
+.lesson-left-bar{
+	background-color: #fafafa;
+	color: #333;	
+	box-sizing: border-box;
+	display: block;
+	height: 100%; /* 100% Full-height */
+	padding-right: 0px;
+	padding-left: 0px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.lesson-middle{
+	background-color: #004b54;
+	height: 100%;
+	padding-right: 0px;
+	padding-left: 0px;
+}
+
+.lesson-right-bar{
+	background-color: green;
+	position: absolute;
+	float: right;
+	top: 40px;
+	bottom: 50px;
+	right: 5px;
+	width: 30%;
+	z-index: 1;
+}
+
+.lesson{
+	height: 100%;
+	width: 100%;
+	position: fixed;
+	padding-bottom: 73px;
+	line-height: 22px;
+}
+
+.action-bar{
+	border-top: 1px solid #0b0e10;
+	background-color: #004b54;
+	height: 50px;
+	width: 100%;
+	position: fixed;
+	bottom: 20px;
+	z-index: 6;
+}
+
+.submit-button{
+	height: 38px !important;
+	padding: 0 0.9em !important;
+	line-height: 38px;
+	cursor: pointer;
+	border-radius: 3px;
+	border: 1px solid transparent;
+	font-weight: bold !important;
+	display: inline-block;
+	margin-top: 4px;
+	margin-left: 5px;
+}
+
+.reset-button{
+	height: 38px !important;
+	padding: 0 0.9em !important;
+	line-height: 38px;
+	cursor: pointer;
+	border-radius: 3px;
+	border: 1px solid transparent;
+	font-weight: bold !important;
+	display: inline-block;
+	margin-top: 4px;
+}
+
+.lesson-left-bar-title{
+	border-bottom: 1px solid rgba(0,0,0,0.15);
+	width: 100%;
+	font-size: 15px;
+	line-height: 22px;
+}
+
+.instruction-header{
+	border-top: 1px solid #c5dfea;
+	border-bottom: 1px solid #c5dfea;
+	line-height: 2.4em;
+	font-weight: bold;
+}
+
+.instruction-element{
+	
+}
+
+.lesson-left-bar-article{
+	padding-bottom: 5px;
+}
+
+.lesson-left-bar-instruction{
+	height: 100%;
+}
+
+.nav-tabs{
+	border-bottom: 1px solid #0b0e10;
+}
+
+.nav-tabs > li.active > a{
+	color: #ffffff;
+	background-color: #00707F;
+	border: none;
+	border-radius: 0;
+}
+
+.nav-tabs > li.active > a:focus{
+	color: #ffffff;
+	background-color: #00707F;
+	border: none;
+	border-radius: 0;
+}
+
+.nav-tabs > li.active > a:hover{
+	color: #ffffff;
+	background-color: #00707F;
+	border: none;
+	border-radius: 0;
+}
+
+#editor {
+    margin: 0;
+    position: absolute;
+    top: 40px;
+	bottom: 50px;
+    left: 0;
+    right: 30.5%;
+    border-radius: 0px;
+	border: none;
+}
+
+.sidenav {
+    height: 100%;
+    width: 12%;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+}
+
+.alert-dismissible .close{
+	right: 5px;
+}
+
+.sidenav a:hover, .offcanvas a:focus{
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 15px;
+    font-size: 36px;
+}
+
+.sidebar-toogle{
+	position: fixed;
+	top: 15px;
+	left: 15px;
+	cursor: pointer;
+}
+
+.alert{
+	padding: 5px;
+	width: 60%;
+	margin: auto;
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
+@media all and (max-width: 995px) {
+    
+    .lesson-left-bar{
+		position: fixed;
+		width: 200px;
+	}
+	
+	.lesson-middle{
+		position: fixed;
+		width: 100%;
+		left: 200px;
+	}
+	
+	.action-bar{
+		position: fixed;
+		width: 100%;
+		left: 200px;
+	}
+}
+
+@media all and (max-width: 770px) {
+	.navbar{
+		display: none;
+	}
+}
