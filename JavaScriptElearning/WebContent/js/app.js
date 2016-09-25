@@ -16,10 +16,20 @@ var app = angular.module("ElearningApp", ["ngRoute","ngStorage",'ui.bootstrap'])
 	//routing do sciezek nauki
 	$routeProvider.when("/paths", {
         templateUrl: "view/paths.html",
-		controller: "CardController"
+		controller: "LessonController"
     });
+	//routing do lekcji nauki
+	$routeProvider.when("/lessons/:pathId", {
+        templateUrl: "view/lessonsList.html",
+		controller: "LessonController"
+    });	
 	//routing do edytore 
 	$routeProvider.when("/editor", {
+        templateUrl: "view/editor.html",
+		controller: "EditorController"
+    });
+	//routing do edytora z lekcja
+	$routeProvider.when("/editor/:lessonId", {
         templateUrl: "view/editor.html",
 		controller: "EditorController"
     });
@@ -42,12 +52,12 @@ app.factory('BearerAuthInterceptor', function ($window, $q,$rootScope) {
         },
         responseError: function(response) {
             if (response.status === 401) {
-            	$rootScope.addAlert('danger','401');
+            	$rootScope.addAlert('danger','Dostęp dla zalogowanych użytkowników.');
             }
             if (response.status === 403) {
-                alert("403");
+            	$rootScope.addAlert('danger','Brak dostępu.');
             }
-            return response || $q.when(response);
+            return $q.reject(response);
         }
     };
 });
@@ -63,6 +73,7 @@ app.run(function ($rootScope, $location) {
 
     $rootScope.$on('$routeChangeSuccess', function() {
         history.push($location.$$path);
+        $rootScope.alerts = [];
     });
 
     $rootScope.back = function () {

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Lesson">
+
+	<typeAlias alias="Lesson" type="com.michal.elearning.dao.Lesson" />	
+	<typeAlias alias="LessonTabs" type="com.michal.elearning.dao.LessonTabs" />	
+	
+	<resultMap id="LessonMap" class="Lesson" >
+		<result property="title" column="lesson_title" />	
+		<result property="id" column="lesson_id" />	
+		<result property="brief" column="lesson_brief" />
+		<result property="article" column="lesson_article" />	
+	</resultMap>
+	
+	<resultMap id="LessonTabMap" class="LessonTabs" >
+		<result property="name" column="tabs_name" />
+		<result property="id" column="tabs_id" />
+		<result property="content" column="tabs_editor_content" />	
+		<result property="contentSubmit" column="tabs_editor_submit" />
+		<result property="editorResult" column="tabs_editor_result" />	
+	</resultMap>
+
+	<select id="getLessonsForPath" resultMap="LessonMap" parameterClass="int">
+	   select lesson_id,lesson_title,lesson_brief,lesson_article from lessons where lesson_path_id=#value#
+	</select>
+	
+	<select id="getLessonInstructions" resultClass="String" parameterClass="int">
+		SELECT instr_content FROM lesson_instruction WHERE instr_lesson_id=#value#	
+	</select> 
+	
+	<select id="getLesonTabs" resultMap="LessonTabMap" parameterClass="int">
+		SELECT tabs_id,tabs_name,tabs_editor_content,tabs_editor_submit,tabs_editor_result 
+		FROM lesson_tabs
+		WHERE tabs_lesson_id=#value#
+	</select>
+</sqlMap>

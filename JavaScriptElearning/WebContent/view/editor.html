@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
-	<div class="lesson">	
+	<div class="lesson" ng-init="initLesson()">	
 		<div id="mySidenav" class="sidenav" uib-collapse="isCollapsedHorizontal">
 		  <a href="javascript:void(0)" class="closebtn" ng-click="isCollapsedHorizontal = !isCollapsedHorizontal">&times;</a>
-		  <a ng-repeat="lesson in lessons">{{lesson.lesson_title}}</a>
+		  <a ng-repeat="lesson in lessons">{{lesson.title}}</a>
 		</div>
 
 		<div class="lesson-left-bar col-lg-2 col-md-3 col-sd-2 text-center">
@@ -23,11 +23,11 @@
 		</div>
 		<div class="lesson-middle col-lg-10 col-md-9 col-sd-10">
 			<uib-tabset active="active" class="editor-tabset" >
-				<uib-tab index="$index + 1" ng-repeat="tab in lesson.tabs" heading="{{tab.title}}" disable="tab.disabled">
-					<editor-directive content="tab" ng-init="initEditor(tab.editor_content)"></editor-directive>
+				<uib-tab index="$index + 1" ng-repeat="tab in lesson.tabs" heading="{{tab.name}}" disable="tab.disabled">
+					<editor-directive content="tab" ng-init="initEditor(tab.content)"></editor-directive>
 					<div class="action-bar">
-						<div class="btn-primary submit-button" ng-click="saveEditor(tab.editor_content_edited)">Save and submit</div>
-						<div class="btn-default reset-button" ng-click="clearEditor(tab.editor_content)">Clear</div>
+						<div class="btn-primary submit-button" ng-click="saveEditor()">Save and submit</div>
+						<div class="btn-default reset-button" ng-click="clearEditor(tab.content)">Clear</div>
 					</div>
 					<div class="lesson-right-bar">
 						RESULT

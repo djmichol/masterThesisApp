@@ -12,34 +12,20 @@ app.service('usersService', function($http, Base64) {
 		});
 	}
 	
-	//login function
-	this.test = function(){
-		return $http({
-			url: "http://localhost:8080/JavaScriptElearning/elearningService/auth/test",
-			method: "GET",
-			headers: {
-				'Content-Type': 'text/html'
-			}
-		});
-	}
-	
 	//singUp function
 	this.singUp = function(name, password, mail){
-		var authToken = 'Basic ' + Base64.encode(name + ':' + password);
 		var newUser = {
 			"name" : name,
 			"password" : password,
 			"mail" : mail
 		};		
-		//TODO url
-		/*return $http({
-			url: "LoginPath",
+		return $http({
+			url: "http://localhost:8080/JavaScriptElearning/elearningService/auth/createUser",
 			method: "POST",
+			data: newUser,
 			headers: {
-				'Authorization': authToken,
-				'Content-Type': 'text/html'
+				'Content-Type': 'application/json'
 			}
-		});*/
-		alert(authToken);
+		});
 	}
 });

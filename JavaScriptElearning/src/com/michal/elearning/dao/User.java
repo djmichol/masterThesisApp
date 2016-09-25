@@ -15,6 +15,12 @@ public class User implements Principal{
 		super();
 	}
 	
+	public User(String name,String password,String mail){
+		this.mail = mail;
+		this.password = password;
+		this.name = name;
+	}
+	
 	public int getId() {
 		return id;
 	}

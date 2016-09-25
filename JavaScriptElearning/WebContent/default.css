@@ -300,6 +300,15 @@ body{
 	margin-top: 5px;
 }
 
+.lessonList{
+	cursor: pointer;
+	width: 60%;
+	margin: auto;
+	background-color: #ffffff;
+	box-shadow: 0 3px 3px rgba(0,0,0,0.175);
+	
+}
+
 @media all and (max-width: 995px) {
     
     .lesson-left-bar{

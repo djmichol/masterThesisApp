@@ -1,7 +1,6 @@
 //kontroler menu
 app.controller("MenuController", function ($scope, $window) {
-	$scope.menuElements = [{label:"Learn", value: "#/paths"},{label:"Support", value:"#/support"},
-	{label:"Editor", value:"#/editor"}]; 
+	$scope.menuElements = [{label:"Learn", value: "#/paths"}]; 
 	
 	//sprawdza czy user zalogowany
 	$scope.isUserLoged = function(){
@@ -9,8 +8,7 @@ app.controller("MenuController", function ($scope, $window) {
 			 return true;
 		 }
 		 return false;
-	};
-	
+	};	
 	//log out
 	$scope.logout = function() {	
 		//informacja o zalogowanym uzytkowniku w localSotrage jako zaszyfrowany token
@@ -27,14 +25,42 @@ app.controller("FooterController", function ($scope, $interval) {
 });
 
 //kontroler kart sciezek
-app.controller("CardController", function ($scope,pageService) {
+app.controller("LessonController", function ($scope,pageService,$rootScope,$location,$routeParams) {
 	$scope.pathCards = []; 
+	$scope.lessons = []; 
+	$scope.alerts = $rootScope.alerts;
 	
-	//login
-	$scope.getAllPath = function() {	
-		pageService.getAllPath().success(function(dane,response) {
-			$scope.pathCards = dane.paths;
-        });
+	//pobierz sciezki rozwoju
+	$scope.getAllPath = function() {
+		if(typeof pageService.getPaths() == 'undefined' || pageService.getPaths().length == 0){
+			pageService.getAllPath().success(function(dane,response) {
+				$scope.pathCards = dane.paths;
+				pageService.setPaths($scope.pathCards);
+	        }).error(function(error) {
+	        	$rootScope.addAlert('danger',error);
+	        });
+		}else{
+			$scope.pathCards = pageService.getPaths();
+		}
+	};	
+	//laduje lekcje dla sciezki
+	$scope.loadLessons = function(){
+		var pathId= $routeParams.pathId;
+		pageService.getPathLessons(pathId).success(function(dane) {			
+			$scope.lessons = dane.lessons;	
+			pageService.setLessons(dane.lessons);
+        }).error(function(error) {
+        	$rootScope.addAlert('danger',error);
+        });		
+	};	
+	//przekierowanie do lekcji dla sciezki
+	$scope.redirectToLessons = function(pathId){
+		$location.path("/lessons/"+pathId);
+	};
+	//przekierowanie do edytora lekcji
+	$scope.redirectToLesson = function(lesson){
+		pageService.setSelectedLesson(lesson);
+		$location.path("/editor/"+lesson.id);
 	};
 });
 

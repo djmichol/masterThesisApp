@@ -4,18 +4,22 @@ import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.security.PermitAll;
-import javax.annotation.security.RolesAllowed;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.bind.DatatypeConverter;
 
@@ -37,13 +41,13 @@ public class AuthService {
 		String userAuth = headers.getHeaderString("log-on-user");
 		//gdy nie ma nag³ówka z info o user
 		if(userAuth==null){
-			return Response.status(Response.Status.UNAUTHORIZED).build();
+			return Response.status(Response.Status.NOT_ACCEPTABLE).entity("B³¹d logowania.").build();
 		}
 		//dekodowanie nag³ówka
         String[] lap = AuthService.decode(userAuth);
         //gdy nie mamy zdekodowanego hasla lub nazwy
         if(lap == null || lap.length != 2) {
-        	return Response.status(Response.Status.UNAUTHORIZED).build();
+        	return Response.status(Response.Status.NOT_ACCEPTABLE).entity("B³¹d logowania.").build();
         }
         //sprobuj zalogowac
         User authentificationResult = null;
@@ -54,20 +58,41 @@ public class AuthService {
 			tokenJson.put("token", token);
 			return Response.ok(tokenJson.toString()).build();
 		} catch (Exception e) {
-			throw new WebApplicationException(Response.Status.UNAUTHORIZED);
+			return Response.status(Response.Status.NOT_ACCEPTABLE).entity("B³¹d logowania.").build();
 		}	
 	}
 	
-	@RolesAllowed("admin")
-    @GET
-	@Path("/test")
-    public String getAllEmployees() 
-    {
-		JSONObject tokenJson = new JSONObject();
-		tokenJson.put("token", "abc");
-         
-        return tokenJson.toString();
-    }
+	@POST
+	@PermitAll
+	@Path("/createUser")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response createUser(String user, @Context HttpHeaders headers) throws IOException{
+		if(user== null){
+			return Response.status(Response.Status.NO_CONTENT).entity("Przes³ane dane s¹ puste").build();
+		}
+		Object result = null;
+		JSONObject userJson = new JSONObject(user);
+		User newUser = new User(userJson.getString("name"),userJson.getString("password"),userJson.getString("mail"));
+		try {
+			result = CoreDao.getSqlMapper().insert("User.insertUser", newUser);
+			if(result!=null){
+				String token = issueToken(newUser);
+				JSONObject tokenJson = new JSONObject();
+				tokenJson.put("token", token);
+				return Response.ok(tokenJson.toString()).build();
+			}else{
+				return Response.status(Response.Status.PRECONDITION_FAILED).entity("Nie mozna dodaæ uzytkownika.").build();
+			}
+		} catch (SQLException e) {
+			if(e.getCause().getClass().equals(com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException.class)){
+				return Response.status(Response.Status.PRECONDITION_FAILED).entity("Mail ju¿ istnieje w bazie danych.").build();
+			}else{
+				e.printStackTrace();
+				return Response.status(Response.Status.PRECONDITION_FAILED).entity("Inny b³¹d.").build();				
+			}
+		} 
+		
+	}
 	
 	@SuppressWarnings("unchecked")
 	private User authentification(String lap1,String lap2) throws Exception{		

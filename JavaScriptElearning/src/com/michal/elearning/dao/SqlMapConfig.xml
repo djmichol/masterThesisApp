@@ -9,7 +9,7 @@
       <dataSource type="SIMPLE">
 		
          <property name="JDBC.Driver" value="com.mysql.jdbc.Driver"/>
-         <property name="JDBC.ConnectionURL" value="jdbc:mysql://localhost:1433/elearning"/>
+         <property name="JDBC.ConnectionURL" value="jdbc:mysql://localhost:3306/elearning?autoReconnect=true&amp;useSSL=false"/>
          <property name="JDBC.Username" value="test123"/>
          <property name="JDBC.Password" value="test123"/>
 			
@@ -18,5 +18,6 @@
 	
    <sqlMap resource="com/michal/elearning/dao/User.xml"/> 
    <sqlMap resource="com/michal/elearning/dao/Path.xml"/> 
+   <sqlMap resource="com/michal/elearning/dao/Lesson.xml"/> 
 </sqlMapConfig>
 

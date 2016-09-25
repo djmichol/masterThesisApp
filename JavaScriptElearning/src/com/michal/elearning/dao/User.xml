@@ -32,4 +32,17 @@
 		where usr_rol_usr_id=#id#
 	</select>
 	
+	<insert id="insertUser" parameterClass="User">
+		INSERT INTO users (usr_name,usr_password,usr_mail)
+		VALUES (#name#,#password#,#mail#)
+		<selectKey resultClass="int" keyProperty="id">
+        	select last_insert_id() as id
+      	</selectKey> 
+	</insert>
+	
+	<insert id="addUserRole" parameterClass="java.util.Map">
+		INSERT INTO users_in_roles (usr_rol_usr_id,usr_rol_rol_id)
+		VALUES (#usrId#,#roleId#)
+	</insert>
+	
 </sqlMap>

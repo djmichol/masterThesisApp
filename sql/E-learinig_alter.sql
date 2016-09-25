@@ -23,14 +23,15 @@ CREATE TABLE `elearning`.`users_in_roles` (
   `usr_rol_usr_id` INT NOT NULL,
   `usr_rol_rol_id` INT NOT NULL,
   PRIMARY KEY (`usr_rol_id`),
-  INDEX `usr_id_idx` (`usr_id` ASC),
-  INDEX `rol_id_idx` (`rol_id` ASC),
-  CONSTRAINT `usr_id`
+  UNIQUE INDEX `usr_rol_id_UNIQUE` (`usr_rol_id` ASC),
+  INDEX `usr_rol_usr_id_idx` (`usr_rol_usr_id` ASC),
+  INDEX `usr_rol_rol_id_idx` (`usr_rol_rol_id` ASC),
+  CONSTRAINT `usr_rol_usr_id`
     FOREIGN KEY (`usr_rol_usr_id`)
     REFERENCES `elearning`.`users` (`usr_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `rol_id`
+  CONSTRAINT `usr_rol_rol_id`
     FOREIGN KEY (`usr_rol_rol_id`)
     REFERENCES `elearning`.`roles` (`rol_id`)
     ON DELETE NO ACTION

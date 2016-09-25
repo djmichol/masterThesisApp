@@ -25,7 +25,7 @@ public class PathService {
 			pathJson.put("paths", paths);
 			return Response.ok(pathJson.toString()).build();
 		} catch (Exception e) {
-			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+			return Response.status(Response.Status.SERVICE_UNAVAILABLE).entity("B³¹d ³adowania œciezek.").build();
 		}	
     }
 	
