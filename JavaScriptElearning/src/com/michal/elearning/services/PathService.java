@@ -9,23 +9,27 @@ import javax.ws.rs.core.Response;
 
 import org.json.JSONObject;
 
-import com.michal.elearning.utils.CoreDao;
+import com.michal.elearning.dao.LearningPath;
+import com.michal.elearning.daoServices.IPathInterface;
+import com.michal.elearning.daoServices.PathDaoService;
 
-@Path("/path")
+@Path("/learningPath")
 public class PathService {
 
-	@SuppressWarnings("unchecked")
+	private IPathInterface pathService = new PathDaoService();
+	
 	@RolesAllowed("user")
     @GET
+    @Path("/allPaths")
     public Response getAllPaths() 
     {       
 		try {
-			List<Path> paths = CoreDao.getSqlMapper().queryForList("Path.getPaths");
+			List<LearningPath> paths = pathService.getAllPaths();
 			JSONObject pathJson = new JSONObject();  
 			pathJson.put("paths", paths);
 			return Response.ok(pathJson.toString()).build();
 		} catch (Exception e) {
-			return Response.status(Response.Status.SERVICE_UNAVAILABLE).entity("B³¹d ³adowania œciezek.").build();
+			return Response.status(Response.Status.SERVICE_UNAVAILABLE).entity("B³¹d ³adowania œciezek rozwoju.").build();
 		}	
     }
 	

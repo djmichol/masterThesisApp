@@ -9,10 +9,16 @@ import com.ibatis.sqlmap.client.SqlMapClientBuilder;
 
 public class CoreDao {
 
-	public static SqlMapClient getSqlMapper() throws IOException{
-		Reader rd = Resources.getResourceAsReader("/com/michal/elearning/dao/SqlMapConfig.xml");
-	    SqlMapClient smc = SqlMapClientBuilder.buildSqlMapClient(rd);
-	    return smc;
+	public static SqlMapClient getSqlMapper(){
+		Reader configReader;
+		SqlMapClient mapClient = null;
+		try {
+			configReader = Resources.getResourceAsReader("/com/michal/elearning/dao/SqlMapConfig.xml");
+			mapClient = SqlMapClientBuilder.buildSqlMapClient(configReader);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}	    
+	    return mapClient;
 	}
 	
 }

@@ -8,8 +8,7 @@ public class StandardApplicationConfig extends ResourceConfig  {
     {
         packages("com.michal.elearning");
         register(StandardRequestFilter.class);
-        register(StandardResponseFilter.class);
-       
+        register(StandardResponseFilter.class);       
     }
 
 }

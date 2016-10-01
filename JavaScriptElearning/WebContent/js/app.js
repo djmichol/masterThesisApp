@@ -1,39 +1,35 @@
 var app = angular.module("ElearningApp", ["ngRoute","ngStorage",'ui.bootstrap']).config(function ($routeProvider) {
-	//routing do strony domowej
 	$routeProvider.when("/home", {
         templateUrl: "view/home.html"
     });
-	//routing do login
 	$routeProvider.when("/login", {
         templateUrl: "view/login.html",
 		controller: "UsersController"
     });
-	//routing do rejestracji
 	$routeProvider.when("/singUp", {
         templateUrl: "view/singUp.html",
 		controller: "UsersController"
     });
-	//routing do sciezek nauki
 	$routeProvider.when("/paths", {
         templateUrl: "view/paths.html",
 		controller: "LessonController"
     });
-	//routing do lekcji nauki
-	$routeProvider.when("/lessons/:pathId", {
-        templateUrl: "view/lessonsList.html",
+	$routeProvider.when("/lessonsBlocks/:pathId", {
+        templateUrl: "view/lessonsBlockList.html",
 		controller: "LessonController"
     });	
-	//routing do edytore 
+	$routeProvider.when("/lessonsForBlock/:blockId", {
+        templateUrl: "view/lessonsList.html",
+		controller: "LessonController"
+    });	 
 	$routeProvider.when("/editor", {
         templateUrl: "view/editor.html",
 		controller: "EditorController"
     });
-	//routing do edytora z lekcja
 	$routeProvider.when("/editor/:lessonId", {
         templateUrl: "view/editor.html",
 		controller: "EditorController"
     });
-	//gdy nie wybrano routingu przekieruj do domowej
     $routeProvider.otherwise({
         redirectTo: "/home"
     });

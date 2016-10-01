@@ -1,10 +1,11 @@
 package com.michal.elearning.dao;
 
-public class Path {
-
+public class LessonBlock {
+	
 	private int id;
-	private String title;
+	private String name;
 	private String description;
+	private int pathId;
 	
 	public int getId() {
 		return id;
@@ -12,11 +13,11 @@ public class Path {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getTitle() {
-		return title;
+	public String getName() {
+		return name;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getDescription() {
 		return description;
@@ -24,6 +25,11 @@ public class Path {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
+	public int getPathId() {
+		return pathId;
+	}
+	public void setPathId(int pathId) {
+		this.pathId = pathId;
+	}
+
 }

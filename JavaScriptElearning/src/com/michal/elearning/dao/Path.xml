@@ -4,7 +4,7 @@
 
 <sqlMap namespace="Path">
 
-	<typeAlias alias="Path" type="com.michal.elearning.dao.Path" />	
+	<typeAlias alias="Path" type="com.michal.elearning.dao.LearningPath" />	
 	
 	<resultMap id="PathMap" class="Path" >
 		<result property="title" column="path_name" />

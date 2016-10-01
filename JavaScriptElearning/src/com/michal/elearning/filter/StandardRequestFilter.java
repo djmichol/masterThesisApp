@@ -1,13 +1,10 @@
 package com.michal.elearning.filter;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.annotation.security.DenyAll;
@@ -24,14 +21,13 @@ import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.ext.Provider;
 
 import com.michal.elearning.dao.User;
-import com.michal.elearning.services.AuthService;
+import com.michal.elearning.utils.TokenUtils;
 
 @Provider
 public class StandardRequestFilter implements ContainerRequestFilter{
 	
-	 private static final Status ACCESS_DENIED = Response.Status.UNAUTHORIZED;
-	 private static final Status ACCESS_FORBIDDEN = Response.Status.FORBIDDEN;
-
+	public static final Status ACCESS_DENIED = Response.Status.UNAUTHORIZED;
+	public static final Status ACCESS_FORBIDDEN = Response.Status.FORBIDDEN;
 	
 	@Context
     private ResourceInfo resourceInfo;
@@ -39,84 +35,77 @@ public class StandardRequestFilter implements ContainerRequestFilter{
 	@Context 
 	SecurityContext securityContext;
 	
+	private String authHeader;
+	
 	@Override
 	public void filter(ContainerRequestContext containerRequest) throws IOException {
-		//CORS preflight
-		if(containerRequest.getMethod().equals("OPTIONS")){
+		if(isCORSPreflight(containerRequest.getMethod())){
 			 return;
 		}
 		Method method = resourceInfo.getResourceMethod();
-        //Access allowed for all
-        if(!method.isAnnotationPresent(PermitAll.class))
+        if(isPerrmitForAll(method))
         {
-        	 //Access denied for all
-            if(method.isAnnotationPresent(DenyAll.class))
-            {
-            	throw new WebApplicationException(ACCESS_FORBIDDEN);
-                
-            }            
-            //Get the authentification passed in HTTP headers parameters
-            String auth = containerRequest.getHeaderString("authorization");  
-            //If the user does not have the right (does not provide any HTTP Auth)
-            if(auth == null) {
-            	throw new WebApplicationException(ACCESS_DENIED);
-            }        
-            //auth only if auth header start with Bearer
-            if(auth.startsWith("Bearer ")){
-            	User authentificationResult = null;
-    	        // try to authenticate
-    			try {
-    				//validate user token
-    				authentificationResult = validateToken(auth.replaceFirst("Bearer ", ""));
-    			} catch (Exception e) {
-    				throw new WebApplicationException(ACCESS_DENIED);
-    			}	  
-    			
-    			//Our system refuse login and password
-    	        if(authentificationResult == null) {
-    	        	throw new WebApplicationException(ACCESS_DENIED);
-    	        }
-    			
-    	        //validate user roles
-    			if(method.isAnnotationPresent(RolesAllowed.class))
-	            {
-	                RolesAllowed rolesAnnotation = method.getAnnotation(RolesAllowed.class);
-	                Set<String> rolesSet = new HashSet<String>(Arrays.asList(rolesAnnotation.value()));
-	                if(!isUserInRole(rolesSet, authentificationResult))
-	                {
-	                	throw new WebApplicationException(ACCESS_DENIED);
-	                }
-	            }
-    			
-    	        String scheme = containerRequest.getUriInfo().getBaseUri().getScheme();
-    	        containerRequest.setSecurityContext(new StandardSecurityContext(authentificationResult, scheme));
-            }  		
+        	return;
         }
+        if(isDenyForAll(method))
+        {
+        	throw new WebApplicationException(ACCESS_FORBIDDEN);            
+        }       
+        this.setAuthHeader(containerRequest.getHeaderString("authorization"));
+        if(!isAuthorizationHeaderAvaliable()) {
+        	throw new WebApplicationException(ACCESS_DENIED);
+        }        
+        if(isAuthHeaderStartWithBearer()){
+        	User authentificationResult = null;
+			try {
+				authentificationResult = TokenUtils.validateToken(getAuthHeader().replaceFirst("Bearer ", ""));
+			} catch (Exception e) {
+				throw new WebApplicationException(ACCESS_DENIED);
+			}	  			
+	        if(authentificationResult == null) {
+	        	throw new WebApplicationException(ACCESS_DENIED);
+	        }
+			if(method.isAnnotationPresent(RolesAllowed.class))
+            {
+                RolesAllowed rolesAnnotation = method.getAnnotation(RolesAllowed.class);
+                Set<String> rolesSet = new HashSet<String>(Arrays.asList(rolesAnnotation.value()));
+                if(!isUserInRole(rolesSet, authentificationResult))
+                {
+                	throw new WebApplicationException(ACCESS_DENIED);
+                }
+            }			
+	        String scheme = containerRequest.getUriInfo().getBaseUri().getScheme();
+	        containerRequest.setSecurityContext(new StandardSecurityContext(authentificationResult, scheme));
+        }  		
 	}
 	
-	@SuppressWarnings("unchecked")
-	private User validateToken(String token){
-		if(token == null){
-			throw new WebApplicationException(ACCESS_DENIED);
+	private boolean isCORSPreflight(String method){
+		if(method.equals("OPTIONS")){
+			return true;
 		}
-		
-		Claims claims = Jwts.parser()
-				   .setSigningKey(AuthService.apiKey)
-				   .parseClaimsJws(token).getBody();
-		//when no info about user in token
-		if(claims.get("userId")==null || claims.get("userName")==null || claims.get("userRoles")==null){
-			throw new WebApplicationException(ACCESS_DENIED);
+		return false;
+	}
+	
+	private boolean isPerrmitForAll(Method method){
+		if(method.isAnnotationPresent(PermitAll.class)){
+			return true;
 		}
-		//when no addional data
-		if(claims.getSubject()==null || claims.getIssuer()==null || claims.getExpiration()==null){
-			throw new WebApplicationException(ACCESS_DENIED);
+		return false;
+	}
+	
+	private boolean isDenyForAll(Method method){
+		if(method.isAnnotationPresent(DenyAll.class)){
+			return true;
 		}
-		//return logged user
-		User tokenUser = new User();
-		tokenUser.setId((int) claims.get("userId"));
-		tokenUser.setName((String) claims.get("userName"));
-		tokenUser.setRole((List<String>) claims.get("userRoles"));
-		return tokenUser;		
+		return false;
+	}
+	
+	private boolean isAuthorizationHeaderAvaliable(){
+		return getAuthHeader() == null ? false : true;
+	}
+	
+	private boolean isAuthHeaderStartWithBearer(){
+		return getAuthHeader().startsWith("Bearer ") ? true : false;
 	}
 	
 	private boolean isUserInRole(Set<String> rolesSet, User u) {
@@ -129,4 +118,12 @@ public class StandardRequestFilter implements ContainerRequestFilter{
         }
         return false;
     }
+
+	public String getAuthHeader() {
+		return authHeader;
+	}
+
+	public void setAuthHeader(String authHeader) {
+		this.authHeader = authHeader;
+	}
 }

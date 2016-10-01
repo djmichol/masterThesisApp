@@ -8,6 +8,7 @@ public class Lesson {
 	private String title;
 	private String article;
 	private String brief;
+	private int blockId;
 	private List<String> instructions;
 	private List<LessonTabs> tabs;
 	
@@ -47,6 +48,10 @@ public class Lesson {
 	public void setBrief(String brief) {
 		this.brief = brief;
 	}
-	
-
+	public int getBlockId() {
+		return blockId;
+	}
+	public void setBlockId(int blockId) {
+		this.blockId = blockId;
+	}
 }

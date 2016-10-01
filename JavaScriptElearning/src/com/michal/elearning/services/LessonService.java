@@ -1,6 +1,5 @@
 package com.michal.elearning.services;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -12,43 +11,60 @@ import javax.ws.rs.core.Response;
 
 import org.json.JSONObject;
 
+import com.google.gson.Gson;
 import com.michal.elearning.dao.Lesson;
 import com.michal.elearning.dao.LessonTabs;
-import com.michal.elearning.utils.CoreDao;
+import com.michal.elearning.daoServices.ILessonsInterface;
+import com.michal.elearning.daoServices.LessonDaoService;
 
 @Path("/lessons")
 public class LessonService {
 	
-	@SuppressWarnings("unchecked")
+	private ILessonsInterface lessonService = new LessonDaoService();
+	private Response LESSON_LOAD_ERROR = Response.status(Response.Status.SERVICE_UNAVAILABLE).entity("B³¹d pobierania lekcji.").build();
+
 	@RolesAllowed("user")
     @GET
-    @Path("/loadPathLessons")
-    public Response getPathLessons(@QueryParam("pathId") int pathId) 
+    @Path("/loadBlockLessons")
+    public Response getBlockLessons(@QueryParam("blockId") int blockId) 
     {       
 		try {
-			List<Lesson> lessons = CoreDao.getSqlMapper().queryForList("Lesson.getLessonsForPath",pathId);
+			List<Lesson> lessons = lessonService.getBlockLessons(blockId);
 			JSONObject lessonsJson = new JSONObject();  
 			lessonsJson.put("lessons", lessons);
 			return Response.ok(lessonsJson.toString()).build();
 		} catch (Exception e) {
-			return Response.status(Response.Status.SERVICE_UNAVAILABLE).entity("B³¹d pobierania lekcji.").build();
+			return LESSON_LOAD_ERROR;
 		}	
     }
 	
-	@SuppressWarnings("unchecked")
 	@RolesAllowed("user")
     @GET
     @Path("/loadLessonInfo")
-	public Response getLessonById(@QueryParam("lessonId") int lessonId){
+	public Response getLessonInfoById(@QueryParam("lessonId") int lessonId){
 		try {
-			List<String> lessonInstructions = CoreDao.getSqlMapper().queryForList("Lesson.getLessonInstructions",lessonId);
-			List<LessonTabs> lessonTabs= CoreDao.getSqlMapper().queryForList("Lesson.getLesonTabs",lessonId);
+			List<String> lessonInstructions = lessonService.getLessonInstructions(lessonId);
+			List<LessonTabs> lessonTabs= lessonService.getLessonTabs(lessonId);
 			JSONObject lessonJson = new JSONObject();  
 			lessonJson.put("lessonInstructions", lessonInstructions);
 			lessonJson.put("lessonTabs", lessonTabs);
 			return Response.ok(lessonJson.toString()).build();
-		} catch (SQLException | IOException e) {
-			return Response.status(Response.Status.SERVICE_UNAVAILABLE).entity("B³¹d pobierania lekcji.").build();
+		} catch (SQLException e) {
+			return LESSON_LOAD_ERROR;
+		}
+	}
+	
+	@RolesAllowed("user")
+    @GET
+    @Path("/loadLessonById")
+	public Response getLessonById(@QueryParam("lessonId") int lessonId){
+		try {
+			Lesson lessonResult = lessonService.getLessonDetailsById(lessonId);
+			Gson gson = new Gson();
+			String json = gson.toJson(lessonResult);
+			return Response.ok(json).build();
+		} catch (SQLException e) {
+			return LESSON_LOAD_ERROR;
 		}
 	}
 

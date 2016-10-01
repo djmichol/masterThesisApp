@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html >
-<div ng-init="loadLessons()">
-	<div class="grid-col-12 text-center lessonList" ng-repeat="lesson in lessons" ng-click="redirectToLesson(lesson)">
+<div ng-init="getLessonsForBlock()">
+	<div class="grid-col-12 text-center lessonList" ng-repeat="lesson in lessonsForBlock" ng-click="redirectToLesson(lesson)">
 		
 		<h1>{{lesson.title}}</h1>
 		{{lesson.brief}}

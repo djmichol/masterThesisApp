@@ -1,22 +1,16 @@
-//kontroler menu
 app.controller("MenuController", function ($scope, $window) {
 	$scope.menuElements = [{label:"Learn", value: "#/paths"}]; 
-	
-	//sprawdza czy user zalogowany
 	$scope.isUserLoged = function(){
 		 if ($window.localStorage.getItem('token') && (typeof $window.localStorage.getItem('token')!= 'undefined')) {
 			 return true;
 		 }
 		 return false;
 	};	
-	//log out
 	$scope.logout = function() {	
-		//informacja o zalogowanym uzytkowniku w localSotrage jako zaszyfrowany token
 		$window.localStorage.removeItem("token");
 	};
 });
 
-//kontoler strony wyswietla aktualny czas w stopce
 app.controller("FooterController", function ($scope, $interval) {
 	$scope.theTime = new Date().toLocaleTimeString();
     $interval(function () {
@@ -24,42 +18,42 @@ app.controller("FooterController", function ($scope, $interval) {
     }, 1000);
 });
 
-//kontroler kart sciezek
 app.controller("LessonController", function ($scope,pageService,$rootScope,$location,$routeParams) {
 	$scope.pathCards = []; 
-	$scope.lessons = []; 
+	$scope.lessonsBlocks = [];
+	$scope.lessonsForBlock = []; 
 	$scope.alerts = $rootScope.alerts;
 	
-	//pobierz sciezki rozwoju
-	$scope.getAllPath = function() {
-		if(typeof pageService.getPaths() == 'undefined' || pageService.getPaths().length == 0){
-			pageService.getAllPath().success(function(dane,response) {
-				$scope.pathCards = dane.paths;
-				pageService.setPaths($scope.pathCards);
-	        }).error(function(error) {
-	        	$rootScope.addAlert('danger',error);
-	        });
-		}else{
-			$scope.pathCards = pageService.getPaths();
-		}
+	$scope.getAllPaths = function() {
+		pageService.getAllLearningPaths().success(function(dane,response) {
+			$scope.pathCards = dane.paths;
+        }).error(function(error) {
+        	$rootScope.addAlert('danger',error);
+        });
 	};	
-	//laduje lekcje dla sciezki
-	$scope.loadLessons = function(){
+	$scope.getLessonsBlockForPath = function(){
 		var pathId= $routeParams.pathId;
-		pageService.getPathLessons(pathId).success(function(dane) {			
-			$scope.lessons = dane.lessons;	
-			pageService.setLessons(dane.lessons);
+		pageService.getLessonBlockForPath(pathId).success(function(dane,response) {
+			$scope.lessonsBlocks = dane.lessonsBlocks;
+        }).error(function(error) {
+        	$rootScope.addAlert('danger',error);
+        });
+	}
+	$scope.getLessonsForBlock = function(){
+		var blockId= $routeParams.blockId;
+		pageService.getLessonsForLessonsBlock(blockId).success(function(dane) {			
+			$scope.lessonsForBlock = dane.lessons;	
         }).error(function(error) {
         	$rootScope.addAlert('danger',error);
         });		
 	};	
-	//przekierowanie do lekcji dla sciezki
-	$scope.redirectToLessons = function(pathId){
-		$location.path("/lessons/"+pathId);
+	$scope.redirectToLessonsBlocks = function(pathId){
+		$location.path("/lessonsBlocks/"+pathId);
+	}
+	$scope.redirectToLessonsForBlock = function(blockId){
+		$location.path("/lessonsForBlock/"+blockId);
 	};
-	//przekierowanie do edytora lekcji
 	$scope.redirectToLesson = function(lesson){
-		pageService.setSelectedLesson(lesson);
 		$location.path("/editor/"+lesson.id);
 	};
 });

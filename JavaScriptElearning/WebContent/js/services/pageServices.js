@@ -1,31 +1,9 @@
 //serwis
 app.service('pageService', function($http,$window) {
 	
-	var paths = [];
-	
-	this.setSelectedLesson = function(object){
-		$window.localStorage.setItem("selectedLesson",JSON.stringify(object));
-	}
-	this.getSelectedLesson = function(){
-		return JSON.parse($window.localStorage.getItem('selectedLesson'));
-	}
-	this.setPaths = function(object){
-		this.paths = object;
-	}
-	this.getPaths = function(){
-		return this.paths;
-	}
-	this.setLessons = function(object){
-		$window.localStorage.setItem("lessons",JSON.stringify(object));
-	}
-	this.getLessons = function(){
-		return JSON.parse($window.localStorage.getItem('lessons'));
-	}
-
-	//pobiera sciezki rozwoju
-	this.getAllPath = function(){
+	this.getAllLearningPaths = function(){
 		return $http({
-			url: "http://localhost:8080/JavaScriptElearning/elearningService/path",
+			url: "http://localhost:8080/JavaScriptElearning/elearningService/learningPath/allPaths",
 			method: "GET",
 			headers: {
 				'Content-Type': 'text/html'
@@ -33,22 +11,27 @@ app.service('pageService', function($http,$window) {
 		});
 	}
 	
-	//pobiera lekcje dla sciezki rozwoju
-	this.getPathLessons = function(pathIdLocal){
+	this.getLessonBlockForPath = function(pathId){
 		return $http({
-			url: "http://localhost:8080/JavaScriptElearning/elearningService/lessons/loadPathLessons",
+			url: "http://localhost:8080/JavaScriptElearning/elearningService/learningLessonBlock/lessonBlock",
 			method: "GET",
-			params: {pathId: pathIdLocal}
+			params: {pathId: pathId}
 		});
 	}
 	
-	//pobiera informacje o lekcji
-	this.getLessonInfo = function(lessonId){
+	this.getLessonsForLessonsBlock = function(blockId){
 		return $http({
-			url: "http://localhost:8080/JavaScriptElearning/elearningService/lessons/loadLessonInfo",
+			url: "http://localhost:8080/JavaScriptElearning/elearningService/lessons/loadBlockLessons",
+			method: "GET",
+			params: {blockId: blockId}
+		});
+	}
+	
+	this.getLessonById = function(lessonId){
+		return $http({
+			url: "http://localhost:8080/JavaScriptElearning/elearningService/lessons/loadLessonById",
 			method: "GET",
 			params: {lessonId: lessonId}
 		});
 	}
-	
 });

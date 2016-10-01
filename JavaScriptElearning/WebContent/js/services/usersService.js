@@ -20,7 +20,7 @@ app.service('usersService', function($http, Base64) {
 			"mail" : mail
 		};		
 		return $http({
-			url: "http://localhost:8080/JavaScriptElearning/elearningService/auth/createUser",
+			url: "http://localhost:8080/JavaScriptElearning/elearningService/auth/logOn",
 			method: "POST",
 			data: newUser,
 			headers: {

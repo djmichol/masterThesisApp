@@ -10,6 +10,7 @@
 	<resultMap id="LessonMap" class="Lesson" >
 		<result property="title" column="lesson_title" />	
 		<result property="id" column="lesson_id" />	
+		<result property="blockId" column="lesson_block_id" />	
 		<result property="brief" column="lesson_brief" />
 		<result property="article" column="lesson_article" />	
 	</resultMap>
@@ -21,9 +22,13 @@
 		<result property="contentSubmit" column="tabs_editor_submit" />
 		<result property="editorResult" column="tabs_editor_result" />	
 	</resultMap>
+	
+	<select id="getLessonById" resultMap="LessonMap" parameterClass="int">
+		 select lesson_id,lesson_title,lesson_brief,lesson_article,lesson_block_id from lessons where lesson_id=#value#
+	</select>
 
-	<select id="getLessonsForPath" resultMap="LessonMap" parameterClass="int">
-	   select lesson_id,lesson_title,lesson_brief,lesson_article from lessons where lesson_path_id=#value#
+	<select id="getLessonsForBlock" resultMap="LessonMap" parameterClass="int">
+	   select lesson_id,lesson_title,lesson_brief,lesson_article,lesson_block_id from lessons where lesson_block_id=#value#
 	</select>
 	
 	<select id="getLessonInstructions" resultClass="String" parameterClass="int">

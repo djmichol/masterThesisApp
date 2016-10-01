@@ -2,8 +2,7 @@ app.controller("EditorController", function ($scope,$routeParams, pageService,$r
 	$scope.editor;
 	$scope.isCollapsedHorizontal = true;
 	$scope.lesson = {};
-	$scope.lessons = []; 
-	//inicjuje edytor
+	
 	$scope.initEditor = function(val){
 		var useWebWorker = false;
 		$scope.editor = ace.edit("editor");
@@ -14,22 +13,19 @@ app.controller("EditorController", function ($scope,$routeParams, pageService,$r
 		$scope.editor.setOption("showPrintMargin", false);
 		$scope.editor.setValue(val);
 	};	
-	//czysci edytor do wartosci domyslnej
+	
 	$scope.clearEditor = function(val){
 		$scope.editor.setValue(val);
 	}
-	//submit
+	
 	$scope.saveEditor = function(){
 		var value = $scope.editor.getValue();
 	}
-	//inicjuje lekcje
+	
 	$scope.initLesson = function(){
 		var lessonId= $routeParams.lessonId;
-		$scope.lessons= pageService.getLessons();
-		$scope.lesson = pageService.getSelectedLesson();
-		pageService.getLessonInfo(lessonId).success(function(dane) {			
-			$scope.lesson.instructions = dane.lessonInstructions;
-			$scope.lesson.tabs = dane.lessonTabs;
+		pageService.getLessonById(lessonId).success(function(dane) {			
+			$scope.lesson = dane;
         }).error(function(error) {
         	$rootScope.addAlert('danger',error);
         });		
