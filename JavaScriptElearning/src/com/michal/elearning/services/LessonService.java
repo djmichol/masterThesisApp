@@ -49,7 +49,12 @@ public class LessonService {
 	public Response getLessonEditorById(@QueryParam("lessonId") int lessonId){
 		try {
 			Lesson lessonResult = lessonService.getEditorLessonById(lessonId);
-			return Response.ok(JsonUtils.getParsedJsonFromObject(lessonResult)).build();
+			List<Lesson> lessons = lessonService.getBlockLessons(lessonResult.getBlockId());
+			JSONObject lesson = new JSONObject(lessonResult);
+			JSONObject lessonsJson = new JSONObject();  
+			lessonsJson.put("lesson", lesson);
+			lessonsJson.put("lessons", lessons);
+			return Response.ok(lessonsJson.toString()).build();
 		} catch (SQLException e) {
 			return LESSON_LOAD_ERROR;
 		}

@@ -26,10 +26,10 @@
 				<uib-tab index="$index + 1" ng-repeat="tab in lesson.tabs" heading="{{tab.name}}" disable="tab.disabled">
 					<editor-directive content="tab" ng-init="initEditor(tab.content)"></editor-directive>
 					<div class="action-bar">
-						<div class="btn-primary submit-button" ng-click="saveEditor()">Save and submit</div>
+						<div class="btn-primary submit-button" ng-click="validateContent(tab)">Save and submit</div>
 						<div class="btn-default reset-button" ng-click="clearEditor(tab.content)">Clear</div>
 					</div>
-					<div class="lesson-right-bar">
+					<div id="result" class="lesson-right-bar">
 						RESULT
 					</div>
 				</uib-tab>

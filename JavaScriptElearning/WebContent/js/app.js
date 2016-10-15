@@ -70,13 +70,14 @@ app.config(function ($httpProvider) {
     $httpProvider.interceptors.push('BearerAuthInterceptor');
 });
 
-app.run(function ($rootScope, $location) {
+app.run(function ($rootScope, $location, inputService,$uibModal) {
 
     var history = [];
     $rootScope.alerts = [];
     $rootScope.keystrokes = [];
     $rootScope.mauseMove = [];
     $rootScope.mauseClick = [];
+    $rootScope.userForm = {};
 
     $rootScope.$on('$routeChangeSuccess', function() {
         history.push($location.$$path);
@@ -95,6 +96,27 @@ app.run(function ($rootScope, $location) {
 	$rootScope.closeAlert = function(index) {
 		$rootScope.alerts.splice(index, 1);
 	};
+	
+	$rootScope.toggleUserFormModal = function(){
+			var modalInstance = $uibModal.open({
+				templateUrl: 'view/modalFormContent.html',
+				backdrop: false,
+				controller: 'ModalInstanceCtrl'
+			})
+		};
+	
+	$rootScope.saveUserInput = function(){
+		var data = {
+				keyStroke : $rootScope.keystrokes,
+				mauseMove :  $rootScope.mauseMove,
+				mauseClick : $rootScope.mauseClick
+		}
+		/*inputService.saveUserInput(data).success(function(dane) {
+			//nic nie rob
+        }).error(function(error) {
+        	$rootScope.addAlert('danger',error);
+        });	*/		
+	}
 	
 	$rootScope.collectKeystrokes = function(){
 		document.onkeydown = function (event) {

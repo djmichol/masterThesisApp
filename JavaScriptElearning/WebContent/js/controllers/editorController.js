@@ -2,6 +2,7 @@ app.controller("EditorController", function ($scope,$routeParams, pageService,$r
 	$scope.editor;
 	$scope.isCollapsedHorizontal = true;
 	$scope.lesson = {};
+	$scope.lessons = [];
 	
 	$scope.initEditor = function(val){
 		var useWebWorker = false;
@@ -18,18 +19,55 @@ app.controller("EditorController", function ($scope,$routeParams, pageService,$r
 		$scope.editor.setValue(val);
 	}
 	
+	$scope.validateContent = function(tab) {
+		var content = $scope.editor.getValue();
+		var pass = testFunction(content,tab.contentSubmit);
+		if(pass){
+			$scope.saveEditor();
+		}
+	}
+	
+	function testFunction(content,test) {
+
+		var functionResult;
+		var oldLog = console.log;
+		
+		var errors = [];
+		console.log=function(){
+			var a="";
+			for(i=0;i<arguments.length;i++)
+				a+=arguments[i]+" ";
+			document.getElementById("result").innerHTML = a;
+		};
+		window.onerror=function(a,b,c){errors.push(a);};
+		
+		var ee = eval(content+test);
+		
+		if(errors.length>0){
+			var a = '';
+			for(i=0;i<errors.length;i++)
+				a+=errors[i]+" ";
+			document.write(a)
+		}
+		
+		console.log = oldLog;
+		console.log(functionResult);
+		
+		return functionResult;
+	}
+	
+	
 	$scope.saveEditor = function(){
 		var value = $scope.editor.getValue();
-		var keyTab = $rootScope.keystrokes;
-		var mauseMove = $rootScope.mauseMove;
-		var mauseClick = $rootScope.mauseClick;
+		$rootScope.toggleUserFormModal();
 	}
 	
 	$scope.initLesson = function(){
 		$rootScope.collectKeystrokes();
 		var lessonId= $routeParams.lessonId;
 		pageService.getEditorLessonById(lessonId).success(function(dane) {			
-			$scope.lesson = dane;
+			$scope.lesson = dane.lesson;
+			$scope.lessons = dane.lessons;
         }).error(function(error) {
         	$rootScope.addAlert('danger',error);
         });		

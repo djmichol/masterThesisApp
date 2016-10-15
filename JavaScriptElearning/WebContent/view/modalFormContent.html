@@ -1,0 +1,24 @@
+
+<div class="modal-header">
+  <h1>Uczucia</h1>
+</div>'
+<div class="modal-body">
+  <p>Wybierz skale uczuc</p>
+   <pre>Model: {{zlosc}}</pre>
+   <div class="btn-group">
+        <label class="btn btn-success" ng-model="zlosc" uib-btn-radio="'No'">Nie</label>
+        <label class="btn btn-success" ng-model="zlosc" uib-btn-radio="'Neutral'">Neutralnie</label>
+        <label class="btn btn-success" ng-model="zlosc" uib-btn-radio="'Yes'">Tak</label>
+    </div>
+	<pre>Model: {{znudzenie}}</pre>
+	<div class="btn-group">
+        <label class="btn btn-success" ng-model="znudzenie" uib-btn-radio="'No'">Nie</label>
+        <label class="btn btn-success" ng-model="znudzenie" uib-btn-radio="'Neutral'">Neutralnie</label>
+        <label class="btn btn-success" ng-model="znudzenie" uib-btn-radio="'Yes'">Tak</label>
+    </div>
+	</div>
+<div class="modal-footer">
+	<button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+</div>
+
+
