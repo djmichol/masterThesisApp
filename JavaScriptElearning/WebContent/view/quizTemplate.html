@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
+	<div class="panel-default text-center" ng-init="initLesson()">
+		<div class="grid-col-12" >
+			<uib-tabset active="active">
+				<uib-tab index="$index + 1" ng-repeat="slide in slides" heading="{{slide.order}}">
+					<p>{{slide.question}}</p>
+					<div class="checkbox">
+						<label><input type="checkbox" ng-model="checkboxModel.a">{{slide.answerA}}</label>
+					</div>
+					<div class="checkbox">
+						<label><input type="checkbox" ng-model="checkboxModel.b">{{slide.answerB}}</label>
+					</div>
+					<div class="checkbox">
+						<label><input type="checkbox" ng-model="checkboxModel.c">{{slide.answerC}}</label>
+					</div>
+					<div class="checkbox">
+						<label><input type="checkbox" ng-model="checkboxModel.d">{{slide.answerD}}</label>
+					</div>
+					<button ng-click="checkAnswer(slide.goodAnswer)">check</button>
+				</uib-tab>
+			</uib-tabset>		
+		</div>
+	</div>
+</html>

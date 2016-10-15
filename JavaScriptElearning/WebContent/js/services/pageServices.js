@@ -27,9 +27,25 @@ app.service('pageService', function($http,$window) {
 		});
 	}
 	
-	this.getLessonById = function(lessonId){
+	this.getEditorLessonById = function(lessonId){
 		return $http({
-			url: "http://localhost:8080/JavaScriptElearning/elearningService/lessons/loadLessonById",
+			url: "http://localhost:8080/JavaScriptElearning/elearningService/lessons/loadLessonEditorById",
+			method: "GET",
+			params: {lessonId: lessonId}
+		});
+	}
+	
+	this.getVideoLessonById = function(lessonId){
+		return $http({
+			url: "http://localhost:8080/JavaScriptElearning/elearningService/lessons/loadLessonVideoById",
+			method: "GET",
+			params: {lessonId: lessonId}
+		});
+	}
+	
+	this.getQuizLessonById = function(lessonId){
+		return $http({
+			url: "http://localhost:8080/JavaScriptElearning/elearningService/lessons/loadLessonQuizById",
 			method: "GET",
 			params: {lessonId: lessonId}
 		});

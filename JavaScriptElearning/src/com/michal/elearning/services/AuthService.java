@@ -32,17 +32,13 @@ public class AuthService {
 	@Path("/login")
 	public Response validateUser(@Context HttpHeaders headers) {
 		String userAuth = headers.getHeaderString("log-on-user");
-		//gdy nie ma nag³ówka z info o user
-		if(userAuth==null){
+		if(!isUserHeaderValid(userAuth)){
 			return NOT_ACCEPT_USRER;
 		}
-		//dekodowanie nag³ówka
         String[] decodedUserInfo = Base64Utils.decode(userAuth);
-        //gdy nie mamy zdekodowanego hasla lub nazwy
-        if(decodedUserInfo == null || decodedUserInfo.length != 2) {
+        if(!isDecodetHeaderValid(decodedUserInfo)) {
         	return NOT_ACCEPT_USRER;
         }
-        //sprobuj zalogowac
         User authentificationResult = null;
 		try {
 			authentificationResult = userService.authentificationUser(decodedUserInfo[0], decodedUserInfo[1]);
@@ -53,11 +49,25 @@ public class AuthService {
 		}	
 	}
 	
+	private boolean isUserHeaderValid(String userHeader){
+		if(userHeader==null){
+			return false;
+		}
+		return true;
+	}
+	
+	private boolean isDecodetHeaderValid(String[] decodedHeader){
+		 if(decodedHeader == null || decodedHeader.length != 2) {
+        	return false;
+        }
+		return true;
+	}
+	
 	@POST
 	@PermitAll
 	@Path("/logOn")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createUser(String user, @Context HttpHeaders headers) throws IOException{
+	public Response createUser(String user) throws IOException{
 		if(user== null){
 			return Response.status(Response.Status.NO_CONTENT).entity("Przes³ane dane s¹ puste").build();
 		}

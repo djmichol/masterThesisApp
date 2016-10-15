@@ -8,4 +8,5 @@ import com.michal.elearning.dao.LessonBlock;
 public interface IBlockInterface {
 
 	List<LessonBlock> getLessonBlockByPathId(int pathId) throws SQLException;
+	LessonBlock getLessonBlockByID(int blockId) throws SQLException;
 }

@@ -5,6 +5,7 @@ public class LearningPath {
 	private int id;
 	private String title;
 	private String description;
+	private String brief;
 	
 	public int getId() {
 		return id;
@@ -23,6 +24,12 @@ public class LearningPath {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public String getBrief() {
+		return brief;
+	}
+	public void setBrief(String brief) {
+		this.brief = brief;
 	}
 	
 	

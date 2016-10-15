@@ -16,4 +16,8 @@
 	<select id="getLessonBlockByPathId" resultMap="LessonBlockMap" parameterClass="int">
 		 select block_id,block_path_id,block_name,block_description from lessons_block where block_path_id=#value#
 	</select>
+	
+	<select id="getLessonBlockById" resultMap="LessonBlockMap" parameterClass="int">
+		 select block_id,block_path_id,block_name,block_description from lessons_block where block_id=#value#
+	</select>
 </sqlMap>

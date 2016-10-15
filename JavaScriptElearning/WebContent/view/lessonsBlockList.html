@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html >
 <banner-directive name="banner.jpg"></banner-directive>
+<h2 class="text-center">{{path.title}}</h2>
+<div class="text-center">{{path.description}}</div>
 <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
 <div ng-init="getLessonsBlockForPath()">
-	<div class="grid-col-12 text-center lessonList" ng-repeat="lessonsBlock in lessonsBlocks" ng-click="redirectToLessonsForBlock(lessonsBlock.id)">
-		
+	<div class="grid-col-12 text-center lessonList" ng-repeat="lessonsBlock in lessonsBlocks" ng-click="redirectToLessonsForBlock(lessonsBlock.id)">		
 		<h1>{{lessonsBlock.name}}</h1>
 		{{lessonsBlock.description}}
 	</div>

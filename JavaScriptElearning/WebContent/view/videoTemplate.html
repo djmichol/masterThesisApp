@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+	<div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
+	<div class="panel-default text-center" ng-init="initLesson()">
+		<div class="grid-col-12">
+			<h2>Video - {{lesson.video.name}}</h2>
+			<div ng-bind-html="player"></div>
+		</div>
+	</div>
+</html>

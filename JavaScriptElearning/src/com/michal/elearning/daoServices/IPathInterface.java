@@ -8,4 +8,6 @@ import com.michal.elearning.dao.LearningPath;
 public interface IPathInterface {
 
 	List<LearningPath> getAllPaths() throws SQLException;	
+	LearningPath getPathById(int pathId) throws SQLException;
+	
 }

@@ -1,4 +1,4 @@
-var app = angular.module("ElearningApp", ["ngRoute","ngStorage",'ui.bootstrap']).config(function ($routeProvider) {
+var app = angular.module("ElearningApp", ["ngRoute",'ui.bootstrap']).config(function ($routeProvider) {
 	$routeProvider.when("/home", {
         templateUrl: "view/home.html"
     });
@@ -29,6 +29,14 @@ var app = angular.module("ElearningApp", ["ngRoute","ngStorage",'ui.bootstrap'])
 	$routeProvider.when("/editor/:lessonId", {
         templateUrl: "view/editor.html",
 		controller: "EditorController"
+    });
+	$routeProvider.when("/videoLesson/:lessonId", {
+        templateUrl: "view/videoTemplate.html",
+		controller: "VideoLessonController"
+    });
+	$routeProvider.when("/quizLesson/:lessonId", {
+        templateUrl: "view/quizTemplate.html",
+		controller: "QuizController"
     });
     $routeProvider.otherwise({
         redirectTo: "/home"
@@ -66,6 +74,9 @@ app.run(function ($rootScope, $location) {
 
     var history = [];
     $rootScope.alerts = [];
+    $rootScope.keystrokes = [];
+    $rootScope.mauseMove = [];
+    $rootScope.mauseClick = [];
 
     $rootScope.$on('$routeChangeSuccess', function() {
         history.push($location.$$path);
@@ -84,4 +95,35 @@ app.run(function ($rootScope, $location) {
 	$rootScope.closeAlert = function(index) {
 		$rootScope.alerts.splice(index, 1);
 	};
+	
+	$rootScope.collectKeystrokes = function(){
+		document.onkeydown = function (event) {
+			event = event || window.event;
+			$rootScope.keystrokes.push({'code':event.which, 'timeStamp':event.timeStamp,'type':event.type});
+		}
+		document.onkeyup = function (event) {
+			event = event || window.event;
+			$rootScope.keystrokes.push({'code':event.which, 'timeStamp':event.timeStamp,'type':event.type});
+		}
+		document.onclick = function (event) {
+			event = event || window.event;
+			$rootScope.mauseClick.push({'timeStamp':event.timeStamp,'type':event.type});
+		}
+		document.onmousemove = function(event) {
+	        var dot, eventDoc, doc, body, pageX, pageY;
+	        event = event || window.event;
+	        if (event.pageX == null && event.clientX != null) {
+	            eventDoc = (event.target && event.target.ownerDocument) || document;
+	            doc = eventDoc.documentElement;
+	            body = eventDoc.body;
+	            event.pageX = event.clientX +
+	              (doc && doc.scrollLeft || body && body.scrollLeft || 0) -
+	              (doc && doc.clientLeft || body && body.clientLeft || 0);
+	            event.pageY = event.clientY +
+	              (doc && doc.scrollTop  || body && body.scrollTop  || 0) -
+	              (doc && doc.clientTop  || body && body.clientTop  || 0 );
+	        }
+	        $rootScope.mauseMove.push({'timeStamp':event.timeStamp,'type':event.type,'posX':event.pageX,'posY':event.pageY});
+	    }
+	}
 });

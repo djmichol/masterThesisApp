@@ -20,11 +20,15 @@ app.controller("EditorController", function ($scope,$routeParams, pageService,$r
 	
 	$scope.saveEditor = function(){
 		var value = $scope.editor.getValue();
+		var keyTab = $rootScope.keystrokes;
+		var mauseMove = $rootScope.mauseMove;
+		var mauseClick = $rootScope.mauseClick;
 	}
 	
 	$scope.initLesson = function(){
+		$rootScope.collectKeystrokes();
 		var lessonId= $routeParams.lessonId;
-		pageService.getLessonById(lessonId).success(function(dane) {			
+		pageService.getEditorLessonById(lessonId).success(function(dane) {			
 			$scope.lesson = dane;
         }).error(function(error) {
         	$rootScope.addAlert('danger',error);

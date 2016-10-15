@@ -327,10 +327,12 @@ body{
 		width: 100%;
 		left: 200px;
 	}
+	
+	.sidenav {
+	    width: 200px;
+	}
 }
 
 @media all and (max-width: 770px) {
-	.navbar{
-		display: none;
-	}
+
 }

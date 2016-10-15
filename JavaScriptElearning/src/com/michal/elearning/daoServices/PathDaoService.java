@@ -18,4 +18,9 @@ public class PathDaoService implements IPathInterface {
 		return paths;
 	}
 
+	@Override
+	public LearningPath getPathById(int pathId) throws SQLException {
+		return (LearningPath) CoreDao.getSqlMapper().queryForObject("Path.getPathById",pathId);
+	}
+
 }

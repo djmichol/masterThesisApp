@@ -86,3 +86,31 @@ CREATE TABLE `elearning`.`lesson_tabs` (
     ON UPDATE NO ACTION)
 COMMENT = 'Zakladni edytora';
 
+CREATE TABLE `elearning`.`users_lessons` (
+  `user_lesson_idssons` INT NOT NULL AUTO_INCREMENT,
+  `users_lessons_lesson_id` INT NOT NULL,
+  `users_lessons_user_id` INT NOT NULL,
+  `users_lessons_finished` VARCHAR(1) NOT NULL DEFAULT 'N',
+  PRIMARY KEY (`user_lesson_idssons`),
+  UNIQUE INDEX `idusers_leuser_lesson_idssons_UNIQUE` (`user_lesson_idssons` ASC),
+  INDEX `user_fk_idx` (`users_lessons_user_id` ASC),
+  INDEX `lesson_fk_idx` (`users_lessons_lesson_id` ASC),
+  CONSTRAINT `user_fk`
+    FOREIGN KEY (`users_lessons_user_id`)
+    REFERENCES `elearning`.`users` (`usr_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `lesson_fk`
+    FOREIGN KEY (`users_lessons_lesson_id`)
+    REFERENCES `elearning`.`lessons` (`lesson_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+    CREATE TABLE `elearning`.`user_input_raw_data` (
+  `in_dat_raw_id` INT NOT NULL AUTO_INCREMENT,
+  `user_input_raw_data_keystrokes` BLOB NOT NULL,
+  `user_input_raw_data_mause_movment` BLOB NOT NULL,
+  PRIMARY KEY (`in_dat_raw_id`),
+  UNIQUE INDEX `data_id_UNIQUE` (`in_dat_raw_id` ASC));
+
+

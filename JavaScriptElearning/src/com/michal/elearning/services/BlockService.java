@@ -10,9 +10,12 @@ import javax.ws.rs.core.Response;
 
 import org.json.JSONObject;
 
+import com.michal.elearning.dao.LearningPath;
 import com.michal.elearning.dao.LessonBlock;
 import com.michal.elearning.daoServices.IBlockInterface;
+import com.michal.elearning.daoServices.IPathInterface;
 import com.michal.elearning.daoServices.LessonBlockDaoService;
+import com.michal.elearning.daoServices.PathDaoService;
 
 @Path("/learningLessonBlock")
 public class BlockService {
@@ -26,12 +29,19 @@ public class BlockService {
     {       
 		try {
 			List<LessonBlock> lessonBlock = blockService.getLessonBlockByPathId(pathId);
+			LearningPath pathInfo = getPathService().getPathById(pathId);
+			JSONObject path = new JSONObject(pathInfo);
 			JSONObject lessonBlockJson = new JSONObject();  
 			lessonBlockJson.put("lessonsBlocks", lessonBlock);
+			lessonBlockJson.put("pathInfo",path);
 			return Response.ok(lessonBlockJson.toString()).build();
 		} catch (Exception e) {
 			return Response.status(Response.Status.SERVICE_UNAVAILABLE).entity("B³¹d ³adowania blokow lekcji.").build();
 		}	
     }
+	
+	private IPathInterface getPathService(){
+		return new PathDaoService();
+	}
 
 }

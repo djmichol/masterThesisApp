@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html >
+<h2 class="text-center">{{lessonBlock.name}}</h2>
+<div class="text-center">{{lessonBlock.description}}</div>
 <div ng-init="getLessonsForBlock()">
-	<div class="grid-col-12 text-center lessonList" ng-repeat="lesson in lessonsForBlock" ng-click="redirectToLesson(lesson)">
-		
+	<div class="grid-col-12 text-center lessonList" ng-repeat="lesson in lessonsForBlock" ng-click="redirectToLesson(lesson)">		
 		<h1>{{lesson.title}}</h1>
 		{{lesson.brief}}
 	</div>

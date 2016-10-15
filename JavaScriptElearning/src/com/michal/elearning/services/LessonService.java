@@ -11,11 +11,13 @@ import javax.ws.rs.core.Response;
 
 import org.json.JSONObject;
 
-import com.google.gson.Gson;
 import com.michal.elearning.dao.Lesson;
-import com.michal.elearning.dao.LessonTabs;
+import com.michal.elearning.dao.LessonBlock;
+import com.michal.elearning.daoServices.IBlockInterface;
 import com.michal.elearning.daoServices.ILessonsInterface;
+import com.michal.elearning.daoServices.LessonBlockDaoService;
 import com.michal.elearning.daoServices.LessonDaoService;
+import com.michal.elearning.utils.JsonUtils;
 
 @Path("/lessons")
 public class LessonService {
@@ -30,8 +32,11 @@ public class LessonService {
     {       
 		try {
 			List<Lesson> lessons = lessonService.getBlockLessons(blockId);
+			LessonBlock lessonBlock = getLessonBlockService().getLessonBlockByID(blockId);
+			JSONObject lessonBlockJson = new JSONObject(lessonBlock);
 			JSONObject lessonsJson = new JSONObject();  
 			lessonsJson.put("lessons", lessons);
+			lessonsJson.put("lessonBlock", lessonBlockJson);
 			return Response.ok(lessonsJson.toString()).build();
 		} catch (Exception e) {
 			return LESSON_LOAD_ERROR;
@@ -40,15 +45,11 @@ public class LessonService {
 	
 	@RolesAllowed("user")
     @GET
-    @Path("/loadLessonInfo")
-	public Response getLessonInfoById(@QueryParam("lessonId") int lessonId){
+    @Path("/loadLessonEditorById")
+	public Response getLessonEditorById(@QueryParam("lessonId") int lessonId){
 		try {
-			List<String> lessonInstructions = lessonService.getLessonInstructions(lessonId);
-			List<LessonTabs> lessonTabs= lessonService.getLessonTabs(lessonId);
-			JSONObject lessonJson = new JSONObject();  
-			lessonJson.put("lessonInstructions", lessonInstructions);
-			lessonJson.put("lessonTabs", lessonTabs);
-			return Response.ok(lessonJson.toString()).build();
+			Lesson lessonResult = lessonService.getEditorLessonById(lessonId);
+			return Response.ok(JsonUtils.getParsedJsonFromObject(lessonResult)).build();
 		} catch (SQLException e) {
 			return LESSON_LOAD_ERROR;
 		}
@@ -56,16 +57,30 @@ public class LessonService {
 	
 	@RolesAllowed("user")
     @GET
-    @Path("/loadLessonById")
-	public Response getLessonById(@QueryParam("lessonId") int lessonId){
+    @Path("/loadLessonVideoById")
+	public Response getLessonVideoById(@QueryParam("lessonId") int lessonId){
 		try {
-			Lesson lessonResult = lessonService.getLessonDetailsById(lessonId);
-			Gson gson = new Gson();
-			String json = gson.toJson(lessonResult);
-			return Response.ok(json).build();
+			Lesson lessonResult = lessonService.getVideoLessonById(lessonId);
+			return Response.ok(JsonUtils.getParsedJsonFromObject(lessonResult)).build();
 		} catch (SQLException e) {
 			return LESSON_LOAD_ERROR;
 		}
+	}	
+	
+	@RolesAllowed("user")
+    @GET
+    @Path("/loadLessonQuizById")
+	public Response getLessonQuizById(@QueryParam("lessonId") int lessonId){
+		try {
+			Lesson lessonResult = lessonService.getQuizLessonById(lessonId);
+			return Response.ok(JsonUtils.getParsedJsonFromObject(lessonResult)).build();
+		} catch (SQLException e) {
+			return LESSON_LOAD_ERROR;
+		}
+	}	
+	
+	private IBlockInterface getLessonBlockService(){
+		return new LessonBlockDaoService();
 	}
 
 }

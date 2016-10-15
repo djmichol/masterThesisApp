@@ -56,20 +56,13 @@ public class StandardRequestFilter implements ContainerRequestFilter{
         	throw new WebApplicationException(ACCESS_DENIED);
         }        
         if(isAuthHeaderStartWithBearer()){
-        	User authentificationResult = null;
-			try {
-				authentificationResult = TokenUtils.validateToken(getAuthHeader().replaceFirst("Bearer ", ""));
-			} catch (Exception e) {
-				throw new WebApplicationException(ACCESS_DENIED);
-			}	  			
-	        if(authentificationResult == null) {
-	        	throw new WebApplicationException(ACCESS_DENIED);
-	        }
-			if(method.isAnnotationPresent(RolesAllowed.class))
+        	User authentificationResult = getUserFromToken();
+        	if(authentificationResult == null) {
+        		throw new WebApplicationException(ACCESS_DENIED);
+            }
+			if(isRolesAllowedPresent(method))
             {
-                RolesAllowed rolesAnnotation = method.getAnnotation(RolesAllowed.class);
-                Set<String> rolesSet = new HashSet<String>(Arrays.asList(rolesAnnotation.value()));
-                if(!isUserInRole(rolesSet, authentificationResult))
+                if(!isRolesValid(method, authentificationResult))
                 {
                 	throw new WebApplicationException(ACCESS_DENIED);
                 }
@@ -106,6 +99,30 @@ public class StandardRequestFilter implements ContainerRequestFilter{
 	
 	private boolean isAuthHeaderStartWithBearer(){
 		return getAuthHeader().startsWith("Bearer ") ? true : false;
+	}
+	
+	private User getUserFromToken(){
+		User userFromToken = null;
+		try {
+			userFromToken = TokenUtils.validateToken(getAuthHeader().replaceFirst("Bearer ", ""));
+		} catch (Exception e) {
+			throw new WebApplicationException(ACCESS_DENIED);
+		}	  			
+        return userFromToken;
+	}
+	
+	private boolean isRolesAllowedPresent(Method method){
+		return method.isAnnotationPresent(RolesAllowed.class) ? true : false;
+	}
+	
+	private boolean isRolesValid(Method method, User authUser){
+		RolesAllowed rolesAnnotation = method.getAnnotation(RolesAllowed.class);
+        Set<String> rolesSet = new HashSet<String>(Arrays.asList(rolesAnnotation.value()));
+        if(!isUserInRole(rolesSet, authUser))
+        {
+        	return false;
+        }
+        return true;
 	}
 	
 	private boolean isUserInRole(Set<String> rolesSet, User u) {

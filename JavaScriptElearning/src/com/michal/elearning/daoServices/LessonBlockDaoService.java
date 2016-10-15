@@ -14,4 +14,9 @@ public class LessonBlockDaoService implements IBlockInterface {
 		return CoreDao.getSqlMapper().queryForList("LessonBlock.getLessonBlockByPathId",pathId);
 	}
 
+	@Override
+	public LessonBlock getLessonBlockByID(int blockId) throws SQLException {
+		return (LessonBlock) CoreDao.getSqlMapper().queryForObject("LessonBlock.getLessonBlockById",blockId);
+	}
+
 }

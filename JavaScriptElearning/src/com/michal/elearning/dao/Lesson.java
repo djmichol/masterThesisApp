@@ -11,6 +11,10 @@ public class Lesson {
 	private int blockId;
 	private List<String> instructions;
 	private List<LessonTabs> tabs;
+	private LessonVideo video;
+	private List<LessonQuizQuestion> quiz;
+	private String type;
+	private int order;
 	
 	public int getId() {
 		return id;
@@ -53,5 +57,29 @@ public class Lesson {
 	}
 	public void setBlockId(int blockId) {
 		this.blockId = blockId;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public int getOrder() {
+		return order;
+	}
+	public void setOrder(int order) {
+		this.order = order;
+	}
+	public LessonVideo getVideo() {
+		return video;
+	}
+	public void setVideo(LessonVideo video) {
+		this.video = video;
+	}
+	public List<LessonQuizQuestion> getQuiz() {
+		return quiz;
+	}
+	public void setQuiz(List<LessonQuizQuestion> quiz) {
+		this.quiz = quiz;
 	}
 }
