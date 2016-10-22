@@ -1,4 +1,3 @@
-//kontoler uzytkownika
 app.controller("UsersController", function ($scope,usersService,$window, $rootScope) {
 	
 	$scope.alerts = $rootScope.alerts;

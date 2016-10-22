@@ -22,12 +22,8 @@ var app = angular.module("ElearningApp", ["ngRoute",'ui.bootstrap']).config(func
         templateUrl: "view/lessonsList.html",
 		controller: "LessonController"
     });	 
-	$routeProvider.when("/editor", {
-        templateUrl: "view/editor.html",
-		controller: "EditorController"
-    });
 	$routeProvider.when("/editor/:lessonId", {
-        templateUrl: "view/editor.html",
+        templateUrl: "view/editorTemplate.html",
 		controller: "EditorController"
     });
 	$routeProvider.when("/videoLesson/:lessonId", {
@@ -43,52 +39,18 @@ var app = angular.module("ElearningApp", ["ngRoute",'ui.bootstrap']).config(func
     });
 }); 
 
+app.run(function ($rootScope, inputService,$uibModal) {
 
-app.factory('BearerAuthInterceptor', function ($window, $q,$rootScope) {
-    return {
-        request: function(config) {
-            config.headers = config.headers || {};
-            var token = $window.localStorage.getItem('token');
-            if (token && !(token === undefined)) {
-              config.headers.Authorization = 'Bearer ' + $window.localStorage.getItem('token');
-            }
-            return config || $q.when(config);
-        },
-        responseError: function(response) {
-            if (response.status === 401) {
-            	$rootScope.addAlert('danger','Dostęp dla zalogowanych użytkowników.');
-            }
-            if (response.status === 403) {
-            	$rootScope.addAlert('danger','Brak dostępu.');
-            }
-            return $q.reject(response);
-        }
-    };
-});
-
-app.config(function ($httpProvider) {
-    $httpProvider.interceptors.push('BearerAuthInterceptor');
-});
-
-app.run(function ($rootScope, $location, inputService,$uibModal) {
-
-    var history = [];
     $rootScope.alerts = [];
     $rootScope.keystrokes = [];
     $rootScope.mauseMove = [];
     $rootScope.mauseClick = [];
     $rootScope.userForm = {};
-
+    
     $rootScope.$on('$routeChangeSuccess', function() {
-        history.push($location.$$path);
         $rootScope.alerts = [];
     });
-
-    $rootScope.back = function () {
-        var prevUrl = history.length > 1 ? history.splice(-2)[0] : "/";
-        $location.path(prevUrl);
-    };    
-
+   
     $rootScope.addAlert = function(alertType,alertMsg) {
     	$rootScope.alerts.push({type: alertType, msg: alertMsg});
 	};
@@ -101,7 +63,7 @@ app.run(function ($rootScope, $location, inputService,$uibModal) {
 			var modalInstance = $uibModal.open({
 				templateUrl: 'view/modalFormContent.html',
 				backdrop: false,
-				controller: 'ModalInstanceCtrl'
+				controller: 'UserFormModalInstanceCtrl'
 			})
 		};
 	

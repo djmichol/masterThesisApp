@@ -5,7 +5,7 @@
 		<div class="grid-col-12" >
 			<uib-tabset active="active">
 				<uib-tab index="$index + 1" ng-repeat="slide in slides" heading="{{slide.order}}">
-					<p>{{slide.question}}</p>
+					<h3>{{slide.question}}</h3>
 					<div class="checkbox">
 						<label><input type="checkbox" ng-model="checkboxModel.a">{{slide.answerA}}</label>
 					</div>
@@ -18,7 +18,7 @@
 					<div class="checkbox">
 						<label><input type="checkbox" ng-model="checkboxModel.d">{{slide.answerD}}</label>
 					</div>
-					<button ng-click="checkAnswer(slide.goodAnswer)">check</button>
+					<button class="btn btn-default " ng-click="goToNextQuestion(slide.goodAnswer)">Następne pytanie</button>
 				</uib-tab>
 			</uib-tabset>		
 		</div>

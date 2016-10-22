@@ -1,4 +1,4 @@
-app.controller("EditorController", function ($scope,$routeParams, pageService,$rootScope) {
+app.controller("EditorController", function ($scope,$routeParams, pageService,$rootScope,$uibModal,lessonUtilsService) {
 	$scope.editor;
 	$scope.isCollapsedHorizontal = true;
 	$scope.lesson = {};
@@ -41,7 +41,7 @@ app.controller("EditorController", function ($scope,$routeParams, pageService,$r
 		};
 		window.onerror=function(a,b,c){errors.push(a);};
 		
-		var ee = eval(content+test);
+		eval(content+test);
 		
 		if(errors.length>0){
 			var a = '';
@@ -55,11 +55,10 @@ app.controller("EditorController", function ($scope,$routeParams, pageService,$r
 		
 		return functionResult;
 	}
-	
-	
+		
 	$scope.saveEditor = function(){
 		var value = $scope.editor.getValue();
-		$rootScope.toggleUserFormModal();
+		$scope.toggleNextLessonModal();		
 	}
 	
 	$scope.initLesson = function(){
@@ -68,9 +67,18 @@ app.controller("EditorController", function ($scope,$routeParams, pageService,$r
 		pageService.getEditorLessonById(lessonId).success(function(dane) {			
 			$scope.lesson = dane.lesson;
 			$scope.lessons = dane.lessons;
+			lessonUtilsService.setLessonsInBlock(dane.lessons);
+			lessonUtilsService.setCurrentLesson(dane.lesson);
         }).error(function(error) {
         	$rootScope.addAlert('danger',error);
         });		
 	}
 	
+	$scope.toggleNextLessonModal = function(){
+		var modalInstance = $uibModal.open({
+			templateUrl: 'view/editorSuccessModal.html',
+			backdrop: false,
+			controller: 'NextLessonModalInstanceCtrl'
+		})
+	};
 });

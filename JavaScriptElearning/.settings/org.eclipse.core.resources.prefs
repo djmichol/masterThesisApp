@@ -1,2 +1,5 @@
 eclipse.preferences.version=1
+encoding//WebContent/view/editorSuccessModal.html=UTF-8
 encoding//WebContent/view/home.html=UTF-8
+encoding//WebContent/view/quizResultModal.html=UTF-8
+encoding//WebContent/view/quizTemplate.html=UTF-8

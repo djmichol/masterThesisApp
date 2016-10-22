@@ -17,7 +17,6 @@ import com.michal.elearning.daoServices.IBlockInterface;
 import com.michal.elearning.daoServices.ILessonsInterface;
 import com.michal.elearning.daoServices.LessonBlockDaoService;
 import com.michal.elearning.daoServices.LessonDaoService;
-import com.michal.elearning.utils.JsonUtils;
 
 @Path("/lessons")
 public class LessonService {
@@ -66,7 +65,12 @@ public class LessonService {
 	public Response getLessonVideoById(@QueryParam("lessonId") int lessonId){
 		try {
 			Lesson lessonResult = lessonService.getVideoLessonById(lessonId);
-			return Response.ok(JsonUtils.getParsedJsonFromObject(lessonResult)).build();
+			List<Lesson> lessons = lessonService.getBlockLessons(lessonResult.getBlockId());
+			JSONObject lesson = new JSONObject(lessonResult);
+			JSONObject lessonsJson = new JSONObject();  
+			lessonsJson.put("lesson", lesson);
+			lessonsJson.put("lessons", lessons);
+			return Response.ok(lessonsJson.toString()).build();
 		} catch (SQLException e) {
 			return LESSON_LOAD_ERROR;
 		}
@@ -78,7 +82,12 @@ public class LessonService {
 	public Response getLessonQuizById(@QueryParam("lessonId") int lessonId){
 		try {
 			Lesson lessonResult = lessonService.getQuizLessonById(lessonId);
-			return Response.ok(JsonUtils.getParsedJsonFromObject(lessonResult)).build();
+			List<Lesson> lessons = lessonService.getBlockLessons(lessonResult.getBlockId());
+			JSONObject lesson = new JSONObject(lessonResult);
+			JSONObject lessonsJson = new JSONObject();  
+			lessonsJson.put("lesson", lesson);
+			lessonsJson.put("lessons", lessons);
+			return Response.ok(lessonsJson.toString()).build();
 		} catch (SQLException e) {
 			return LESSON_LOAD_ERROR;
 		}

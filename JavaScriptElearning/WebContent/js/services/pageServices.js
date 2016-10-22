@@ -1,5 +1,4 @@
-//serwis
-app.service('pageService', function($http,$window) {
+app.service('pageService', function($http,$window,$location) {
 	
 	this.getAllLearningPaths = function(){
 		return $http({
@@ -50,4 +49,31 @@ app.service('pageService', function($http,$window) {
 			params: {lessonId: lessonId}
 		});
 	}
+	
+	
+	this.redirectToEditorLesson = function(lesson){
+		$location.path("/editor/"+lesson.id);
+	};
+	this.redirectToVideoLesson = function(lesson){
+		$location.path("/videoLesson/"+lesson.id);
+	};
+	this.redirectToQuizLesson = function(lesson){
+		$location.path("/quizLesson/"+lesson.id);
+	};
+	this.redirectToLesson = function(lesson){
+		if(lesson.type=='editor'){
+			this.redirectToEditorLesson(lesson);
+		}else if(lesson.type=='video'){
+			this.redirectToVideoLesson(lesson);
+		}else if(lesson.type=='quiz'){
+			this.redirectToQuizLesson(lesson);
+		}
+	};
+	
+	this.redirectToLessonsBlocks = function(pathId){
+		$location.path("/lessonsBlocks/"+pathId);
+	}
+	this.redirectToLessonsForBlock = function(blockId){
+		$location.path("/lessonsForBlock/"+blockId);
+	};
 });
