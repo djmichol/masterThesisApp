@@ -3,6 +3,7 @@ app.service('lessonUtilsService', function($http,$window,pageService) {
 	this.lessonInBlock = [];
 	this.currentLesson = {};
 	this.nextLessonIndex = -1;
+	this.currentPathId;
 	
 	this.setLessonsInBlock = function (lessons){
 		this.lessonInBlock = lessons;
@@ -51,11 +52,35 @@ app.service('lessonUtilsService', function($http,$window,pageService) {
 		return this.nextLessonIndex;
 	}
 	
+	this.setCurrentPath = function (currentPathId){
+		this.currentPathId = currentPathId;
+		$window.localStorage.setItem("currentPathId",currentPathId);
+	}
+	
+	this.getCurrentPath= function (){
+		if (this.currentPathId && !(this.currentPathId === undefined)) {
+			return this.currentPathId;
+		} else {
+			var currentPathId = $window.localStorage.getItem('currentPathId');
+            if (currentPathId && !(currentPathId === undefined)) {
+            	return currentPathId;
+            }
+		}
+		return this.currentPathId;
+	}
+	
 	this.redirectToNextLesson = function(){
 		var nextLessonIndex = this.getNextLessonIndex();
-		if(nextLessonIndex>=0 && nextLessonIndex<=this.getLessonsInBlock().length){
+		if(nextLessonIndex>=0 && nextLessonIndex<this.getLessonsInBlock().length){
 			var nextLesson = this.getLessonsInBlock()[nextLessonIndex];
 			pageService.redirectToLesson(nextLesson);
+		} else if(nextLessonIndex>=0 && nextLessonIndex===this.getLessonsInBlock().length){
+			var currentPath = this.getCurrentPath();
+			 if (currentPath && !(currentPath === undefined)) {
+				 pageService.redirectToLessonsBlocks(currentPath);
+			 }else{
+				 pageService.redirectToHome();
+			 }
 		}
 	}
 	
@@ -68,6 +93,5 @@ app.service('lessonUtilsService', function($http,$window,pageService) {
         }
       }
       return false;
-    }
-	
+    }	
 });

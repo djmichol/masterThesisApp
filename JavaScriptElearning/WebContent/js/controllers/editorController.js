@@ -37,7 +37,7 @@ app.controller("EditorController", function ($scope,$routeParams, pageService,$r
 			var a="";
 			for(i=0;i<arguments.length;i++)
 				a+=arguments[i]+" ";
-			document.getElementById("result").innerHTML = a;
+			document.getElementById("result").innerHTML += a;
 		};
 		window.onerror=function(a,b,c){errors.push(a);};
 		

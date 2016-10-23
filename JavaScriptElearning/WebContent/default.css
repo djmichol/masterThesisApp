@@ -135,7 +135,8 @@ body{
 }
 
 .lesson-right-bar{
-	background-color: green;
+	background-color: back;
+	color: white;
 	position: absolute;
 	float: right;
 	top: 40px;
@@ -263,9 +264,9 @@ body{
 }
 
 .sidenav a {
-    padding: 8px 8px 8px 32px;
+    padding: 5px 8px 8px 5px;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 20px;
     color: #818181;
     display: block;
 }

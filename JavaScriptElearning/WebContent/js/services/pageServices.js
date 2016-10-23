@@ -48,8 +48,7 @@ app.service('pageService', function($http,$window,$location) {
 			method: "GET",
 			params: {lessonId: lessonId}
 		});
-	}
-	
+	}	
 	
 	this.redirectToEditorLesson = function(lesson){
 		$location.path("/editor/"+lesson.id);
@@ -68,12 +67,14 @@ app.service('pageService', function($http,$window,$location) {
 		}else if(lesson.type=='quiz'){
 			this.redirectToQuizLesson(lesson);
 		}
-	};
-	
+	};	
 	this.redirectToLessonsBlocks = function(pathId){
 		$location.path("/lessonsBlocks/"+pathId);
 	}
 	this.redirectToLessonsForBlock = function(blockId){
 		$location.path("/lessonsForBlock/"+blockId);
+	};
+	this.redirectToHome = function(){
+		$location.path("/paths");
 	};
 });

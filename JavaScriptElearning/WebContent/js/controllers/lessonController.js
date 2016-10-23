@@ -1,4 +1,4 @@
-app.controller("LessonController", function ($scope,pageService,$rootScope,$routeParams) {
+app.controller("LessonController", function ($scope,pageService,$rootScope,$routeParams,lessonUtilsService) {
 	$scope.pathCards = []; 
 	$scope.lessonsBlocks = [];
 	$scope.path = {};
@@ -15,6 +15,7 @@ app.controller("LessonController", function ($scope,pageService,$rootScope,$rout
 	};	
 	$scope.getLessonsBlockForPath = function(){
 		var pathId= $routeParams.pathId;
+		lessonUtilsService.setCurrentPath(pathId);
 		pageService.getLessonBlockForPath(pathId).success(function(dane,response) {
 			$scope.lessonsBlocks = dane.lessonsBlocks;
 			$scope.path = dane.pathInfo;

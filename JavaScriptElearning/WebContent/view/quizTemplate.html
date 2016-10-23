@@ -2,6 +2,10 @@
 <html>
 	<div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
 	<div class="panel-default text-center" ng-init="initLesson()">
+		<div id="mySidenav" class="sidenav" uib-collapse="isCollapsedHorizontal">
+		  <a href="javascript:void(0)" class="closebtn" ng-click="isCollapsedHorizontal = !isCollapsedHorizontal">&times;</a>
+		  <a ng-repeat="lesson in lessons">{{lesson.title}}</a>
+		</div>
 		<div class="grid-col-12" >
 			<uib-tabset active="active">
 				<uib-tab index="$index + 1" ng-repeat="slide in slides" heading="{{slide.order}}">
@@ -21,6 +25,9 @@
 					<button class="btn btn-default " ng-click="goToNextQuestion(slide.goodAnswer)">Następne pytanie</button>
 				</uib-tab>
 			</uib-tabset>		
+		</div>
+		<div class="sidebar-toogle">
+			<span class="glyphicon glyphicon-menu-hamburger" ng-click="isCollapsedHorizontal = !isCollapsedHorizontal"></span>
 		</div>
 	</div>
 </html>

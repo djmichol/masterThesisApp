@@ -2,10 +2,17 @@
 <html>
 	<div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
 	<div class="panel-default text-center" ng-init="initLesson()">
+		<div id="mySidenav" class="sidenav" uib-collapse="isCollapsedHorizontal">
+		  <a href="javascript:void(0)" class="closebtn" ng-click="isCollapsedHorizontal = !isCollapsedHorizontal">&times;</a>
+		  <a ng-repeat="lesson in lessons">{{lesson.title}}</a>
+		</div>
 		<div class="grid-col-12">
 			<h2>Video - {{lesson.video.name}}</h2>
 			<div ng-bind-html="player"></div>
 			<button class="btn btn-default " ng-click="redirectToNextLesson()">Nastepna lekcja</button>
+		</div>
+		<div class="sidebar-toogle">
+			<span class="glyphicon glyphicon-menu-hamburger" ng-click="isCollapsedHorizontal = !isCollapsedHorizontal"></span>
 		</div>
 	</div>
 </html>
