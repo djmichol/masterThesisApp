@@ -20,5 +20,6 @@
    <sqlMap resource="com/michal/elearning/dao/Path.xml"/> 
    <sqlMap resource="com/michal/elearning/dao/Lesson.xml"/> 
    <sqlMap resource="com/michal/elearning/dao/LessonBlock.xml"/> 
+   <sqlMap resource="com/michal/elearning/dao/UserInputData.xml"/> 
 </sqlMapConfig>
 

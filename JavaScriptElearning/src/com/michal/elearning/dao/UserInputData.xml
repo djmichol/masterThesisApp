@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="UserInputData">
+
+	<typeAlias alias="UserInputData" type="com.michal.elearning.dao.UserInputData" />	
+
+	<resultMap id="UserInputDataMap" class="UserInputData" >
+		<result property="keyStrokes" column="input_keystrokes" />
+		<result property="mouseMove" column="input_mause_move" />
+		<result property="mouseClicks" column="input_mause_click" />	
+		<result property="form" column="input_form" />	
+		<result property="id" column="input_id" />
+		<result property="usrId" column="input_user_id" />	
+	</resultMap>
+
+	 
+   <insert id="insertInputData" parameterClass="UserInputData">
+	   INSERT INTO  user_input_data (
+		   input_user_id,
+		   input_keystrokes,
+		   input_mause_move,
+		   input_mause_click,
+		   input_form)
+	   values (
+		    #usrId#,
+		    #keyStrokes#,
+		    #mouseMove#,
+		    #mouseClicks#,
+		    #form#)
+   </insert>
+	
+</sqlMap>

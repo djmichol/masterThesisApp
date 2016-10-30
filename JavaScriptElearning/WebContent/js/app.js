@@ -71,13 +71,14 @@ app.run(function ($rootScope, inputService,$uibModal) {
 		var data = {
 				keyStroke : $rootScope.keystrokes,
 				mauseMove :  $rootScope.mauseMove,
-				mauseClick : $rootScope.mauseClick
+				mauseClick : $rootScope.mauseClick,
+				form : $rootScope.userForm
 		}
-		/*inputService.saveUserInput(data).success(function(dane) {
+		inputService.saveUserInput(data).success(function(dane) {
 			//nic nie rob
         }).error(function(error) {
         	$rootScope.addAlert('danger',error);
-        });	*/		
+        });			
 	}
 	
 	$rootScope.collectKeystrokes = function(){
