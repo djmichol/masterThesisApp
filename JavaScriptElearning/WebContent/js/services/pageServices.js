@@ -1,4 +1,4 @@
-app.service('pageService', function($http,$window,$location) {
+app.service('pageService', function($http,$window,$location,$rootScope) {
 	
 	this.getAllLearningPaths = function(){
 		return $http({
@@ -60,6 +60,9 @@ app.service('pageService', function($http,$window,$location) {
 		$location.path("/quizLesson/"+lesson.id);
 	};
 	this.redirectToLesson = function(lesson){
+		if(lesson.order==99){
+			$rootScope.toggleUserFormModal();
+		}
 		if(lesson.type=='editor'){
 			this.redirectToEditorLesson(lesson);
 		}else if(lesson.type=='video'){

@@ -1,5 +1,5 @@
 app.controller("MenuController", function ($scope, $window) {
-	$scope.menuElements = [{label:"Learn", value: "#/paths"}]; 
+	$scope.menuElements = [{label:"Ścieżki nauki", value: "#/paths"}]; 
 	$scope.isUserLoged = function(){
 		 if ($window.localStorage.getItem('token') && (typeof $window.localStorage.getItem('token')!= 'undefined')) {
 			 return true;

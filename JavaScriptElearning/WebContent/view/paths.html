@@ -4,8 +4,9 @@
 	<div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
 	<div class="panel-default text-center">
 		<div class="grid-col-12">
-			<h2>Language Skills</h2>
-			<p>Learn core programming concepts and syntax for the world's most popular languages.</p>
+			<h2>Ścieżki nauki</h2>
+			<p>Nauka kluczowych konceptów oraz składni najpopularniejszych jezyków programowania.</p>
+			<p>Kursy pogrupowane sa w ścieżki na podstawie technologi.</p>
 			<div class="grid-row" ng-init="getAllPaths()">
 				<path-card-directive ng-repeat="pathCard in pathCards" path="pathCard" ng-click="redirectToLessonsBlocks(pathCard.id)"></path-card-directive>
 			</div>

@@ -1,22 +1,36 @@
 
 <div class="modal-header">
-  <h1>Uczucia</h1>
+  <h1 class="text-center">Emocje towarzyszące rozwiązywaniu zadań</h1>
 </div>'
 <div class="modal-body">
-  <p>Wybierz skale uczuc</p>
-   <pre>Model: {{zlosc}}</pre>
-   <div class="btn-group">
-        <label class="btn btn-success" ng-model="zlosc" uib-btn-radio="'No'">Nie</label>
-        <label class="btn btn-success" ng-model="zlosc" uib-btn-radio="'Neutral'">Neutralnie</label>
-        <label class="btn btn-success" ng-model="zlosc" uib-btn-radio="'Yes'">Tak</label>
+  <h3 class="text-center">Wybierz emocje</h3>
+  <div class="text-center">
+   <h5 class="text-center">Znudzenie</h5>
+   <div class="btn-group text-center">
+        <label class="btn btn-success" ng-model="boredom" uib-btn-radio="'No'">Nie</label>
+        <label class="btn btn-success" ng-model="boredom" uib-btn-radio="'Neutral'">Neutralnie</label>
+        <label class="btn btn-success" ng-model="boredom" uib-btn-radio="'Yes'">Tak</label>
     </div>
-	<pre>Model: {{znudzenie}}</pre>
-	<div class="btn-group">
-        <label class="btn btn-success" ng-model="znudzenie" uib-btn-radio="'No'">Nie</label>
-        <label class="btn btn-success" ng-model="znudzenie" uib-btn-radio="'Neutral'">Neutralnie</label>
-        <label class="btn btn-success" ng-model="znudzenie" uib-btn-radio="'Yes'">Tak</label>
+	<h5 class="text-center">Dezorientacja</h5>
+	<div class="btn-group ">
+        <label class="btn btn-success" ng-model="confusion" uib-btn-radio="'No'">Nie</label>
+        <label class="btn btn-success" ng-model="confusion" uib-btn-radio="'Neutral'">Neutralnie</label>
+        <label class="btn btn-success" ng-model="confusion" uib-btn-radio="'Yes'">Tak</label>
     </div>
-	</div>
+    <h5 class="text-center">Zaangażowanie</h5>
+	<div class="btn-group text-center">
+        <label class="btn btn-success" ng-model="engaged" uib-btn-radio="'No'">Nie</label>
+        <label class="btn btn-success" ng-model="engaged" uib-btn-radio="'Neutral'">Neutralnie</label>
+        <label class="btn btn-success" ng-model="engaged" uib-btn-radio="'Yes'">Tak</label>
+    </div>
+    <h5 class="text-center">Frustracja</h5>
+	<div class="btn-group text-center">
+        <label class="btn btn-success" ng-model="frustration" uib-btn-radio="'No'">Nie</label>
+        <label class="btn btn-success" ng-model="frustration" uib-btn-radio="'Neutral'">Neutralnie</label>
+        <label class="btn btn-success" ng-model="frustration" uib-btn-radio="'Yes'">Tak</label>
+    </div>
+    </div>
+</div>
 <div class="modal-footer">
 	<button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
 </div>

@@ -6,7 +6,10 @@ app.controller("VideoLessonController", function ($scope,$routeParams,$sce, page
 	$scope.initLesson = function(){
 		$rootScope.collectKeystrokes();
 		var lessonId= $routeParams.lessonId;
-		pageService.getVideoLessonById(lessonId).success(function(dane) {			
+		pageService.getVideoLessonById(lessonId).success(function(dane) {	
+			if(dane.lesson.order==1){
+				$rootScope.collectKeystrokes();
+			}
 			$scope.lesson = dane.lesson;
 			$scope.lessons = dane.lessons;
 			$scope.player = $sce.trustAsHtml(dane.lesson.video.source);

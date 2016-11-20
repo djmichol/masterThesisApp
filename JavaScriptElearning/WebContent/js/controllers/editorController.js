@@ -1,4 +1,4 @@
-app.controller("EditorController", function ($scope,$routeParams, pageService,$rootScope,$uibModal,lessonUtilsService) {
+app.controller("EditorController", function ($scope,$routeParams, pageService,$rootScope,$uibModal,$sce,lessonUtilsService) {
 	$scope.editor;
 	$scope.isCollapsedHorizontal = true;
 	$scope.lesson = {};
@@ -21,18 +21,19 @@ app.controller("EditorController", function ($scope,$routeParams, pageService,$r
 	
 	$scope.validateContent = function(tab) {
 		var content = $scope.editor.getValue();
-		var pass = testFunction(content,tab.contentSubmit);
+		var pass = testFunction(content,tab.contentSubmit,tab.editorResult);
 		if(pass){
 			$scope.saveEditor();
 		}
 	}
 	
-	function testFunction(content,test) {
+	function testFunction(content,test,errorInfo) {
 
 		var functionResult;
 		var oldLog = console.log;
 		
 		var errors = [];
+		document.getElementById("result").innerHTML = "";
 		console.log=function(){
 			var a="";
 			for(i=0;i<arguments.length;i++)
@@ -41,15 +42,21 @@ app.controller("EditorController", function ($scope,$routeParams, pageService,$r
 		};
 		window.onerror=function(a,b,c){errors.push(a);};
 		
-		eval(content+test);
+		try {
+			eval(content+test); 
+		} catch (e) {
+			console.log(e.message);
+		}
 		
 		if(errors.length>0){
 			var a = '';
 			for(i=0;i<errors.length;i++)
 				a+=errors[i]+" ";
-			document.write(a)
+			console.log(a);
 		}
-		
+		if(functionResult==false){
+			console.log(errorInfo);
+		}		
 		console.log = oldLog;
 		console.log(functionResult);
 		
@@ -61,12 +68,15 @@ app.controller("EditorController", function ($scope,$routeParams, pageService,$r
 		$scope.toggleNextLessonModal();		
 	}
 	
-	$scope.initLesson = function(){
-		$rootScope.collectKeystrokes();
+	$scope.initLesson = function(){		
 		var lessonId= $routeParams.lessonId;
-		pageService.getEditorLessonById(lessonId).success(function(dane) {			
+		pageService.getEditorLessonById(lessonId).success(function(dane) {	
+			if(dane.lesson.order==1){
+				$rootScope.collectKeystrokes();
+			}
 			$scope.lesson = dane.lesson;
 			$scope.lessons = dane.lessons;
+			$scope.lesson.article =  $sce.trustAsHtml(dane.lesson.article);
 			lessonUtilsService.setLessonsInBlock(dane.lessons);
 			lessonUtilsService.setCurrentLesson(dane.lesson);
         }).error(function(error) {

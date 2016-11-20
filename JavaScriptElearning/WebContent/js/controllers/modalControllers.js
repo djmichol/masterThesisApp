@@ -4,8 +4,7 @@
 
 app.controller('NextLessonModalInstanceCtrl', function($scope, $rootScope, $uibModalInstance, lessonUtilsService) {
 	$scope.ok = function() {
-		$uibModalInstance.close(this);
-		$rootScope.toggleUserFormModal();
+		$uibModalInstance.close(this);		
 		lessonUtilsService.setNextLessonIndex();
 		lessonUtilsService.redirectToNextLesson();
 	};
@@ -26,15 +25,19 @@ app.controller('UserFormModalInstanceCtrl', function($scope, $rootScope, $uibMod
 
 	$scope.ok = function() {
 		var ankieta = {
-			zlosc : $scope.zlosc,
-			znudzenie : $scope.znudzenie
+			boredom : $scope.boredom,
+			confusion : $scope.confusion,
+			engaged : $scope.engaged, 
+			frustration :$scope.frustration
 		}
 		$rootScope.userForm = ankieta;
 		$rootScope.saveUserInput();
 		$uibModalInstance.close(this);
 	};
 
-	$scope.zlosc = 'Neutral';
-	$scope.znudzenie = 'Neutral';
+	$scope.boredom = 'Neutral';
+	$scope.confusion = 'Neutral';
+	$scope.engaged = 'Neutral';
+	$scope.frustration = 'Neutral';
 
 });
