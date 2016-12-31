@@ -71,7 +71,7 @@ app.controller("EditorController", function ($scope,$routeParams, pageService,$r
 	$scope.initLesson = function(){		
 		var lessonId= $routeParams.lessonId;
 		pageService.getEditorLessonById(lessonId).success(function(dane) {	
-			if(dane.lesson.order==1){
+			if($rootScope.isKeyCollecting === false){
 				$rootScope.collectKeystrokes();
 			}
 			$scope.lesson = dane.lesson;

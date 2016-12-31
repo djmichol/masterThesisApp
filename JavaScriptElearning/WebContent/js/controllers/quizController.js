@@ -13,9 +13,11 @@ app.controller("QuizController", function ($scope,$routeParams,pageService,lesso
      };
 	
 	$scope.initLesson = function(){
-		//$rootScope.collectKeystrokes();
 		var lessonId= $routeParams.lessonId;
-		pageService.getQuizLessonById(lessonId).success(function(dane) {			
+		pageService.getQuizLessonById(lessonId).success(function(dane) {	
+			if($rootScope.isKeyCollecting === false){
+				$rootScope.collectKeystrokes();
+			}
 			$scope.lesson = dane.lesson;
 			$scope.slides = dane.lesson.quiz;
 			$scope.lessons = dane.lessons;

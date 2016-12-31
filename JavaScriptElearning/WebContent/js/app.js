@@ -39,13 +39,14 @@ var app = angular.module("ElearningApp", ["ngRoute",'ui.bootstrap']).config(func
     });
 }); 
 
-app.run(function ($rootScope, inputService,$uibModal) {
+app.run(function ($rootScope, inputService,lessonUtilsService,$uibModal) {
 
     $rootScope.alerts = [];
     $rootScope.keystrokes = [];
     $rootScope.mauseMove = [];
     $rootScope.mauseClick = [];
     $rootScope.userForm = {};
+    $rootScope.isKeyCollecting = false;
     
     $rootScope.$on('$routeChangeSuccess', function() {
         $rootScope.alerts = [];
@@ -60,6 +61,7 @@ app.run(function ($rootScope, inputService,$uibModal) {
 	};
 	
 	$rootScope.toggleUserFormModal = function(){
+			$rootScope.stopCollecting();
 			var modalInstance = $uibModal.open({
 				templateUrl: 'view/modalFormContent.html',
 				backdrop: false,
@@ -68,36 +70,43 @@ app.run(function ($rootScope, inputService,$uibModal) {
 		};
 	
 	$rootScope.saveUserInput = function(){
+		var lessonId = lessonUtilsService.getCurrentLesson().id;
 		var data = {
 				keyStroke : $rootScope.keystrokes,
 				mauseMove :  $rootScope.mauseMove,
 				mauseClick : $rootScope.mauseClick,
-				form : $rootScope.userForm
+				form : $rootScope.userForm,
+				lessonId : lessonId
 		}
 		inputService.saveUserInput(data).success(function(dane) {
-			//nic nie rob
+			$rootScope.keystrokes = [];
+		    $rootScope.mauseMove = [];
+		    $rootScope.mauseClick = [];
+		    $rootScope.userForm = {};
         }).error(function(error) {
         	$rootScope.addAlert('danger',error);
         });			
 	}
-	
+	var counter = 0;
 	$rootScope.collectKeystrokes = function(){
+		$rootScope.isKeyCollecting = true;
 		document.onkeydown = function (event) {
 			event = event || window.event;
-			$rootScope.keystrokes.push({'code':event.which, 'timeStamp':event.timeStamp,'type':event.type});
+			$rootScope.keystrokes.push({'code':event.which, 'time':event.timeStamp,'type':event.type});
 		}
 		document.onkeyup = function (event) {
 			event = event || window.event;
-			$rootScope.keystrokes.push({'code':event.which, 'timeStamp':event.timeStamp,'type':event.type});
+			$rootScope.keystrokes.push({'code':event.which, 'time':event.timeStamp,'type':event.type});
 		}
 		document.onclick = function (event) {
 			event = event || window.event;
-			$rootScope.mauseClick.push({'timeStamp':event.timeStamp,'type':event.type});
-		}
+			$rootScope.mauseClick.push({'time':event.timeStamp,'type':event.type});
+		}		
 		document.onmousemove = function(event) {
+			counter = counter + 1;
 	        var dot, eventDoc, doc, body, pageX, pageY;
 	        event = event || window.event;
-	        if (event.pageX == null && event.clientX != null) {
+	        if (event.pageX == null && event.clientX != null) {	        	
 	            eventDoc = (event.target && event.target.ownerDocument) || document;
 	            doc = eventDoc.documentElement;
 	            body = eventDoc.body;
@@ -108,7 +117,18 @@ app.run(function ($rootScope, inputService,$uibModal) {
 	              (doc && doc.scrollTop  || body && body.scrollTop  || 0) -
 	              (doc && doc.clientTop  || body && body.clientTop  || 0 );
 	        }
-	        $rootScope.mauseMove.push({'timeStamp':event.timeStamp,'type':event.type,'posX':event.pageX,'posY':event.pageY});
+	        if(counter === 2){
+	        	counter=0;
+	        	$rootScope.mauseMove.push({'time':event.timeStamp,'X':event.pageX,'Y':event.pageY});
+	        }	        
 	    }
+	}
+	
+	$rootScope.stopCollecting = function(){
+		$rootScope.isKeyCollecting = false;
+		document.onkeydown = function (event) {}
+		document.onkeyup = function (event) {}
+		document.onclick = function (event) {}
+		document.onmousemove = function(event) {}
 	}
 });

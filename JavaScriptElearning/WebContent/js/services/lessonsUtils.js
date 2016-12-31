@@ -48,6 +48,14 @@ app.service('lessonUtilsService', function($http,$window,pageService) {
 		this.nextLessonIndex = index;
 	}
 	
+	this.checkIfLastEditorLesson = function(){
+		var nextLesson = this.lessonInBlock[this.nextLessonIndex];
+		if(nextLesson.order == 99){
+			return true;
+		}
+		return false;
+	}
+	
 	this.getNextLessonIndex = function (){
 		return this.nextLessonIndex;
 	}

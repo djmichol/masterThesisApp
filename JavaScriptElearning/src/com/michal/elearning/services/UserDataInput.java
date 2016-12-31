@@ -35,7 +35,8 @@ public class UserDataInput {
 		userDataObject.setMouseMove(inpoutData.getJSONArray("mauseMove").toString().getBytes());
 		userDataObject.setMouseClicks(inpoutData.getJSONArray("mauseClick").toString().getBytes());
 		userDataObject.setForm(inpoutData.getJSONObject("form").toString().getBytes());
-		userDataObject.setUsrId(((User)securityContext.getUserPrincipal()).getId());;
+		userDataObject.setUsrId(((User)securityContext.getUserPrincipal()).getId());
+		userDataObject.setLessonId(inpoutData.getInt("lessonId"));
 		
 		try {
 			dataService.insertUserInputData(userDataObject);

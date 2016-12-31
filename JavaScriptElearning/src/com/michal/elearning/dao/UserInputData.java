@@ -8,6 +8,7 @@ public class UserInputData {
 	private byte[] mouseMove;
 	private byte[] mouseClicks;
 	private byte[] form;
+	private int lessonId;
 	public int getId() {
 		return id;
 	}
@@ -43,6 +44,12 @@ public class UserInputData {
 	}
 	public void setForm(byte[] form) {
 		this.form = form;
+	}
+	public int getLessonId() {
+		return lessonId;
+	}
+	public void setLessonId(int lessonId) {
+		this.lessonId = lessonId;
 	}
 
 }

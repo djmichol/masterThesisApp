@@ -13,6 +13,7 @@
 		<result property="form" column="input_form" />	
 		<result property="id" column="input_id" />
 		<result property="usrId" column="input_user_id" />	
+		<result property="lessonId" column="input_user_lesson_id" />	
 	</resultMap>
 
 	 
@@ -22,13 +23,15 @@
 		   input_keystrokes,
 		   input_mause_move,
 		   input_mause_click,
-		   input_form)
+		   input_form,
+		   input_user_lesson_id)
 	   values (
 		    #usrId#,
 		    #keyStrokes#,
 		    #mouseMove#,
 		    #mouseClicks#,
-		    #form#)
+		    #form#,
+		    #lessonId#)
    </insert>
 	
 </sqlMap>

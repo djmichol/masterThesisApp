@@ -6,6 +6,9 @@ app.controller('NextLessonModalInstanceCtrl', function($scope, $rootScope, $uibM
 	$scope.ok = function() {
 		$uibModalInstance.close(this);		
 		lessonUtilsService.setNextLessonIndex();
+		if(lessonUtilsService.checkIfLastEditorLesson()){
+			$rootScope.toggleUserFormModal();
+		}
 		lessonUtilsService.redirectToNextLesson();
 	};
 });
@@ -16,6 +19,7 @@ app.controller('QuizResultModalInstanceCtrl', function($scope, $rootScope, $uibM
 	
 	$scope.ok = function() {
 		$uibModalInstance.close(this);
+		$rootScope.toggleUserFormModal();
 		lessonUtilsService.setNextLessonIndex();
 		lessonUtilsService.redirectToNextLesson();
 	};
