@@ -9,6 +9,8 @@ public interface IUserInterface {
 	
 	User getLoggedUser(String mail, String password) throws SQLException;
 	
+	User getUserByID(int usrId) throws SQLException;
+	
 	Object insertUser(User newUser) throws SQLException;
 	
 	List<String> getUserRoles(int user)  throws SQLException;

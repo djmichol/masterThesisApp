@@ -33,5 +33,9 @@
 		    #form#,
 		    #lessonId#)
    </insert>
+   
+   <select id="getUserInputData" parameterClass="int" resultMap="UserInputDataMap">
+	   select * from user_input_data where input_user_id=#value#
+   </select>
 	
 </sqlMap>

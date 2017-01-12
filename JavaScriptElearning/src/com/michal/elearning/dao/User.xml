@@ -23,6 +23,15 @@
 	   	and usr_password = #password#
 	</select>
 	
+	<select id="getUserById" resultMap="UserMap" parameterClass="int">
+	   select 
+	   	* 
+	   from 
+	   	users 
+	   where 
+	    usr_id = #value#
+	</select>
+	
 	<select id="getUserRoles" resultClass="String" parameterClass="int">
 	   	select 
 	   		rol_name

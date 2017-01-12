@@ -45,7 +45,11 @@ public class UserDaoService implements IUserInterface{
 		user.setRole(getUserRoles(user.getId()));
 		return user;
 	}
-
-
+	
+	@Override
+	public User getUserByID(int usrId) throws SQLException {
+		User loggedUser = (User) CoreDao.getSqlMapper().queryForObject("User.getUserById", usrId);
+		return loggedUser;
+	}
 
 }

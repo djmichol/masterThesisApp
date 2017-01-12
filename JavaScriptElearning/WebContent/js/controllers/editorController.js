@@ -17,6 +17,7 @@ app.controller("EditorController", function ($scope,$routeParams, pageService,$r
 	
 	$scope.clearEditor = function(val){
 		$scope.editor.setValue(val);
+		document.getElementById("result").innerHTML = "";
 	}
 	
 	$scope.validateContent = function(tab) {
@@ -36,8 +37,8 @@ app.controller("EditorController", function ($scope,$routeParams, pageService,$r
 		document.getElementById("result").innerHTML = "";
 		console.log=function(){
 			var a="";
-			for(i=0;i<arguments.length;i++)
-				a+=arguments[i]+" ";
+			for(var ii=0;ii<arguments.length;ii++)
+				a+=arguments[ii]+" ";
 			document.getElementById("result").innerHTML += a;
 		};
 		window.onerror=function(a,b,c){errors.push(a);};
@@ -50,8 +51,8 @@ app.controller("EditorController", function ($scope,$routeParams, pageService,$r
 		
 		if(errors.length>0){
 			var a = '';
-			for(i=0;i<errors.length;i++)
-				a+=errors[i]+" ";
+			for(var ii=0;ii<errors.length;ii++)
+				a+=errors[ii]+" ";
 			console.log(a);
 		}
 		if(functionResult==false){
