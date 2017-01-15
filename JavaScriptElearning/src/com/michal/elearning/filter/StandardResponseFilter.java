@@ -17,7 +17,7 @@ public class StandardResponseFilter implements ContainerResponseFilter {
 		responseContext.getHeaders().add("Access-Control-Allow-Origin", "*");
 		responseContext.getHeaders().add("Access-Control-Allow-Methods", "GET, POST, PUT, UPDATE, DELETE, OPTIONS");
 		responseContext.getHeaders().add("Access-Control-Max-Age", "151200");
-		responseContext.getHeaders().add("Access-Control-Allow-Headers", "origin, content-type, accept, Authorization");
+		responseContext.getHeaders().add("Access-Control-Allow-Headers", "origin, content-type, accept, Authorization, Log-On-User");
 	}
 
 }

@@ -3,10 +3,18 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>JavaScriptElearning</groupId>
 	<artifactId>JavaScriptElearning</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
+		<resources>
+	      <resource>
+	        <directory>resources</directory>
+	        <includes>
+	          <include>**/*.xml</include>
+	        </includes>
+	      </resource>
+	    </resources>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>

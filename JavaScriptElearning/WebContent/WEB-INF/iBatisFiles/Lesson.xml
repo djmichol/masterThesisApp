@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Lesson">
+
+	<typeAlias alias="Lesson" type="com.michal.elearning.dao.Lesson" />	
+	<typeAlias alias="LessonTabs" type="com.michal.elearning.dao.LessonTabs" />	
+	<typeAlias alias="LessonVideo" type="com.michal.elearning.dao.LessonVideo" />
+	<typeAlias alias="LessonQuizQuestion" type="com.michal.elearning.dao.LessonQuizQuestion" />	
+	
+	<resultMap id="LessonMap" class="Lesson" >
+		<result property="title" column="lesson_title" />	
+		<result property="id" column="lesson_id" />	
+		<result property="blockId" column="lesson_block_id" />	
+		<result property="brief" column="lesson_brief" />
+		<result property="article" column="lesson_article" />	
+		<result property="type" column="lesson_type" />	
+		<result property="order" column="lesson_order" />
+	</resultMap>
+	
+	<resultMap id="LessonMapSimple" class="Lesson" >
+		<result property="title" column="lesson_title" />	
+		<result property="id" column="lesson_id" />	
+		<result property="blockId" column="lesson_block_id" />	
+		<result property="brief" column="lesson_brief" />
+		<result property="type" column="lesson_type" />	
+		<result property="order" column="lesson_order" />	
+	</resultMap>
+	
+	<resultMap id="LessonTabMap" class="LessonTabs" >
+		<result property="name" column="tabs_name" />
+		<result property="id" column="tabs_id" />
+		<result property="content" column="tabs_editor_content" />	
+		<result property="contentSubmit" column="tabs_editor_submit" />
+		<result property="editorResult" column="tabs_editor_result" />	
+	</resultMap>
+	
+	<resultMap id="LessonVideoMap" class="LessonVideo" >
+		<result property="name" column="lesson_video_name" />
+		<result property="id" column="lesson_video_id" />
+		<result property="lessonId" column="lesson_video_lesson_id" />	
+		<result property="source" column="lesson_video_source" />
+	</resultMap>
+	
+	<resultMap id="LessonQuizQuestionMap" class="LessonQuizQuestion" >
+		<result property="id" column="lessson_quiz_question_id" />
+		<result property="lessonId" column="lesson_quiz_lesson_id" />	
+		<result property="answerA" column="lessson_quiz_question_answer_a" />
+		<result property="answerB" column="lessson_quiz_question_answer_b" />
+		<result property="answerC" column="lessson_quiz_question_answer_c" />
+		<result property="answerD" column="lessson_quiz_question_answer_d" />
+		<result property="question" column="lessson_quiz_question_question" />
+		<result property="goodAnswer" column="lessson_quiz_question_right_answer" />
+		<result property="order" column="lessson_quiz_question_order" />		
+	</resultMap>
+	
+	<select id="getLessonById" resultMap="LessonMap" parameterClass="int">
+		 select lesson_id,lesson_title,lesson_brief,lesson_article,lesson_block_id,lesson_type,lesson_order from lessons where lesson_id=#value#
+	</select>
+
+	<select id="getLessonsForBlock" resultMap="LessonMapSimple" parameterClass="int">
+	   select lesson_id,lesson_title,lesson_brief,lesson_type,lesson_block_id,lesson_order 
+	   from lessons 
+	   where lesson_block_id=#value# 
+	   order by lesson_order
+	</select>
+	
+	<select id="getLessonInstructions" resultClass="String" parameterClass="int">
+		SELECT instr_content FROM lesson_instruction WHERE instr_lesson_id=#value#	
+	</select> 
+	
+	<select id="getLesonTabs" resultMap="LessonTabMap" parameterClass="int">
+		SELECT tabs_id,tabs_name,tabs_editor_content,tabs_editor_submit,tabs_editor_result 
+		FROM lesson_tabs
+		WHERE tabs_lesson_id=#value#
+	</select>
+	
+	<select id="getLesonVideo" resultMap="LessonVideoMap" parameterClass="int">
+		SELECT lesson_video_id, lesson_video_lesson_id, lesson_video_source, lesson_video_name
+		FROM lesson_video
+		WHERE lesson_video_lesson_id=#value#
+	</select>
+	
+	<select id="getLessonQuizQuestion" resultMap="LessonQuizQuestionMap" parameterClass="int">
+		SELECT lessson_quiz_question_id, lesson_quiz_lesson_id, lessson_quiz_question_answer_a, lessson_quiz_question_answer_b, 
+		lessson_quiz_question_answer_c, lessson_quiz_question_answer_d,lessson_quiz_question_right_answer,lessson_quiz_question_question,
+		lessson_quiz_question_order
+		FROM lessson_quiz_question
+		WHERE lesson_quiz_lesson_id=#value#
+	</select>
+</sqlMap>

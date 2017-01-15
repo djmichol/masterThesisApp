@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Path">
+
+	<typeAlias alias="Path" type="com.michal.elearning.dao.LearningPath" />	
+	
+	<resultMap id="PathMap" class="Path" >
+		<result property="title" column="path_name" />
+		<result property="description" column="path_description" />	
+		<result property="id" column="path_id" />
+		<result property="brief" column="path_brief" />	
+	</resultMap>
+
+	<select id="getPaths" resultMap="PathMap">
+	   select * from path 
+	</select>
+	
+	<select id="getPathById" resultMap="PathMap" parameterClass="int">
+	   select path_id, path_description, path_name,path_brief from path where path_id=#value#
+	</select>
+</sqlMap>

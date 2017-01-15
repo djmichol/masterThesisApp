@@ -2,7 +2,7 @@ app.service('pageService', function($http,$window,$location,$rootScope) {
 	
 	this.getAllLearningPaths = function(){
 		return $http({
-			url: "http://localhost:8080/JavaScriptElearning/elearningService/learningPath/allPaths",
+			url: $rootScope.baseUrl+"/elearningService/learningPath/allPaths",
 			method: "GET",
 			headers: {
 				'Content-Type': 'text/html'
@@ -12,7 +12,7 @@ app.service('pageService', function($http,$window,$location,$rootScope) {
 	
 	this.getLessonBlockForPath = function(pathId){
 		return $http({
-			url: "http://localhost:8080/JavaScriptElearning/elearningService/learningLessonBlock/lessonBlock",
+			url: $rootScope.baseUrl+"/elearningService/learningLessonBlock/lessonBlock",
 			method: "GET",
 			params: {pathId: pathId}
 		});
@@ -20,7 +20,7 @@ app.service('pageService', function($http,$window,$location,$rootScope) {
 	
 	this.getLessonsForLessonsBlock = function(blockId){
 		return $http({
-			url: "http://localhost:8080/JavaScriptElearning/elearningService/lessons/loadBlockLessons",
+			url: $rootScope.baseUrl+"/elearningService/lessons/loadBlockLessons",
 			method: "GET",
 			params: {blockId: blockId}
 		});
@@ -28,7 +28,7 @@ app.service('pageService', function($http,$window,$location,$rootScope) {
 	
 	this.getEditorLessonById = function(lessonId){
 		return $http({
-			url: "http://localhost:8080/JavaScriptElearning/elearningService/lessons/loadLessonEditorById",
+			url: $rootScope.baseUrl+"/elearningService/lessons/loadLessonEditorById",
 			method: "GET",
 			params: {lessonId: lessonId}
 		});
@@ -36,7 +36,7 @@ app.service('pageService', function($http,$window,$location,$rootScope) {
 	
 	this.getVideoLessonById = function(lessonId){
 		return $http({
-			url: "http://localhost:8080/JavaScriptElearning/elearningService/lessons/loadLessonVideoById",
+			url: $rootScope.baseUrl+"/elearningService/lessons/loadLessonVideoById",
 			method: "GET",
 			params: {lessonId: lessonId}
 		});
@@ -44,7 +44,7 @@ app.service('pageService', function($http,$window,$location,$rootScope) {
 	
 	this.getQuizLessonById = function(lessonId){
 		return $http({
-			url: "http://localhost:8080/JavaScriptElearning/elearningService/lessons/loadLessonQuizById",
+			url: $rootScope.baseUrl+"/elearningService/lessons/loadLessonQuizById",
 			method: "GET",
 			params: {lessonId: lessonId}
 		});

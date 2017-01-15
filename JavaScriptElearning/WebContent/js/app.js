@@ -40,7 +40,8 @@ var app = angular.module("ElearningApp", ["ngRoute",'ui.bootstrap']).config(func
 }); 
 
 app.run(function ($rootScope, inputService,lessonUtilsService,$uibModal) {
-
+	//$rootScope.baseUrl = "http://localhost:8080/JavaScriptElearning";
+	$rootScope.baseUrl = "https://java-script-elearning.herokuapp.com";
     $rootScope.alerts = [];
     $rootScope.keystrokes = [];
     $rootScope.mauseMove = [];

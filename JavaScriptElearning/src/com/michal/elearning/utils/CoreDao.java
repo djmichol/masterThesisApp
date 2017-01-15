@@ -13,7 +13,7 @@ public class CoreDao {
 		Reader configReader;
 		SqlMapClient mapClient = null;
 		try {
-			configReader = Resources.getResourceAsReader("/com/michal/elearning/dao/SqlMapConfig.xml");
+			configReader = Resources.getResourceAsReader("SqlMapConfig.xml");
 			mapClient = SqlMapClientBuilder.buildSqlMapClient(configReader);
 		} catch (IOException e) {
 			e.printStackTrace();

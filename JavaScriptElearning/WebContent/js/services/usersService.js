@@ -1,9 +1,9 @@
-app.service('usersService', function($http, Base64) {
+app.service('usersService', function($http, $rootScope, Base64) {
 	//login function
 	this.login = function(name, password){
 		var authToken = 'Basic ' + Base64.encode(name + ':' + password);
 		return $http({
-			url: "http://localhost:8080/JavaScriptElearning/elearningService/auth/login",
+			url: $rootScope.baseUrl+"/elearningService/auth/login",
 			method: "GET",
 			headers: {
 				'Log-On-User': authToken,
@@ -20,7 +20,7 @@ app.service('usersService', function($http, Base64) {
 			"mail" : mail
 		};		
 		return $http({
-			url: "http://localhost:8080/JavaScriptElearning/elearningService/auth/logOn",
+			url: $rootScope.baseUrl+"/elearningService/auth/logOn",
 			method: "POST",
 			data: newUser,
 			headers: {

@@ -16,10 +16,10 @@
       </dataSource>
    </transactionManager>
 	
-   <sqlMap resource="com/michal/elearning/dao/User.xml"/> 
-   <sqlMap resource="com/michal/elearning/dao/Path.xml"/> 
-   <sqlMap resource="com/michal/elearning/dao/Lesson.xml"/> 
-   <sqlMap resource="com/michal/elearning/dao/LessonBlock.xml"/> 
-   <sqlMap resource="com/michal/elearning/dao/UserInputData.xml"/> 
+   <sqlMap resource="User.xml"/> 
+   <sqlMap resource="Path.xml"/> 
+   <sqlMap resource="Lesson.xml"/> 
+   <sqlMap resource="LessonBlock.xml"/> 
+   <sqlMap resource="UserInputData.xml"/> 
 </sqlMapConfig>
 
