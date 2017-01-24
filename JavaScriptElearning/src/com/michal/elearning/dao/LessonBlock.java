@@ -6,6 +6,7 @@ public class LessonBlock {
 	private String name;
 	private String description;
 	private int pathId;
+	private int order;
 	
 	public int getId() {
 		return id;
@@ -30,6 +31,12 @@ public class LessonBlock {
 	}
 	public void setPathId(int pathId) {
 		this.pathId = pathId;
+	}
+	public int getOrder() {
+		return order;
+	}
+	public void setOrder(int order) {
+		this.order = order;
 	}
 
 }

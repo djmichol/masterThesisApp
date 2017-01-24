@@ -5,13 +5,24 @@
 <sqlMapConfig>
    <settings useStatementNamespaces="true"/>
 	
-   <transactionManager type="JDBC">
+ <!-- <transactionManager type="JDBC">
       <dataSource type="SIMPLE">
 		
          <property name="JDBC.Driver" value="com.mysql.jdbc.Driver"/>
          <property name="JDBC.ConnectionURL" value="jdbc:mysql://db4free.net:3306/elearning?autoReconnect=true&amp;useSSL=false"/>
          <property name="JDBC.Username" value="djmichol"/>
          <property name="JDBC.Password" value="Buba@1122"/>
+			
+      </dataSource>
+   </transactionManager> -->
+   
+      <transactionManager type="JDBC">
+      <dataSource type="SIMPLE">
+		
+         <property name="JDBC.Driver" value="com.mysql.jdbc.Driver"/>
+         <property name="JDBC.ConnectionURL" value="jdbc:mysql://localhost:3306/elearning?autoReconnect=true&amp;useSSL=false"/>
+         <property name="JDBC.Username" value="test123"/>
+         <property name="JDBC.Password" value="test123"/>
 			
       </dataSource>
    </transactionManager>

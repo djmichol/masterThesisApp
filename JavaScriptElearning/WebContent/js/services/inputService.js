@@ -1,4 +1,4 @@
-app.service('inputService', function($http, Base64) {
+app.service('inputService', function($http, Base64,$rootScope) {
 	
 	this.saveUserInput = function(data){
 	
