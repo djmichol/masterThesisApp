@@ -34,6 +34,10 @@ var app = angular.module("ElearningApp", ["ngRoute",'ui.bootstrap']).config(func
         templateUrl: "view/quizTemplate.html",
 		controller: "QuizController"
     });
+	$routeProvider.when("/admin", {
+        templateUrl: "view/admin.html",
+		controller: "AdminController"
+    });
     $routeProvider.otherwise({
         redirectTo: "/home"
     });

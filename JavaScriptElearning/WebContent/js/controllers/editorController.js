@@ -11,6 +11,9 @@ app.controller("EditorController", function ($scope,$routeParams, pageService,$r
 		$scope.editor.session.setMode("ace/mode/javascript");
 		$scope.editor.getSession().setUseWrapMode(true);
 		$scope.editor.getSession().setWrapLimitRange(80, 80);
+		$scope.editor.on("paste", function(e){
+			e.preventDefault();
+		});
 		$scope.editor.setOption("showPrintMargin", false);
 		$scope.editor.setValue(val);
 	};	

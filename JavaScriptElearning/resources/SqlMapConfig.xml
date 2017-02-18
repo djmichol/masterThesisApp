@@ -5,18 +5,7 @@
 <sqlMapConfig>
    <settings useStatementNamespaces="true"/>
 	
- <!-- <transactionManager type="JDBC">
-      <dataSource type="SIMPLE">
-		
-         <property name="JDBC.Driver" value="com.mysql.jdbc.Driver"/>
-         <property name="JDBC.ConnectionURL" value="jdbc:mysql://db4free.net:3306/elearning?autoReconnect=true&amp;useSSL=false"/>
-         <property name="JDBC.Username" value="djmichol"/>
-         <property name="JDBC.Password" value="Buba@1122"/>
-			
-      </dataSource>
-   </transactionManager> -->
-   
-      <transactionManager type="JDBC">
+ <transactionManager type="JDBC">
       <dataSource type="SIMPLE">
 		
          <property name="JDBC.Driver" value="com.mysql.jdbc.Driver"/>
@@ -25,12 +14,24 @@
          <property name="JDBC.Password" value="test123"/>
 			
       </dataSource>
-   </transactionManager>
+   </transactionManager> 
+   
+   <!--    <transactionManager type="JDBC">
+      <dataSource type="SIMPLE">
+		
+         <property name="JDBC.Driver" value="com.mysql.jdbc.Driver"/>
+         <property name="JDBC.ConnectionURL" value="jdbc:mysql://elearning.cueik2l6fdtq.eu-central-1.rds.amazonaws.com:3306/elearning?autoReconnect=true&amp;useSSL=false"/>
+         <property name="JDBC.Username" value="djmichol"/>
+         <property name="JDBC.Password" value="Buba1122"/>
+			
+      </dataSource>
+   </transactionManager>-->
 	
    <sqlMap resource="User.xml"/> 
    <sqlMap resource="Path.xml"/> 
    <sqlMap resource="Lesson.xml"/> 
    <sqlMap resource="LessonBlock.xml"/> 
    <sqlMap resource="UserInputData.xml"/> 
+   <sqlMap resource="Model.xml"/> 
 </sqlMapConfig>
 

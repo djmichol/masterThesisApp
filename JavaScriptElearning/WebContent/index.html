@@ -16,21 +16,34 @@
 	<script src="js/controllers/quizController.js"></script>
 	<script src="js/controllers/modalControllers.js"></script>
 	<script src="js/controllers/lessonController.js"></script>
+	<script src="js/controllers/AdminController.js"></script>
 	<script src="js/directives/pageDirectives.js"></script>
 	<script src="js/services/pageServices.js"></script>
+	<script src="js/services/adminService.js"></script>
 	<script src="js/services/lessonsUtils.js"></script>
 	<script src="js/services/inputService.js"></script>
 	<script src="js/controllers/usersController.js"></script>
 	<script src="js/services/usersService.js"></script>
 	<script src="js/services/authInterceptorFactory.js"></script>
 	<script src="lib/ace.js"></script>
+	<script src="lib/jQuery.js"></script>
 	<script src="js/services/base64Factory.js"></script>
 	<link href="lib/bootstrap.css" rel="stylesheet" >
 	<link href="default.css" rel="stylesheet">
 </head>
 <body>
 	<menu-list-directive></menu-list-directive>
+	<div id="loaderDiv" loader>
+	    <img src="img/loader.gif" class="ajax-loader"/>
+	</div>
 	<main class="content" role="main" ng-view></main>
 	<footer-directive></footer-directive>	
+	<script>
+		$(document).ready(function(){
+			$('body').bind("cut copy paste", function(e){
+				e.preventDefault()
+			});
+		});			
+	</script>
 </body>
 </html>

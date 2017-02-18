@@ -15,6 +15,7 @@ public class UserInputDataDaoService implements IUserInputData {
 
 	@Override
 	public List<UserInputData> getUserData(int userId) throws SQLException {
+		@SuppressWarnings("unchecked")
 		List<UserInputData> result = CoreDao.getSqlMapper().queryForList("UserInputData.getUserInputData",userId);
 		return result;
 	}

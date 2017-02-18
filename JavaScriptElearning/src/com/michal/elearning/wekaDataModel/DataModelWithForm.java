@@ -2,7 +2,7 @@ package com.michal.elearning.wekaDataModel;
 
 import com.michal.elearning.dao.UserInputForm;
 
-public class MauseDataModel {
+public class DataModelWithForm {
 
 	private Features features;
 	private UserInputForm userForm;

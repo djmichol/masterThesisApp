@@ -33,6 +33,17 @@ app.directive("pathCardDirective", function() {
     };
 });
 
+app.directive("loader", function ($rootScope) {
+    return function ($scope, element, attrs) {
+        $scope.$on("loader_show", function () {
+            return jQuery('#loaderDiv').show();
+        });
+        return $scope.$on("loader_hide", function () {
+            return jQuery('#loaderDiv').hide();
+        });
+    };
+});
+
 app.directive("editorDirective", function() {
     return {
       restrict: 'E',

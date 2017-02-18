@@ -1,23 +1,21 @@
 package com.michal.elearning.dao;
 
-import java.sql.Timestamp;
-
-public class UserKeystrokes {
+public class UserKeystrokes implements Comparable<UserKeystrokes>{
 	
-	private int keyCode;
-	private int time;
+	private int code;
+	private Integer time;
 	private String type;
 	
-	public int getKeyCode() {
-		return keyCode;
+	public int getCode() {
+		return code;
 	}
-	public void setKeyCode(int keyCode) {
-		this.keyCode = keyCode;
+	public void setCode(int code) {
+		this.code = code;
 	}
-	public int getTime() {
+	public Integer getTime() {
 		return time;
 	}
-	public void setTime(int time) {
+	public void setTime(Integer time) {
 		this.time = time;
 	}
 	public String getType() {
@@ -25,6 +23,10 @@ public class UserKeystrokes {
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+	@Override
+	public int compareTo(UserKeystrokes o) {
+		return this.getTime().compareTo(o.getTime());
 	}
 
 }

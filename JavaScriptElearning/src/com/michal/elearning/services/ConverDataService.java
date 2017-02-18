@@ -1,25 +1,27 @@
 package com.michal.elearning.services;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
@@ -33,11 +35,20 @@ import com.michal.elearning.daoServices.ILessonsInterface;
 import com.michal.elearning.daoServices.IUserInputData;
 import com.michal.elearning.daoServices.IUserInterface;
 import com.michal.elearning.daoServices.LessonDaoService;
+import com.michal.elearning.daoServices.ModelDaoService;
 import com.michal.elearning.daoServices.UserDaoService;
 import com.michal.elearning.daoServices.UserInputDataDaoService;
+import com.michal.elearning.machineLearning.ArffFileHelper;
+import com.michal.elearning.machineLearning.MathHelperUtils;
+import com.michal.elearning.machineLearning.WekaClassifierUtils;
+import com.michal.elearning.modeldata.vectors.SingleKeyFeatures;
+import com.michal.elearning.modeldata.vectors.MauseClickVector;
 import com.michal.elearning.wekaDataModel.Features;
-import com.michal.elearning.wekaDataModel.MauseDataModel;
-import com.mysql.fabric.xmlrpc.base.Array;
+
+import weka.classifiers.Classifier;
+import weka.classifiers.trees.J48;
+
+import com.michal.elearning.wekaDataModel.DataModelWithForm;
 
 @Path("/convertData")
 public class ConverDataService {
@@ -45,24 +56,37 @@ public class ConverDataService {
 	private IUserInputData dataService = new UserInputDataDaoService();
 	private ILessonsInterface lessonService = new LessonDaoService();
 	private IUserInterface userService = new UserDaoService();
-	private final static String path="C:\\DataWeka";
+	private ModelDaoService modelService = new ModelDaoService();			
 	
 	@Context 
 	SecurityContext securityContext;
 	
-	//@RolesAllowed("user")
+	private int userId;
+	
+	@RolesAllowed("admin")
 	@PermitAll
     @GET
-    @Path("/getData")
-    public Response getUserData() 
+    @Path("/userModel")
+    public Response getUserModel(@QueryParam("userId") int userId) throws SQLException 
     {   
-    	int userId = 1;//((User)securityContext.getUserPrincipal()).getId();
-    	List<RawData> rawData = getRawData(userId);
-    	
+		this.userId = userId;
+    	@SuppressWarnings("unused")
+		List<ModelData> userModels = modelService.getUserTrainedModels(userId);
     	return Response.ok().build(); 
     }
 	
-	private List<RawData> getRawData(int userId){
+	@RolesAllowed("admin")
+	@PermitAll
+    @POST
+    @Path("/saveModel")
+    public Response saveUserModel(@QueryParam("userId") int userId) 
+    {   
+		this.userId = userId;
+    	prepareModel();    	
+    	return Response.ok().build(); 
+    }
+	
+	private void prepareModel(){
     	List<RawData> rawData = new ArrayList<RawData>();
     	try {
 			List<UserInputData> userDataList = dataService.getUserData(userId);	
@@ -100,129 +124,106 @@ public class ConverDataService {
 						mauseMove = converter.fromJson(mauseMoves.getJSONObject(i).toString(), UserMauseMove.class);
 						mauseMoveList.add(mauseMove);
 					}	
-					
-					rawData.add(new RawData(mauseClicksList, keystrokeList, mauseMoveList, userForm, lesson.getType(),user.getMail()));
+					if(lesson.getType().equals("editor")){
+						rawData.add(new RawData(mauseClicksList, keystrokeList, mauseMoveList, userForm, lesson.getType(),user.getMail()));
+					}
 				}
-				computeMauseClicksVectors(rawData,user.getMail());
+				
+				List<DataModelWithForm> dataToFile = computeVectors(rawData);
+				
+				tryToInsertUserLernedModel(dataToFile);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return null;
 		}
-    	return rawData;
+	}
+
+	private void tryToInsertUserLernedModel(List<DataModelWithForm> dataToFile) {
+		try {
+			modelService.deleteUserModels(userId);
+			Map<String,byte[]> arffInputStream = ArffFileHelper.prepareArffInputStream(dataToFile);
+			for (Map.Entry<String, byte[]> entry : arffInputStream.entrySet())
+			{
+				J48 j48Classifier = new J48();	
+				WekaClassifierUtils.trainClassiffier(new ByteArrayInputStream(entry.getValue()), j48Classifier);
+				
+				tryToSaveTmpArffFile(entry);
+				
+				insertUserModel(entry.getKey(), j48Classifier);
+			}			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void tryToSaveTmpArffFile(Map.Entry<String, byte[]> entry) throws IOException {		
+		File targetFile = new File("C:\\DataWeka\\"+ entry.getKey()+".arff");
+	    OutputStream outStream = new FileOutputStream(targetFile);
+	    outStream.write(entry.getValue());
+	    outStream.close();
+	}
+
+	private void insertUserModel(String emotion, Classifier classifier)throws IOException, SQLException {		
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		ObjectOutput out = new ObjectOutputStream(bos);    
+		out.writeObject(classifier);
+		out.flush();
+		
+		ModelData modelData = new ModelData();
+		modelData.setEmotion(emotion);
+		modelData.setUserId(userId);
+		modelData.setClassifier(bos.toByteArray());
+		modelService.insertUserModel(modelData);
+		
+		out.close();
+		bos.close();		
 	}
 	
-	private void computeMauseClicksVectors(List<RawData> rawData,String userName){
-		List<MauseDataModel> dataToFile = new ArrayList<MauseDataModel>();
+	private List<DataModelWithForm> computeVectors(List<RawData> rawData){
+		List<DataModelWithForm> dataToFile = new ArrayList<DataModelWithForm>();
 		
 		for(RawData data : rawData){
 			Collections.sort(data.getMauseClicksList());
-			Vector<Integer> dwellTimes = new Vector<Integer>();
-			if(data.getMauseClicksList().size()>=2){
-				for(int i=1; i<data.getMauseClicksList().size();i++){
-					int time1 = data.getMauseClicksList().get(i-1).getTime();
-					int time2 = data.getMauseClicksList().get(i).getTime();
-					if(time1!=0 && time2!=0){
-						dwellTimes.add(time2-time1);
-					}
-				}
-			}
-			if(dwellTimes.size()>0){
-				MauseDataModel dataToAdd = new MauseDataModel();
-				Features features = new Features();
-				features.setMauseClicksMean(calculateMean(dwellTimes));
-				features.setMauseClickDeviation(calculateStandardDeviation(dwellTimes));
-				features.setMauseCliskEventCount(data.getMauseClicksList().size());
-				dataToAdd.setFeatures(features);
-				dataToAdd.setUserForm(data.getUserForm());
-				dataToAdd.setUser(data.getUser());
-				dataToFile.add(dataToAdd);
-			}
+			DataModelWithForm dataToAdd = prepareEmptyDataToAdd(data);	
+						
+			setSingleKeysFeatures(data.getKeystrokeList(), dataToAdd);				
+			setMauceClickFeatures(data.getMauseClicksList(), dataToAdd);
+			
+			dataToFile.add(dataToAdd);
 		}
-		
-		try {
-			prepareFile(dataToFile,userName);
-		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
-	}
-	
-	
-	private void prepareFile(List<MauseDataModel> dataToFile,String userName) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		List<String> emotionStates = InspectClassFields(UserInputForm.class);
-		List<String> features = InspectClassFields(Features.class);
-		String FILENAME = null;
-		FileWriter fw;
-		BufferedWriter bw;
-		
-		for(String emotion : emotionStates){
-			FILENAME = path+"\\"+emotion+userName+".arff"; 
-			try {
-				fw = new FileWriter(FILENAME);
-				bw = new BufferedWriter(fw);
-				
-				bw.append("@relation "+emotion);
-				bw.append("\n");
-				bw.append("\n");
-				for(String feature : features){
-					bw.append("@attribute "+feature+" NUMERIC \n");
-				}
-				bw.append("@attribute "+emotion+" {Neutral,Yes,No} \n");
-				bw.append("\n");
-				bw.append("@data \n");
-				for(MauseDataModel data : dataToFile){
-					for(String feature : features){
-						String function = "get"+feature.substring(0, 1).toUpperCase() + feature.substring(1);
-						Method method = data.getFeatures().getClass().getMethod(function, new Class[] {});
-						Object obj = method.invoke(data.getFeatures(),new Object[] {});
-						bw.append(obj+",");
-					}
-					String state = "get"+emotion.substring(0, 1).toUpperCase() + emotion.substring(1);
-					Method method = data.getUserForm().getClass().getMethod(state, new Class[] {});
-					Object obj2 = method.invoke(data.getUserForm(),new Object[] {});
-					bw.append(obj2+"\n");
-				}
-				bw.close();
-				fw.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}			
-		}		
-	}
-	
-	static <T> List<String> InspectClassFields(Class<T> klazz) {
-		List<String> emotionStates = new ArrayList<String>();
-		Field[] fields = klazz.getDeclaredFields();
-		System.out.printf("%d fields:%n", fields.length);
-		for (Field field : fields) {
-			emotionStates.add(field.getName());
-			System.out.printf("%s %s %s%n", Modifier.toString(field.getModifiers()), field.getType().getSimpleName(),field.getName());
-		}
-		return emotionStates;
+		return dataToFile;			
 	}
 
-	private int calculateMean(Vector<Integer> data){
-		int suma = 0;
-		for(Integer dwell : data){
-			suma += dwell;
+	private void setMauceClickFeatures(List<UserMauseClick> mauseClicks, DataModelWithForm dataToAdd) {
+		Vector<Integer> timeBeetwwnClicks = MauseClickVector.mauseClickVector(mauseClicks);
+		if(timeBeetwwnClicks.size()>0){				
+			dataToAdd.getFeatures().setMauseClicksMean(MathHelperUtils.calculateMean(timeBeetwwnClicks));
+			dataToAdd.getFeatures().setMauseClickDeviation(MathHelperUtils.calculateStandardDeviation(timeBeetwwnClicks));
+			dataToAdd.getFeatures().setMauseCliskEventCount(mauseClicks.size());			
 		}
-		return suma/data.size();
-	}
-	 
-	private int calculateStandardDeviation(Vector<Integer> data){
-		int mean = calculateMean(data);
-		int sum = 0;
-		int deviation = 0;
-		
-		for(Integer dwell : data){
-			deviation = (int) Math.pow(dwell - mean,2);
-			sum += deviation;
-		}
-		
-		int standardDeviation = sum / data.size();
-		return (int) Math.sqrt(standardDeviation);
 	}
 
+	private void setSingleKeysFeatures(List<UserKeystrokes> keystrokes, DataModelWithForm dataToAdd) {
+		SingleKeyFeatures singleKeyFeatures = new SingleKeyFeatures();
+		singleKeyFeatures.prepareFreqMember(keystrokes);
+		dataToAdd.getFeatures().setEnterFreq(singleKeyFeatures.getEnterFreq());	
+		dataToAdd.getFeatures().setBackSpaceFreq(singleKeyFeatures.getBackspaceFreq());
+		dataToAdd.getFeatures().setDelFreq(singleKeyFeatures.getDelFreq());
+		dataToAdd.getFeatures().setEnterFreq(singleKeyFeatures.getEnterFreq());	
+		dataToAdd.getFeatures().setTabFreq(singleKeyFeatures.getTabFreq());
+		dataToAdd.getFeatures().setSingleKeyDwellDeviation(MathHelperUtils.calculateStandardDeviation(singleKeyFeatures.getSingleKeyDwellTime()));
+		dataToAdd.getFeatures().setSingleKeyDwellMean(MathHelperUtils.calculateMean(singleKeyFeatures.getSingleKeyDwellTime()));
+		dataToAdd.getFeatures().setWritingSpeed(singleKeyFeatures.getWriteSpeed());
+	}
+	
+	private DataModelWithForm prepareEmptyDataToAdd(RawData data){
+		DataModelWithForm dataToAdd = new DataModelWithForm();
+		Features features = new Features();
+		dataToAdd.setFeatures(features);
+		dataToAdd.setUserForm(data.getUserForm());
+		dataToAdd.setUser(data.getUser());	
+		return dataToAdd;
+	}
+	
+	
 }
