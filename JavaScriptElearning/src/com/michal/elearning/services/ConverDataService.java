@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
-import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -64,7 +63,6 @@ public class ConverDataService {
 	private int userId;
 	
 	@RolesAllowed("admin")
-	@PermitAll
     @GET
     @Path("/userModel")
     public Response getUserModel(@QueryParam("userId") int userId) throws SQLException 
@@ -76,7 +74,6 @@ public class ConverDataService {
     }
 	
 	@RolesAllowed("admin")
-	@PermitAll
     @POST
     @Path("/saveModel")
     public Response saveUserModel(@QueryParam("userId") int userId) 

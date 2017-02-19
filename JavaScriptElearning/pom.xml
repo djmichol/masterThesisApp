@@ -40,6 +40,17 @@
 					<appName>java-script-elearning</appName>
 				</configuration>
 			</plugin>
+			<plugin>  
+			    <groupId>org.apache.tomcat.maven</groupId>  
+				 <artifactId>tomcat7-maven-plugin</artifactId>  
+				 <version>2.2</version>
+			 <configuration>  
+			  <url>http://ec2-35-157-36-251.eu-central-1.compute.amazonaws.com:8080/manager/text</url>  
+			  <server>TomcatServer</server>    
+			  <username>djmichol</username>  
+			  <password>Buba@1122</password>   
+			 </configuration>   
+			</plugin>  
 		</plugins>
 	</build>
 	<dependencies>

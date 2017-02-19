@@ -4,12 +4,13 @@
 
 app.controller('NextLessonModalInstanceCtrl', function($scope, $rootScope, $uibModalInstance, lessonUtilsService) {
 	$scope.ok = function() {
-		$uibModalInstance.close(this);		
-		lessonUtilsService.setNextLessonIndex();
+		$uibModalInstance.close(this);				
 		if(lessonUtilsService.checkIfLastEditorLesson()){
 			$rootScope.toggleUserFormModal();
+		}else{
+			lessonUtilsService.setNextLessonIndex();
+			lessonUtilsService.redirectToNextLesson();
 		}
-		lessonUtilsService.redirectToNextLesson();
 	};
 });
 
@@ -37,6 +38,8 @@ app.controller('UserFormModalInstanceCtrl', function($scope, $rootScope, $uibMod
 		$rootScope.userForm = ankieta;
 		$rootScope.saveUserInput();
 		$uibModalInstance.close(this);
+		lessonUtilsService.setNextLessonIndex();
+		lessonUtilsService.redirectToNextLesson();
 	};
 
 	$scope.boredom = 'Neutral';

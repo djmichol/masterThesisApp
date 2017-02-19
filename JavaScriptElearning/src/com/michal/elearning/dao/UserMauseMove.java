@@ -1,7 +1,5 @@
 package com.michal.elearning.dao;
 
-import java.sql.Timestamp;
-
 public class UserMauseMove {
 	
 	private int posX;

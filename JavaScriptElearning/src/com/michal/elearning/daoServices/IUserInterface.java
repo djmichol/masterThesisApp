@@ -11,7 +11,7 @@ public interface IUserInterface {
 	
 	User getUserByID(int usrId) throws SQLException;
 	
-	Object insertUser(User newUser) throws SQLException;
+	User insertUser(User newUser) throws SQLException;
 	
 	List<String> getUserRoles(int user)  throws SQLException;
 	

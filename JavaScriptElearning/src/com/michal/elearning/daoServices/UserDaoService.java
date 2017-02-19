@@ -23,9 +23,15 @@ public class UserDaoService implements IUserInterface{
 	}
 
 	@Override
-	public Object insertUser(User newUser) throws SQLException {
-		Object result = CoreDao.getSqlMapper().insert("User.insertUser", newUser);
-		return result;
+	public User insertUser(User newUser) throws SQLException {
+		CoreDao.getSqlMapper().insert("User.insertUser", newUser);
+		int rolId = (int) CoreDao.getSqlMapper().queryForObject("User.getUserRole");
+		Map<String, Object> params = new HashMap<>();
+		params.put("usrId", newUser.getId());
+		params.put("roleId", rolId);
+		CoreDao.getSqlMapper().insert("User.addUserRole",params);
+		newUser.setRole(getUserRoles(newUser.getId()));
+		return newUser;
 	}
 	
 	@SuppressWarnings("unchecked")

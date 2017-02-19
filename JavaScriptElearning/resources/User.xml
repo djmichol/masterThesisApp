@@ -54,4 +54,8 @@
 		VALUES (#usrId#,#roleId#)
 	</insert>
 	
+	<select id="getUserRole" resultClass="int">
+	    select rol_id from roles where rol_name="user"
+	</select>
+	
 </sqlMap>
