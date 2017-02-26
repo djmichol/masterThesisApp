@@ -12,7 +12,7 @@ import com.michal.elearning.modeldata.vectors.Digraphs;
 import com.michal.elearning.modeldata.vectors.NGraph;
 import com.michal.elearning.utils.VectorsUtils;
 
-public class test {
+public class DigraphTest {
 
 	public static List<UserKeystrokes> keystrokes = new ArrayList<UserKeystrokes>();
 	static{
