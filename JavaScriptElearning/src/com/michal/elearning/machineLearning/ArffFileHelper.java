@@ -50,7 +50,7 @@ public class ArffFileHelper {
 		return map;
 	}
 	
-	static <T> List<String> InspectClassFields(Class<T> klazz) {
+	public static <T> List<String> InspectClassFields(Class<T> klazz) {
 		List<String> emotionStates = new ArrayList<String>();
 		Field[] fields = klazz.getDeclaredFields();
 		System.out.printf("%d fields:%n", fields.length);

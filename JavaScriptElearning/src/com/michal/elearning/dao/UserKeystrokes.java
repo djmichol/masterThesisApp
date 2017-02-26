@@ -6,6 +6,16 @@ public class UserKeystrokes implements Comparable<UserKeystrokes>{
 	private Integer time;
 	private String type;
 	
+	private int[] foundGraph;
+	
+	public UserKeystrokes(){}
+	
+	public UserKeystrokes(int code, Integer time, String type){
+		this.code = code;
+		this.time = time;
+		this.type = type;
+	}
+	
 	public int getCode() {
 		return code;
 	}
@@ -27,6 +37,14 @@ public class UserKeystrokes implements Comparable<UserKeystrokes>{
 	@Override
 	public int compareTo(UserKeystrokes o) {
 		return this.getTime().compareTo(o.getTime());
+	}
+
+	public int[] getFoundGraph() {
+		return foundGraph;
+	}
+
+	public void setFoundGraph(int[] foundGraph) {
+		this.foundGraph = foundGraph;
 	}
 
 }

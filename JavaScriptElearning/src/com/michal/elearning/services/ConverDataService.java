@@ -41,7 +41,9 @@ import com.michal.elearning.machineLearning.ArffFileHelper;
 import com.michal.elearning.machineLearning.MathHelperUtils;
 import com.michal.elearning.machineLearning.WekaClassifierUtils;
 import com.michal.elearning.modeldata.vectors.SingleKeyFeatures;
+import com.michal.elearning.modeldata.vectors.DiGraphFeatures;
 import com.michal.elearning.modeldata.vectors.MauseClickVector;
+import com.michal.elearning.modeldata.vectors.NGraph;
 import com.michal.elearning.wekaDataModel.Features;
 
 import weka.classifiers.Classifier;
@@ -185,10 +187,27 @@ public class ConverDataService {
 						
 			setSingleKeysFeatures(data.getKeystrokeList(), dataToAdd);				
 			setMauceClickFeatures(data.getMauseClicksList(), dataToAdd);
+			setDigraphFeatures(data.getKeystrokeList(), dataToAdd);
 			
 			dataToFile.add(dataToAdd);
 		}
 		return dataToFile;			
+	}
+
+	private void setDigraphFeatures(List<UserKeystrokes> keystrokeList, DataModelWithForm dataToAdd) {
+		DiGraphFeatures digraphFeatures = new DiGraphFeatures();
+		List<NGraph> result = digraphFeatures.prepareVector(keystrokeList);
+		digraphFeatures.calculateVectors(result);
+		dataToAdd.getFeatures().setFirstDwellMean(MathHelperUtils.calculateMean(digraphFeatures.getFirstDwell()));
+		dataToAdd.getFeatures().setSecondDwellMean(MathHelperUtils.calculateMean(digraphFeatures.getSecondDwell()));
+		dataToAdd.getFeatures().setTimeBetweenFirsAndSecondPressMean(MathHelperUtils.calculateMean(digraphFeatures.getTimeBetweenFirsAndSecondPress()));
+		dataToAdd.getFeatures().setTimeBetweenFirstUpAndSecondDownMean(MathHelperUtils.calculateMean(digraphFeatures.getTimeBetweenFirstUpAndSecondDown()));
+		dataToAdd.getFeatures().setDigraphDurationMean(MathHelperUtils.calculateMean(digraphFeatures.getDigraphDuration()));
+		dataToAdd.getFeatures().setFirstDwellDeviation(MathHelperUtils.calculateStandardDeviation(digraphFeatures.getFirstDwell()));
+		dataToAdd.getFeatures().setSecondDwellDeviation(MathHelperUtils.calculateStandardDeviation(digraphFeatures.getSecondDwell()));
+		dataToAdd.getFeatures().setTimeBetweenFirsAndSecondPressDeviation(MathHelperUtils.calculateStandardDeviation(digraphFeatures.getTimeBetweenFirsAndSecondPress()));
+		dataToAdd.getFeatures().setTimeBetweenFirstUpAndSecondDownDeviation(MathHelperUtils.calculateStandardDeviation(digraphFeatures.getTimeBetweenFirstUpAndSecondDown()));
+		dataToAdd.getFeatures().setDigraphDurationDeviation(MathHelperUtils.calculateStandardDeviation(digraphFeatures.getDigraphDuration()));		
 	}
 
 	private void setMauceClickFeatures(List<UserMauseClick> mauseClicks, DataModelWithForm dataToAdd) {
