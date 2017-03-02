@@ -52,6 +52,9 @@ public class OtherWordsGraphVectors {
 						}
 						if(!isDigraphContionue){
 							graphStarted = false;
+							if(index>1){
+								i--;
+							}
 							index = 0;
 							digraph = new HashMap<int[],List<UserKeystrokes>>();
 							for(int[] object : list){
@@ -73,6 +76,7 @@ public class OtherWordsGraphVectors {
 							if(index >= lastElement){
 								if(entry.getKey()[index]==keystrokes.get(i).getCode() && entry.getValue().size()>=3){
 									index = 0;
+									i--;
 									graphStarted = false;
 									digraphs.add(new NGraph(entry.getValue(), entry.getKey()));
 									digraph = new HashMap<int[],List<UserKeystrokes>>();

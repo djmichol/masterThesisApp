@@ -70,6 +70,7 @@ public class DiGraphFeatures {
 							entry.getValue().add(keystrokes.get(i));
 							if(entry.getKey()[1]==keystrokes.get(i).getCode() && entry.getValue().size()>=3){
 								digraphStarted = false;
+								i--;
 								digraphs.add(new NGraph(entry.getValue(), entry.getKey()));
 								digraph = new HashMap<int[],List<UserKeystrokes>>();
 							}

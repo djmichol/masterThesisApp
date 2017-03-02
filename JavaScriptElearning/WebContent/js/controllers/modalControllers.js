@@ -4,11 +4,11 @@
 
 app.controller('NextLessonModalInstanceCtrl', function($scope, $rootScope, $uibModalInstance, lessonUtilsService) {
 	$scope.ok = function() {
-		$uibModalInstance.close(this);				
+		$uibModalInstance.close(this);			
+		lessonUtilsService.setNextLessonIndex();
 		if(lessonUtilsService.checkIfLastEditorLesson()){
 			$rootScope.toggleUserFormModal();
 		}else{
-			lessonUtilsService.setNextLessonIndex();
 			lessonUtilsService.redirectToNextLesson();
 		}
 	};
@@ -22,11 +22,10 @@ app.controller('QuizResultModalInstanceCtrl', function($scope, $rootScope, $uibM
 		$uibModalInstance.close(this);
 		$rootScope.toggleUserFormModal();
 		lessonUtilsService.setNextLessonIndex();
-		lessonUtilsService.redirectToNextLesson();
 	};
 });
 
-app.controller('UserFormModalInstanceCtrl', function($scope, $rootScope, $uibModalInstance) {
+app.controller('UserFormModalInstanceCtrl', function($scope, $rootScope, $uibModalInstance, lessonUtilsService) {
 
 	$scope.ok = function() {
 		var ankieta = {
@@ -38,7 +37,6 @@ app.controller('UserFormModalInstanceCtrl', function($scope, $rootScope, $uibMod
 		$rootScope.userForm = ankieta;
 		$rootScope.saveUserInput();
 		$uibModalInstance.close(this);
-		lessonUtilsService.setNextLessonIndex();
 		lessonUtilsService.redirectToNextLesson();
 	};
 
