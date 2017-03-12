@@ -8,6 +8,7 @@ app.controller("UsersController", function ($scope,usersService,$window, $rootSc
 			if(dane.token){
 				$rootScope.addAlert('success','Pomyślnie zalogowano');
 				$window.localStorage.setItem("token",dane.token);
+				$window.location.href = '/JavaScriptElearning-0.0.2-SNAPSHOT/#/paths';
 			}
         }).error(function(error) {
         	$rootScope.addAlert('danger',error);
@@ -21,6 +22,7 @@ app.controller("UsersController", function ($scope,usersService,$window, $rootSc
 				if(dane.token){
 					$rootScope.addAlert('success','Pomyślnie dodano użytkownika');
 					$window.localStorage.setItem("token",dane.token);
+					$window.location.href = '/JavaScriptElearning-0.0.2-SNAPSHOT/#/paths';
 				}
 	        }).error(function(error) {
 	        	$rootScope.addAlert('danger',error);

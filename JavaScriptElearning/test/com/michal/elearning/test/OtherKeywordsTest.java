@@ -56,6 +56,38 @@ public class OtherKeywordsTest {
 	}
 	
 	@Test
+	public void testAbc() throws IllegalArgumentException, IllegalAccessException{
+		List<UserKeystrokes> keystrokes = new ArrayList<UserKeystrokes>();
+		//public static int[] CONSOLE_PLUS_WORD = {67,79,78,83,79,76,69};
+		
+		keystrokes.add(new UserKeystrokes(67,492451453,"keydown"));
+		keystrokes.add(new UserKeystrokes(84,492451473,"keyup"));
+		keystrokes.add(new UserKeystrokes(79,492451515,"keydown"));
+		keystrokes.add(new UserKeystrokes(67,492451515,"keyup"));		
+		keystrokes.add(new UserKeystrokes(79,492451615,"keyup"));
+		keystrokes.add(new UserKeystrokes(78,492451653,"keydown"));
+		keystrokes.add(new UserKeystrokes(78,492451715,"keyup"));
+		keystrokes.add(new UserKeystrokes(83,492451753,"keydown"));
+		keystrokes.add(new UserKeystrokes(83,492451815,"keyup"));
+		keystrokes.add(new UserKeystrokes(79,492451853,"keydown"));
+		keystrokes.add(new UserKeystrokes(79,492451915,"keyup"));
+		keystrokes.add(new UserKeystrokes(76,492451953,"keydown"));
+		keystrokes.add(new UserKeystrokes(76,492452015,"keyup"));
+		keystrokes.add(new UserKeystrokes(69,492452053,"keydown"));
+		keystrokes.add(new UserKeystrokes(69,492452115,"keyup"));
+
+		OtherWordsGraphVectors dd = new OtherWordsGraphVectors();
+		List<NGraph> result = dd.prepareVector(keystrokes);
+		Assert.assertEquals(1, result.size());
+		Assert.assertEquals(15, result.get(0).getKeystrokes().size());
+		Assert.assertArrayEquals(JavaScriptKeyWords.CONSOLE_PLUS_WORD, result.get(0).getKeyList());
+		dd.calculateVectors(result);
+		dd.getKeyDwell();
+		dd.getPressToPress();
+		Assert.assertEquals((int)dd.getWordDuration().get(0),662);
+	}
+	
+	@Test
 	public void testNull() throws IllegalArgumentException, IllegalAccessException{
 		List<UserKeystrokes> keystrokes = new ArrayList<UserKeystrokes>();
 		//public static int[] CONSOLE_PLUS_WORD = {67,79,78,83,79,76,69};		

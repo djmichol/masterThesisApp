@@ -2,5 +2,12 @@
 <button ng-click="prepareModel()" >SaveModel</button>
 
 <input type="number" ng-model="userId"></input>
+<input type="text" ng-model="userData"></input>
 <button ng-click="getUserModel()" >GetUserModel</button>
-		
+
+<h5 class="text-center">Czy zbieranie danych?</h5>
+<div class="btn-group text-center">
+	<label class="btn btn-success" ng-model="isCollectMode" uib-btn-radio="true">true</label>
+    <label class="btn btn-success" ng-model="isCollectMode" uib-btn-radio="false">false</label>
+</div>
+<button ng-click="setMode()" >Set mode</button>		

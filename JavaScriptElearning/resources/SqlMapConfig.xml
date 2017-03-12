@@ -5,7 +5,7 @@
 <sqlMapConfig>
    <settings useStatementNamespaces="true"/>
 	
- <transactionManager type="JDBC">
+<!-- <transactionManager type="JDBC">
       <dataSource type="SIMPLE">
 		
          <property name="JDBC.Driver" value="com.mysql.jdbc.Driver"/>
@@ -14,9 +14,9 @@
          <property name="JDBC.Password" value="test123"/>
 			
       </dataSource>
-   </transactionManager> 
+   </transactionManager> -->
    
-   <!--    <transactionManager type="JDBC">
+       <transactionManager type="JDBC">
       <dataSource type="SIMPLE">
 		
          <property name="JDBC.Driver" value="com.mysql.jdbc.Driver"/>
@@ -25,7 +25,7 @@
          <property name="JDBC.Password" value="Buba1122"/>
 			
       </dataSource>
-   </transactionManager>-->
+   </transactionManager>
 	
    <sqlMap resource="User.xml"/> 
    <sqlMap resource="Path.xml"/> 
@@ -33,5 +33,6 @@
    <sqlMap resource="LessonBlock.xml"/> 
    <sqlMap resource="UserInputData.xml"/> 
    <sqlMap resource="Model.xml"/> 
+   <sqlMap resource="Mode.xml"/>
 </sqlMapConfig>
 

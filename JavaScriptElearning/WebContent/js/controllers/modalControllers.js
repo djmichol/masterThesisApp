@@ -28,6 +28,30 @@ app.controller('QuizResultModalInstanceCtrl', function($scope, $rootScope, $uibM
 app.controller('UserFormModalInstanceCtrl', function($scope, $rootScope, $uibModalInstance, lessonUtilsService) {
 
 	$scope.ok = function() {
+		if($scope.boredom==='YesRather'){
+			$scope.boredom="Yes";
+		}else if($scope.boredom==='NoRather'){
+			$scope.boredom="No";
+		}
+		
+		if($scope.confusion==='YesRather'){
+			$scope.confusion="Yes";
+		}else if($scope.confusion==='NoRather'){
+			$scope.confusion="No";
+		}
+		
+		if($scope.engaged==='YesRather'){
+			$scope.engaged="Yes";
+		}else if($scope.engaged==='NoRather'){
+			$scope.engaged="No";
+		}
+		
+		if($scope.frustration==='YesRather'){
+			$scope.frustration="Yes";
+		}else if($scope.frustration==='NoRather'){
+			$scope.frustration="No";
+		}
+		
 		var ankieta = {
 			boredom : $scope.boredom,
 			confusion : $scope.confusion,

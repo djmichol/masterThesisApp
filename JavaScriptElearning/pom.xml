@@ -34,22 +34,14 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>com.heroku.sdk</groupId>
-				<artifactId>heroku-maven-plugin</artifactId>
-				<version>1.1.1</version>
-				<configuration>
-					<appName>java-script-elearning</appName>
-				</configuration>
-			</plugin>
-			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.2</version>
 				<configuration>
-					<url>http://ec2-35-157-36-251.eu-central-1.compute.amazonaws.com:8080/manager/text</url>
+					<url>http://ec2-35-157-187-252.eu-central-1.compute.amazonaws.com:8080/manager/text</url>
 					<server>TomcatServer</server>
 					<username>djmichol</username>
-					<password>Buba@1122</password>
+					<password>Buba1122</password>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -67,11 +59,6 @@
 		</plugins>
 	</build>
 	<dependencies>
-		<dependency>
-			<groupId>com.heroku.sdk</groupId>
-			<artifactId>heroku-maven-plugin</artifactId>
-			<version>1.1.1</version>
-		</dependency>
 		<dependency>
 			<groupId>asm</groupId>
 			<artifactId>asm</artifactId>

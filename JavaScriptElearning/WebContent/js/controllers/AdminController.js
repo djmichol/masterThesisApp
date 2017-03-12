@@ -1,5 +1,6 @@
-app.controller("AdminController", function ($scope,adminService) {
+app.controller("AdminController", function ($scope,$rootScope, adminService) {
 	$scope.userId;
+	$scope.isCollectMode = $rootScope.isCollectMode;
 	
 	$scope.prepareModel = function(){
 		adminService.saveModel($scope.userId).success(function(dane,response) {
@@ -10,10 +11,19 @@ app.controller("AdminController", function ($scope,adminService) {
 	}
 	
 	$scope.getUserModel = function(){
-		adminService.getUserModel($scope.userId).success(function(dane,response) {
+		adminService.getUserModel($scope.userId, $scope.userData).success(function(dane,response) {
 			alert('pobrano model');
 	    }).error(function(error) {
 	    	alert('blad pobrania modelu');
+	    });
+	}
+	
+	$scope.setMode = function(){
+		adminService.setMode($scope.isCollectMode).success(function(dane,response) {
+			alert('zmieniono tryb');
+			 $rootScope.loadModel();
+	    }).error(function(error) {
+	    	alert('blad pobrania trybu');
 	    });
 	}
 });

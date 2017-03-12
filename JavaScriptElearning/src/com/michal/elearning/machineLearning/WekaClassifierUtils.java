@@ -18,4 +18,16 @@ public class WekaClassifierUtils {
 		evaluation.evaluateModel(classifier,data); 
 		return classifier;
 	}	
+	
+	public static Classifier getTrainedClass(InputStream dataToClassify, Classifier classifier) throws Exception{
+		
+		DataSource toClassifyDataSource = new DataSource(dataToClassify);
+		Instances toClassifyInstances = toClassifyDataSource.getDataSet();
+		toClassifyInstances.setClassIndex(toClassifyInstances.numAttributes()-1);	
+		
+		double value = classifier.classifyInstance(toClassifyInstances.instance(0));
+		String prediction = toClassifyInstances.classAttribute().value((int)value); 
+		System.out.println(prediction);
+		return classifier;
+	}	
 }

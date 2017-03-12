@@ -25,6 +25,13 @@ public class Features {
 	private int timeBetweenFirstUpAndSecondDownDeviation;
 	private int digraphDurationDeviation;
 	
+	private int meanDwellTimeMean;
+	private int wordDurationMean;
+	private int meanFlightTimeMean;
+	private int meanDwellTimeDeviation;
+	private int wordDurationDeviation;
+	private int meanFlightTimeDeviation;
+	
 	public int getMauseClicksMean() {
 		return mauseClicksMean;
 	}

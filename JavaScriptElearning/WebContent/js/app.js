@@ -43,15 +43,26 @@ var app = angular.module("ElearningApp", ["ngRoute",'ui.bootstrap']).config(func
     });
 }); 
 
-app.run(function ($rootScope, inputService,lessonUtilsService,$uibModal) {
+app.run(function ($rootScope, inputService,lessonUtilsService, adminService, $uibModal) {
 	$rootScope.baseUrl = "http://localhost:8080/JavaScriptElearning";
-	//$rootScope.baseUrl = "https://java-script-elearning.herokuapp.com";
+	//$rootScope.baseUrl = "http://ec2-35-157-187-252.eu-central-1.compute.amazonaws.com:8080/JavaScriptElearning-0.0.2-SNAPSHOT";
     $rootScope.alerts = [];
     $rootScope.keystrokes = [];
     $rootScope.mauseMove = [];
     $rootScope.mauseClick = [];
     $rootScope.userForm = {};
     $rootScope.isKeyCollecting = false;
+    $rootScope.isCollectMode = true;
+    
+    
+    $rootScope.loadModel =  function(){
+		adminService.getMode().success(function(dane,response) {
+			$rootScope.isCollectMode = dane;
+	    }).error(function(error) {
+	    	alert('blad pobrania trybu');
+	    });
+    }
+    $rootScope.loadModel();
     
     $rootScope.$on('$routeChangeSuccess', function() {
         $rootScope.alerts = [];

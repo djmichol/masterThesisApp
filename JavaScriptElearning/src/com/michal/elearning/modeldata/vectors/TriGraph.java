@@ -8,10 +8,9 @@ import java.util.Map;
 import java.util.Vector;
 
 import com.michal.elearning.dao.UserKeystrokes;
-import com.michal.elearning.machineLearning.MathHelperUtils;
 import com.michal.elearning.utils.VectorsUtils;
 
-public class OtherWordsGraphVectors {
+public class TriGraph {
 
 	private Vector<Integer> pressToPress;
 	private Vector<Integer> keyDwell;
@@ -89,71 +88,7 @@ public class OtherWordsGraphVectors {
 			}
 		}
 		return digraphs;
-	}
-	
-	public  void calculateVectors(List<NGraph> digraphs){
-		for(NGraph digraph : digraphs){
-			pressToPress.add(getDwell(digraph));			
-			keyDwell.add(getTimeFlight(digraph));
-			wordDuration.add(getDigraphDuration(digraph));
-		}
-	}
-	
-	private Integer getTimeFlight(NGraph digraph) {
-		Vector<Integer> dwellMean= new Vector<>();
-		int start = 0;
-		int stop = 0;
-		boolean isAdded = false;
-		for (UserKeystrokes key : digraph.getKeystrokes()) {
-			if (key.getType().equals("keydown")) {
-				if(!isAdded){
-					isAdded = true;
-					start = key.getTime();
-				}else{
-					stop = key.getTime();
-					dwellMean.add(stop-start);
-					start = stop;
-					stop = 0;
-					isAdded = false;
-				}
-			} 
-		}
-		if(dwellMean.size()==0){
-			return 0;
-		}
-		return MathHelperUtils.calculateMean(dwellMean);
-	}
-
-	private Integer getDwell(NGraph digraph) {
-		Vector<Integer> dwellMean= new Vector<>();
-		int start = 0;
-		int stop = 0;
-		int keyCode = 0;
-		for (UserKeystrokes key : digraph.getKeystrokes()) {
-			if (key.getType().equals("keydown")) {
-				start = key.getTime();
-				keyCode = key.getCode();
-			} else if (key.getType().equals("keyup")) {
-				if(key.getCode()==keyCode){
-					stop = key.getTime();
-					dwellMean.add(stop-start);
-					keyCode = 0;
-				}
-			}
-		}
-		if(dwellMean.size()==0){
-			return 0;
-		}
-		return MathHelperUtils.calculateMean(dwellMean);
-	}
-
-	private Integer getDigraphDuration(NGraph digraph) {
-		Integer dwell = 0;
-		int stop = digraph.getKeystrokes().get(digraph.getKeystrokes().size()-1).getTime();
-		int start = digraph.getKeystrokes().get(0).getTime();
-		dwell = stop-start;
-		return dwell;
-	}
+	}	
 	
 	private void clear(){
 		pressToPress = new Vector<>();
