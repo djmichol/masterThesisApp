@@ -1,4 +1,4 @@
-app.service('lessonUtilsService', function($http,$window,pageService) {
+app.service('lessonUtilsService', function($http,$window, $rootScope,pageService) {
 	
 	this.lessonInBlock = [];
 	this.currentLesson = {};
@@ -102,4 +102,19 @@ app.service('lessonUtilsService', function($http,$window,pageService) {
       }
       return false;
     }	
+	
+	this.saveLessonProgress = function(passed,submitCount){
+		var data = {
+				keyStroke : $rootScope.keystrokes,
+				mauseMove :  $rootScope.mauseMove,
+				mauseClick : $rootScope.mauseClick,
+				lessonId : this.getCurrentLesson().id,
+				passed : passed
+		}
+		inputService.saveUserPassLesson(data).success(function(dane) {
+			//DO NOTHING
+        }).error(function(error) {
+        	//DO NOTHING
+        });
+	}
 });

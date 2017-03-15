@@ -28,6 +28,8 @@ app.controller("EditorController", function ($scope,$routeParams, pageService,$r
 		var pass = testFunction(content,tab.contentSubmit,tab.editorResult);
 		if(pass){
 			$scope.saveEditor();
+		}else{
+			saveLessonProgress(false);
 		}
 	}
 	
@@ -67,7 +69,8 @@ app.controller("EditorController", function ($scope,$routeParams, pageService,$r
 		return functionResult;
 	}
 		
-	$scope.saveEditor = function(){
+	$scope.saveEditor = function(){				
+		lessonUtilsService.saveLessonProgress(true);
 		var value = $scope.editor.getValue();
 		$scope.toggleNextLessonModal();		
 	}

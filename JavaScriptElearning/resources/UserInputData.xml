@@ -4,7 +4,8 @@
 
 <sqlMap namespace="UserInputData">
 
-	<typeAlias alias="UserInputData" type="com.michal.elearning.dao.UserInputData" />	
+	<typeAlias alias="UserInputData" type="com.michal.elearning.dao.UserInputData" />
+	<typeAlias alias="UserInLessonInputData" type="com.michal.elearning.dao.UserInLessons" />	
 
 	<resultMap id="UserInputDataMap" class="UserInputData" >
 		<result property="keyStrokes" column="input_keystrokes" />
@@ -14,6 +15,17 @@
 		<result property="id" column="input_id" />
 		<result property="usrId" column="input_user_id" />	
 		<result property="lessonId" column="input_user_lesson_id" />	
+	</resultMap>
+	
+	<resultMap id="UserInLessonInputDataMap" class="UserInLessonInputData" >
+		<result property="keyStrokes" column="usr_in_lesson_keystrokes" />
+		<result property="mouseMove" column="usr_in_lesson_mause_move" />
+		<result property="mouseClicks" column="usr_in_lesson_mause_click" />	
+		<result property="passed" column="usr_in_lesson_passed" />
+		<result property="submitCount" column="usr_in_lesson_submitCount" />	
+		<result property="id" column="usr_in_lesson_id" />
+		<result property="userId" column="usr_in_lesson_user_id" />	
+		<result property="lessonId" column="usr_in_lesson_lesson_id" />	
 	</resultMap>
 
 	 
@@ -33,6 +45,42 @@
 		    #form#,
 		    #lessonId#)
    </insert>
+   
+   <insert id="insertUserInLessonInputData" parameterClass="UserInLessonInputData">
+	   INSERT INTO  user_in_lesson (
+		   usr_in_lesson_id,
+		   usr_in_lesson_keystrokes,
+		   usr_in_lesson_mause_move,
+		   usr_in_lesson_mause_click,
+		   usr_in_lesson_passed,
+		   usr_in_lesson_submitCount,
+		   usr_in_lesson_user_id,
+		   usr_in_lesson_lesson_id)
+	   values (
+		    #id#,
+		    #keyStrokes#,
+		    #mouseMove#,
+		    #mouseClicks#,
+		    #passed#,
+		    #submitCount#,
+		    #userId#,
+		    #lessoonId#)
+   </insert>
+   
+   <update id="updateUserInLesson" parameterClass="UserInLessonInputData">
+   		UPDATE user_in_lesson
+		SET 
+			usr_in_lesson_submitCount=#submitCount#, 
+			usr_in_lesson_passed=#passed#,
+			usr_in_lesson_keystrokes=CONCAT(usr_in_lesson_keystrokes, #keyStrokes#)
+			usr_in_lesson_mause_move= CONCAT(usr_in_lesson_mause_move, #mouseMove#),
+			usr_in_lesson_mause_click= CONCAT(usr_in_lesson_mause_click, #mouseClicks#),
+		WHERE usr_in_lesson_user_id=#userId# and usr_in_lesson_lesson_id=#lessonId#
+   </update>
+   
+    <select id="getUserInLessonData" parameterClass="Map" resultMap="UserInLessonInputDataMap">
+	   select * from user_in_lesson where usr_in_lesson_user_id=#userId# and usr_in_lesson_lesson_id=#lessonId#
+   </select>
    
    <select id="getUserInputData" parameterClass="int" resultMap="UserInputDataMap">
 	   select * from user_input_data where input_user_id=#value#

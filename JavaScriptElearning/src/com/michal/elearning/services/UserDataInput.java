@@ -12,6 +12,7 @@ import javax.ws.rs.core.SecurityContext;
 import org.json.JSONObject;
 
 import com.michal.elearning.dao.User;
+import com.michal.elearning.dao.UserInLessons;
 import com.michal.elearning.dao.UserInputData;
 import com.michal.elearning.daoServices.IUserInputData;
 import com.michal.elearning.daoServices.UserInputDataDaoService;
@@ -45,6 +46,34 @@ public class UserDataInput {
 			e.printStackTrace();
 		}
 		return Response.status(Response.Status.SERVICE_UNAVAILABLE).entity("Blad dodawania danych .").build();
+    }
+	
+	@RolesAllowed("user")
+    @POST
+    @Path("/insertPassedLesson")
+    public Response insertPassedLesson(String inputData) 
+    {   		
+		JSONObject inpoutData = new JSONObject(inputData);
+		UserInLessons userDataObject = new UserInLessons();
+		userDataObject.setKeyStrokes(inpoutData.getJSONArray("keyStroke").toString().getBytes());
+		userDataObject.setMouseMove(inpoutData.getJSONArray("mauseMove").toString().getBytes());
+		userDataObject.setMouseClicks(inpoutData.getJSONArray("mauseClick").toString().getBytes());
+		userDataObject.setPassed(inpoutData.getBoolean("passed"));
+		userDataObject.setUserId(((User)securityContext.getUserPrincipal()).getId());
+		userDataObject.setLessonId(inpoutData.getInt("lessonId"));
+		
+		try {
+			UserInLessons userExisDataObject = dataService.getUserLesson(userDataObject.getLessonId(), userDataObject.getUserId());		
+			if(userExisDataObject==null){
+				dataService.insertUserInLesson(userDataObject);
+			}else{
+				dataService.updateuserInLesson(userDataObject,userExisDataObject);
+			}
+		} catch (SQLException e) {
+			Response.status(Response.Status.SERVICE_UNAVAILABLE).entity("Blad dodawania danych .").build();
+			e.printStackTrace();
+		}		
+		return Response.ok().build();
     }
 	
 }
