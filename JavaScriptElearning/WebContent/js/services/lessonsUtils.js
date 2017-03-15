@@ -1,4 +1,4 @@
-app.service('lessonUtilsService', function($http,$window, $rootScope,pageService) {
+app.service('lessonUtilsService', function($http,$window, $rootScope,pageService,inputService) {
 	
 	this.lessonInBlock = [];
 	this.currentLesson = {};

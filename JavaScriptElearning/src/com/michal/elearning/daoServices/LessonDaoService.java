@@ -46,7 +46,12 @@ public class LessonDaoService implements ILessonsInterface {
 			Map<String, Object> params = new HashMap<>();
 			params.put("userId", userId);
 			params.put("lessonId", lesson.getId());
-			lesson.setPassed((int)CoreDao.getSqlMapper().queryForObject("UserInputData.isLessonPassed",params) == 0 ? false : true);
+			Object result = CoreDao.getSqlMapper().queryForObject("Lesson.isLessonPassed",params);
+			if(result==null){
+				result = 0;
+			}
+			lesson.setPassed((int)result == 0 ? false : true);
+			
 		}
 		return lessons;
 	}

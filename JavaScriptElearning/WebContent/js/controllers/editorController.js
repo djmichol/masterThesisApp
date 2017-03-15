@@ -29,7 +29,7 @@ app.controller("EditorController", function ($scope,$routeParams, pageService,$r
 		if(pass){
 			$scope.saveEditor();
 		}else{
-			saveLessonProgress(false);
+			lessonUtilsService.saveLessonProgress(false);
 		}
 	}
 	

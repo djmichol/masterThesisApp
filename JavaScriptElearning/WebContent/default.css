@@ -221,21 +221,21 @@ body{
 
 .nav-tabs > li.active > a{
 	color: #ffffff;
-	background-color: #5AA3AC;
+	background-color: #1B3033;
 	border: none;
 	border-radius: 0;
 }
 
 .nav-tabs > li.active > a:focus{
 	color: #ffffff;
-	background-color: #5AA3AC;
+	background-color: #1B3033;
 	border: none;
 	border-radius: 0;
 }
 
 .nav-tabs > li.active > a:hover{
 	color: #ffffff;
-	background-color: #5AA3AC;
+	background-color: #1B3033;
 	border: none;
 	border-radius: 0;
 }
