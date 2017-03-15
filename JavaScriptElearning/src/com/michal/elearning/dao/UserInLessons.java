@@ -9,7 +9,7 @@ public class UserInLessons {
 	private byte[] keyStrokes;
 	private byte[] mouseMove;
 	private byte[] mouseClicks;
-	private boolean passed;
+	private int passed;
 	
 	public int getId() {
 		return id;
@@ -53,10 +53,10 @@ public class UserInLessons {
 	public void setMouseClicks(byte[] mouseClicks) {
 		this.mouseClicks = mouseClicks;
 	}
-	public boolean isPassed() {
+	public int isPassed() {
 		return passed;
 	}
-	public void setPassed(boolean passed) {
+	public void setPassed(int passed) {
 		this.passed = passed;
 	}
 	

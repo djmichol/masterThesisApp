@@ -15,6 +15,7 @@ public class Lesson {
 	private List<LessonQuizQuestion> quiz;
 	private String type;
 	private int order;
+	private boolean passed;
 	
 	public int getId() {
 		return id;
@@ -81,5 +82,11 @@ public class Lesson {
 	}
 	public void setQuiz(List<LessonQuizQuestion> quiz) {
 		this.quiz = quiz;
+	}
+	public boolean isPassed() {
+		return passed;
+	}
+	public void setPassed(boolean passed) {
+		this.passed = passed;
 	}
 }

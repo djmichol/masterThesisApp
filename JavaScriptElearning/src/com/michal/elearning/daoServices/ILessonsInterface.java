@@ -16,7 +16,7 @@ public interface ILessonsInterface {
 	Lesson getEditorLessonById(int lessonId) throws SQLException;
 	Lesson getVideoLessonById(int lessonId) throws SQLException;
 	Lesson getQuizLessonById(int lessonId) throws SQLException;
-	List<Lesson> getBlockLessons(int blockId) throws SQLException;
+	List<Lesson> getBlockLessons(int blockId, int userId) throws SQLException;
 	LessonVideo getLessonVideo(int lessonId) throws SQLException;
 	List<LessonQuizQuestion> getLessonQuestion(int lessonId) throws SQLException;
 }

@@ -58,7 +58,8 @@ public class UserDataInput {
 		userDataObject.setKeyStrokes(inpoutData.getJSONArray("keyStroke").toString().getBytes());
 		userDataObject.setMouseMove(inpoutData.getJSONArray("mauseMove").toString().getBytes());
 		userDataObject.setMouseClicks(inpoutData.getJSONArray("mauseClick").toString().getBytes());
-		userDataObject.setPassed(inpoutData.getBoolean("passed"));
+		boolean passed = inpoutData.getBoolean("passed");
+		userDataObject.setPassed(passed ? 1 : 0);
 		userDataObject.setUserId(((User)securityContext.getUserPrincipal()).getId());
 		userDataObject.setLessonId(inpoutData.getInt("lessonId"));
 		

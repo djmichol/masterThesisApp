@@ -1,7 +1,9 @@
 package com.michal.elearning.daoServices;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.michal.elearning.dao.Lesson;
 import com.michal.elearning.dao.LessonQuizQuestion;
@@ -38,8 +40,15 @@ public class LessonDaoService implements ILessonsInterface {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Lesson> getBlockLessons(int blockId) throws SQLException {
-		return CoreDao.getSqlMapper().queryForList("Lesson.getLessonsForBlock",blockId);
+	public List<Lesson> getBlockLessons(int blockId,int userId) throws SQLException {
+		List<Lesson> lessons = CoreDao.getSqlMapper().queryForList("Lesson.getLessonsForBlock",blockId);
+		for(Lesson lesson : lessons){
+			Map<String, Object> params = new HashMap<>();
+			params.put("userId", userId);
+			params.put("lessonId", lesson.getId());
+			lesson.setPassed((int)CoreDao.getSqlMapper().queryForObject("UserInputData.isLessonPassed",params) == 0 ? false : true);
+		}
+		return lessons;
 	}
 
 	@Override
