@@ -71,7 +71,7 @@ public class UserDataInput {
 				dataService.updateuserInLesson(userDataObject,userExisDataObject);
 			}
 		} catch (SQLException e) {
-			Response.status(Response.Status.SERVICE_UNAVAILABLE).entity("Blad dodawania danych .").build();
+			Response.status(Response.Status.SERVICE_UNAVAILABLE).entity("Blad dodawania danych.").build();
 			e.printStackTrace();
 		}		
 		return Response.ok().build();

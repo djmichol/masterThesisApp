@@ -1,4 +1,4 @@
-package com.michal.elearning.modeldata.vectors;
+package com.michal.elearning.modeldata.vectors.model;
 
 import java.util.List;
 

@@ -22,10 +22,8 @@ import com.michal.elearning.dao.UserMauseMove;
 import com.michal.elearning.daoServices.ILessonsInterface;
 import com.michal.elearning.daoServices.LessonDaoService;
 import com.michal.elearning.machineLearning.MathHelperUtils;
-import com.michal.elearning.modeldata.vectors.DiGraphFeatures;
-import com.michal.elearning.modeldata.vectors.MauseClickVector;
-import com.michal.elearning.modeldata.vectors.NGraph;
-import com.michal.elearning.modeldata.vectors.SingleKeyFeatures;
+import com.michal.elearning.modeldata.vectors.*;
+import com.michal.elearning.modeldata.vectors.model.NGraph;
 import com.michal.elearning.wekaDataModel.DataModelWithForm;
 import com.michal.elearning.wekaDataModel.Features;
 
@@ -95,37 +93,23 @@ public class ConvertDataUtils {
 		for(RawData data : rawData){
 			Collections.sort(data.getMauseClicksList());
 			DataModelWithForm dataToAdd = prepareEmptyDataToAdd(data);	
-						
-			setSingleKeysFeatures(data.getKeystrokeList(), dataToAdd);				
+					
 			setMauceClickFeatures(data.getMauseClicksList(), dataToAdd);
+			setSingleKeysFeatures(data.getKeystrokeList(), dataToAdd);				
 			setDigraphFeatures(data.getKeystrokeList(), dataToAdd);
+			setTriGraphFeatuers(data.getKeystrokeList(), dataToAdd);
+			setNGraphFeatures(data.getKeystrokeList(), dataToAdd);
 			
 			dataToFile.add(dataToAdd);
 		}
 		return dataToFile;			
 	}
 
-	private static void setDigraphFeatures(List<UserKeystrokes> keystrokeList, DataModelWithForm dataToAdd) {
-		DiGraphFeatures digraphFeatures = new DiGraphFeatures();
-		List<NGraph> result = digraphFeatures.prepareVector(keystrokeList);
-		digraphFeatures.calculateVectors(result);
-		dataToAdd.getFeatures().setFirstDwellMean(MathHelperUtils.calculateMean(digraphFeatures.getFirstDwell()));
-		dataToAdd.getFeatures().setSecondDwellMean(MathHelperUtils.calculateMean(digraphFeatures.getSecondDwell()));
-		dataToAdd.getFeatures().setTimeBetweenFirsAndSecondPressMean(MathHelperUtils.calculateMean(digraphFeatures.getTimeBetweenFirsAndSecondPress()));
-		dataToAdd.getFeatures().setTimeBetweenFirstUpAndSecondDownMean(MathHelperUtils.calculateMean(digraphFeatures.getTimeBetweenFirstUpAndSecondDown()));
-		dataToAdd.getFeatures().setDigraphDurationMean(MathHelperUtils.calculateMean(digraphFeatures.getDigraphDuration()));
-		dataToAdd.getFeatures().setFirstDwellDeviation(MathHelperUtils.calculateStandardDeviation(digraphFeatures.getFirstDwell()));
-		dataToAdd.getFeatures().setSecondDwellDeviation(MathHelperUtils.calculateStandardDeviation(digraphFeatures.getSecondDwell()));
-		dataToAdd.getFeatures().setTimeBetweenFirsAndSecondPressDeviation(MathHelperUtils.calculateStandardDeviation(digraphFeatures.getTimeBetweenFirsAndSecondPress()));
-		dataToAdd.getFeatures().setTimeBetweenFirstUpAndSecondDownDeviation(MathHelperUtils.calculateStandardDeviation(digraphFeatures.getTimeBetweenFirstUpAndSecondDown()));
-		dataToAdd.getFeatures().setDigraphDurationDeviation(MathHelperUtils.calculateStandardDeviation(digraphFeatures.getDigraphDuration()));		
-	}
-
 	private static void setMauceClickFeatures(List<UserMauseClick> mauseClicks, DataModelWithForm dataToAdd) {
-		Vector<Integer> timeBeetwwnClicks = MauseClickVector.mauseClickVector(mauseClicks);
-		if(timeBeetwwnClicks.size()>0){				
-			dataToAdd.getFeatures().setMauseClicksMean(MathHelperUtils.calculateMean(timeBeetwwnClicks));
-			dataToAdd.getFeatures().setMauseClickDeviation(MathHelperUtils.calculateStandardDeviation(timeBeetwwnClicks));
+		Vector<Integer> timeBetweenClicks = MauseClickFeatures.mauseClickVector(mauseClicks);
+		if(timeBetweenClicks.size()>0){				
+			dataToAdd.getFeatures().setMauseClicksMean(MathHelperUtils.calculateMean(timeBetweenClicks));
+			dataToAdd.getFeatures().setMauseClickDeviation(MathHelperUtils.calculateStandardDeviation(timeBetweenClicks));
 			dataToAdd.getFeatures().setMauseCliskEventCount(mauseClicks.size());			
 		}
 	}
@@ -141,6 +125,60 @@ public class ConvertDataUtils {
 		dataToAdd.getFeatures().setSingleKeyDwellDeviation(MathHelperUtils.calculateStandardDeviation(singleKeyFeatures.getSingleKeyDwellTime()));
 		dataToAdd.getFeatures().setSingleKeyDwellMean(MathHelperUtils.calculateMean(singleKeyFeatures.getSingleKeyDwellTime()));
 		dataToAdd.getFeatures().setWritingSpeed(singleKeyFeatures.getWriteSpeed());
+	}
+	
+	private static void setDigraphFeatures(List<UserKeystrokes> keystrokeList, DataModelWithForm dataToAdd) {
+		DiGraphFeatures digraphFeatures = new DiGraphFeatures();
+		List<NGraph> result = digraphFeatures.prepareVector(keystrokeList);
+		digraphFeatures.calculateVectors(result);
+		dataToAdd.getFeatures().setDiGraphFirstDwellMean(MathHelperUtils.calculateMean(digraphFeatures.getFirstDwell()));
+		dataToAdd.getFeatures().setDiGraphSecondDwellMean(MathHelperUtils.calculateMean(digraphFeatures.getSecondDwell()));
+		dataToAdd.getFeatures().setDiGraphPressToPressMean(MathHelperUtils.calculateMean(digraphFeatures.getTimeBetweenFirsAndSecondPress()));
+		dataToAdd.getFeatures().setDiGraphFlightMean(MathHelperUtils.calculateMean(digraphFeatures.getTimeBetweenFirstUpAndSecondDown()));
+		dataToAdd.getFeatures().setDigraphDurationMean(MathHelperUtils.calculateMean(digraphFeatures.getDigraphDuration()));
+		dataToAdd.getFeatures().setDiGraphFirstDwellDeviation(MathHelperUtils.calculateStandardDeviation(digraphFeatures.getFirstDwell()));
+		dataToAdd.getFeatures().setDiGraphSecondDwellDeviation(MathHelperUtils.calculateStandardDeviation(digraphFeatures.getSecondDwell()));
+		dataToAdd.getFeatures().setDiGraphPressToPressDeviation(MathHelperUtils.calculateStandardDeviation(digraphFeatures.getTimeBetweenFirsAndSecondPress()));
+		dataToAdd.getFeatures().setDiGraphFlightDeviation(MathHelperUtils.calculateStandardDeviation(digraphFeatures.getTimeBetweenFirstUpAndSecondDown()));
+		dataToAdd.getFeatures().setDigraphDurationDeviation(MathHelperUtils.calculateStandardDeviation(digraphFeatures.getDigraphDuration()));		
+	}
+	
+	private static void setTriGraphFeatuers(List<UserKeystrokes> keystrokeList, DataModelWithForm dataToAdd) {
+		TriGraphFeatures triGraphsFeatures = new TriGraphFeatures();
+		List<NGraph> result = triGraphsFeatures.prepareVector(keystrokeList);
+		triGraphsFeatures.calculateVectors(result);
+		dataToAdd.getFeatures().setTriGraphDwellFirstMean(MathHelperUtils.calculateMean(triGraphsFeatures.getDwellFirst()));
+		dataToAdd.getFeatures().setTriGraphDwellSecondMean(MathHelperUtils.calculateMean(triGraphsFeatures.getDwellSecond()));
+		dataToAdd.getFeatures().setTriGraphDwellThirdMean(MathHelperUtils.calculateMean(triGraphsFeatures.getDwellThird()));
+		dataToAdd.getFeatures().setTriGraphPressFirstSecMean(MathHelperUtils.calculateMean(triGraphsFeatures.getPressFirstSec()));
+		dataToAdd.getFeatures().setTriGraphPressSecThirdMean(MathHelperUtils.calculateMean(triGraphsFeatures.getPressSecThird()));
+		dataToAdd.getFeatures().setTriGraphFlightFirstSecMean(MathHelperUtils.calculateMean(triGraphsFeatures.getFlightFirstSec()));
+		dataToAdd.getFeatures().setTriGraphFlightSecThirdMean(MathHelperUtils.calculateMean(triGraphsFeatures.getFlightSecThird()));
+		dataToAdd.getFeatures().setTriGraphPressToPressMean(MathHelperUtils.calculateMean(triGraphsFeatures.getPressToPress()));
+		dataToAdd.getFeatures().setTriGraphKeyDwellMean(MathHelperUtils.calculateMean(triGraphsFeatures.getKeyDwell()));
+		dataToAdd.getFeatures().setTriGraphDurationMean(MathHelperUtils.calculateMean(triGraphsFeatures.getWordDuration()));
+		dataToAdd.getFeatures().setTriGraphDwellFirstDeviation(MathHelperUtils.calculateStandardDeviation(triGraphsFeatures.getDwellFirst()));
+		dataToAdd.getFeatures().setTriGraphDwellSecondDeviation(MathHelperUtils.calculateStandardDeviation(triGraphsFeatures.getDwellSecond()));
+		dataToAdd.getFeatures().setTriGraphDwellThirdDeviation(MathHelperUtils.calculateStandardDeviation(triGraphsFeatures.getDwellThird()));
+		dataToAdd.getFeatures().setTriGraphPressFirstSecDeviation(MathHelperUtils.calculateStandardDeviation(triGraphsFeatures.getPressFirstSec()));
+		dataToAdd.getFeatures().setTriGraphPressSecThirdDeviation(MathHelperUtils.calculateStandardDeviation(triGraphsFeatures.getPressSecThird()));
+		dataToAdd.getFeatures().setTriGraphFlightFirstSecDeviation(MathHelperUtils.calculateStandardDeviation(triGraphsFeatures.getFlightFirstSec()));
+		dataToAdd.getFeatures().setTriGraphFlightSecThirdDeviation(MathHelperUtils.calculateStandardDeviation(triGraphsFeatures.getFlightSecThird()));
+		dataToAdd.getFeatures().setTriGraphPressToPressDeviation(MathHelperUtils.calculateStandardDeviation(triGraphsFeatures.getPressToPress()));
+		dataToAdd.getFeatures().setTriGraphKeyDwellDeviation(MathHelperUtils.calculateStandardDeviation(triGraphsFeatures.getKeyDwell()));
+		dataToAdd.getFeatures().setTriGraphDurationDeviation(MathHelperUtils.calculateStandardDeviation(triGraphsFeatures.getWordDuration()));
+	}
+	
+	private static void setNGraphFeatures(List<UserKeystrokes> keystrokeList, DataModelWithForm dataToAdd) {
+		NGraphsFeatures nGraphFeatures = new NGraphsFeatures();
+		List<NGraph> result = nGraphFeatures.prepareVector(keystrokeList);
+		nGraphFeatures.calculateVectors(result);		
+		dataToAdd.getFeatures().setnGraphPressToPressMean(MathHelperUtils.calculateMean(nGraphFeatures.getPressToPress()));
+		dataToAdd.getFeatures().setnGraphKeyDwellMean(MathHelperUtils.calculateMean(nGraphFeatures.getKeyDwell()));
+		dataToAdd.getFeatures().setnGraphWordDurationMean(MathHelperUtils.calculateMean(nGraphFeatures.getWordDuration()));
+		dataToAdd.getFeatures().setnGraphPressToPressDeviation(MathHelperUtils.calculateStandardDeviation(nGraphFeatures.getPressToPress()));
+		dataToAdd.getFeatures().setnGraphKeyDwellDeviation(MathHelperUtils.calculateStandardDeviation(nGraphFeatures.getKeyDwell()));
+		dataToAdd.getFeatures().setnGraphWordDurationDeviation(MathHelperUtils.calculateStandardDeviation(nGraphFeatures.getWordDuration()));
 	}
 	
 	private static DataModelWithForm prepareEmptyDataToAdd(RawData data){

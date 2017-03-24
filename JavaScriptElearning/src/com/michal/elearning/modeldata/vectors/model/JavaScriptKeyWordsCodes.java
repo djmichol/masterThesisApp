@@ -1,6 +1,6 @@
-package com.michal.elearning.modeldata.vectors;
+package com.michal.elearning.modeldata.vectors.model;
 
-public class JavaScriptKeyWords {
+public class JavaScriptKeyWordsCodes {
 
 	public static int[] ELSE_WORD = {69,76,83,69};
 	public static int[] NULL_WORD = {78,85,76,76};

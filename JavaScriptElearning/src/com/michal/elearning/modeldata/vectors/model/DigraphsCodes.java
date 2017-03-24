@@ -1,6 +1,6 @@
-package com.michal.elearning.modeldata.vectors;
+package com.michal.elearning.modeldata.vectors.model;
 
-public class Digraphs {
+public class DigraphsCodes {
 
 	public static int[] IF_DI = {73,70};
 	public static int[] EQUAL_DI = {187,187};

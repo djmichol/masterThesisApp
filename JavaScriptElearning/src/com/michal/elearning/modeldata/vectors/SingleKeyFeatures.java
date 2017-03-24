@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Vector;
 
 import com.michal.elearning.dao.UserKeystrokes;
+import com.michal.elearning.modeldata.vectors.model.KeyCodes;
 
 public class SingleKeyFeatures {
 
@@ -17,7 +18,7 @@ public class SingleKeyFeatures {
 	private Vector<Integer> singleKeyDwellTime;
 	
 	public void prepareFreqMember(List<UserKeystrokes> keystrokes) {
-		clearData();
+		clear();
 		Collections.sort(keystrokes);
 
 		writeSpeed = getWriteSpeed(keystrokes);
@@ -70,7 +71,7 @@ public class SingleKeyFeatures {
 		return result;
 	}
 
-	private void clearData() {
+	private void clear() {
 		tabFreq = 0;
 		spaceFreq = 0;
 		enterFreq = 0;
@@ -102,15 +103,7 @@ public class SingleKeyFeatures {
 		return writeSpeed;
 	}
 
-	public void setWriteSpeed(double writeSpeed) {
-		this.writeSpeed = writeSpeed;
-	}
-
 	public Vector<Integer> getSingleKeyDwellTime() {
 		return singleKeyDwellTime;
-	}
-
-	public void setSingleKeyDwellTime(Vector<Integer> singleKeyDwellTime) {
-		this.singleKeyDwellTime = singleKeyDwellTime;
 	}
 }

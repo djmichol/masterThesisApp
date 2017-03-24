@@ -9,9 +9,11 @@ import java.util.Map;
 import java.util.Vector;
 
 import com.michal.elearning.dao.UserKeystrokes;
+import com.michal.elearning.modeldata.vectors.model.DigraphsCodes;
+import com.michal.elearning.modeldata.vectors.model.NGraph;
 import com.michal.elearning.utils.VectorsUtils;
 
-public class DiGraphFeatures {
+public class DiGraphFeatures implements GraphsFeatures{
 
 	private Vector<Integer> firstDwell;
 	private Vector<Integer> secondDwell;
@@ -23,7 +25,7 @@ public class DiGraphFeatures {
 		clear();
 		List<NGraph> digraphs = new ArrayList<NGraph>();
 
-		List<int[]> list = VectorsUtils.getDigraphsList(Digraphs.class);
+		List<int[]> list = VectorsUtils.getNgraphsList(DigraphsCodes.class);
 		
 		// sortowanie po czasie
 		Collections.sort(keystrokes);
@@ -82,7 +84,7 @@ public class DiGraphFeatures {
 		return digraphs;
 	}
 	
-	public  void calculateVectors(List<NGraph> digraphs){
+	public void calculateVectors(List<NGraph> digraphs){
 		for(NGraph digraph : digraphs){
 			firstDwell.add(getFirstDwell(digraph));			
 			timeBetweenFirsAndSecondPress.add(getTimeBetweenFirstAndSecondPress(digraph));
@@ -153,7 +155,7 @@ public class DiGraphFeatures {
 		});
 
 		Integer dwell = 0;
-		int stop = digraph.getKeystrokes().get(0).getTime();;
+		int stop = digraph.getKeystrokes().get(0).getTime();
 		int start = 0;
 		for(UserKeystrokes key : digraph.getKeystrokes()){
 			if(key.getCode() == digraph.getKeyList()[1] && key.getType().equals("keydown")){
@@ -179,7 +181,7 @@ public class DiGraphFeatures {
 		return dwell;		
 	}
 
-	private void clear(){
+	public void clear(){
 		firstDwell = new Vector<>();
 		secondDwell = new Vector<>();
 		timeBetweenFirsAndSecondPress = new Vector<>();

@@ -29,7 +29,6 @@ public class AuthService {
 	
 	@GET
 	@PermitAll
-	@Path("/login")
 	public Response validateUser(@Context HttpHeaders headers) {
 		String userAuth = headers.getHeaderString("log-on-user");
 		if(!isUserHeaderValid(userAuth)){
@@ -65,7 +64,6 @@ public class AuthService {
 	
 	@POST
 	@PermitAll
-	@Path("/logOn")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createUser(String user) throws IOException{
 		if(user== null){

@@ -8,8 +8,8 @@ import org.junit.Test;
 
 import com.michal.elearning.dao.UserKeystrokes;
 import com.michal.elearning.modeldata.vectors.DiGraphFeatures;
-import com.michal.elearning.modeldata.vectors.Digraphs;
-import com.michal.elearning.modeldata.vectors.NGraph;
+import com.michal.elearning.modeldata.vectors.model.DigraphsCodes;
+import com.michal.elearning.modeldata.vectors.model.NGraph;
 import com.michal.elearning.utils.VectorsUtils;
 
 public class DigraphTest {
@@ -32,7 +32,7 @@ public class DigraphTest {
 	
 	@Test
 	public void reflectionGetFieldList() throws IllegalArgumentException, IllegalAccessException{
-		List<int[]> list = VectorsUtils.getDigraphsList(Digraphs.class);
+		List<int[]> list = VectorsUtils.getNgraphsList(DigraphsCodes.class);
 		int[] exeptedArray = {73,70};
 		Assert.assertArrayEquals(list.get(0),exeptedArray);
 		Assert.assertEquals(list.size(), 6);
@@ -69,9 +69,9 @@ public class DigraphTest {
 		Assert.assertEquals(4, result.get(0).getKeystrokes().size());
 		Assert.assertEquals(4, result.get(1).getKeystrokes().size());
 		Assert.assertEquals(4, result.get(2).getKeystrokes().size());
-		Assert.assertArrayEquals(Digraphs.PLUS_PLUS_DI, result.get(2).getKeyList());
+		Assert.assertArrayEquals(DigraphsCodes.PLUS_PLUS_DI, result.get(2).getKeyList());
 		Assert.assertEquals(5, result.get(3).getKeystrokes().size());
-		Assert.assertArrayEquals(Digraphs.IF_DI, result.get(3).getKeyList());
+		Assert.assertArrayEquals(DigraphsCodes.IF_DI, result.get(3).getKeyList());
 	}
 	
 	@Test

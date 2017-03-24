@@ -19,7 +19,6 @@ public class ArffFileHelper {
 		List<String> emotionStates = InspectClassFields(UserInputForm.class);
 		List<String> features = InspectClassFields(Features.class);
 		
-				
 		Map<String, byte[]> map = new HashMap<String, byte[]>();
 		
 		for(String emotion : emotionStates){
@@ -50,7 +49,7 @@ public class ArffFileHelper {
 		return map;
 	}
 	
-	public static <T> List<String> InspectClassFields(Class<T> klazz) {
+	private static <T> List<String> InspectClassFields(Class<T> klazz) {
 		List<String> emotionStates = new ArrayList<String>();
 		Field[] fields = klazz.getDeclaredFields();
 		System.out.printf("%d fields:%n", fields.length);

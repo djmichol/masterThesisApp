@@ -17,14 +17,13 @@ import com.michal.elearning.daoServices.IPathInterface;
 import com.michal.elearning.daoServices.LessonBlockDaoService;
 import com.michal.elearning.daoServices.PathDaoService;
 
-@Path("/learningLessonBlock")
+@Path("/lessonBlock")
 public class BlockService {
 	
 	private IBlockInterface blockService = new LessonBlockDaoService();
 	
 	@RolesAllowed("user")
     @GET
-    @Path("/lessonBlock")
     public Response getLessonsBloskcForPath(@QueryParam("pathId") int pathId) 
     {       
 		try {

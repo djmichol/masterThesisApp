@@ -7,9 +7,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.michal.elearning.dao.UserKeystrokes;
-import com.michal.elearning.modeldata.vectors.JavaScriptKeyWords;
-import com.michal.elearning.modeldata.vectors.NGraph;
-import com.michal.elearning.modeldata.vectors.OtherWordsGraphVectors;
+import com.michal.elearning.modeldata.vectors.NGraphsFeatures;
+import com.michal.elearning.modeldata.vectors.model.JavaScriptKeyWordsCodes;
+import com.michal.elearning.modeldata.vectors.model.NGraph;
 
 public class OtherKeywordsTest {
 	
@@ -46,13 +46,13 @@ public class OtherKeywordsTest {
 		keystrokes.add(new UserKeystrokes(69,492452053,"keydown"));
 		keystrokes.add(new UserKeystrokes(69,492452115,"keyup"));
 
-		OtherWordsGraphVectors dd = new OtherWordsGraphVectors();
+		NGraphsFeatures dd = new NGraphsFeatures();
 		List<NGraph> result = dd.prepareVector(keystrokes);
 		Assert.assertEquals(2, result.size());
 		Assert.assertEquals(10, result.get(0).getKeystrokes().size());
-		Assert.assertArrayEquals(JavaScriptKeyWords.ALERT_PLUS_WORD, result.get(0).getKeyList());
+		Assert.assertArrayEquals(JavaScriptKeyWordsCodes.ALERT_PLUS_WORD, result.get(0).getKeyList());
 		Assert.assertEquals(15, result.get(1).getKeystrokes().size());
-		Assert.assertArrayEquals(JavaScriptKeyWords.CONSOLE_PLUS_WORD, result.get(1).getKeyList());
+		Assert.assertArrayEquals(JavaScriptKeyWordsCodes.CONSOLE_PLUS_WORD, result.get(1).getKeyList());
 	}
 	
 	@Test
@@ -76,11 +76,11 @@ public class OtherKeywordsTest {
 		keystrokes.add(new UserKeystrokes(69,492452053,"keydown"));
 		keystrokes.add(new UserKeystrokes(69,492452115,"keyup"));
 
-		OtherWordsGraphVectors dd = new OtherWordsGraphVectors();
+		NGraphsFeatures dd = new NGraphsFeatures();
 		List<NGraph> result = dd.prepareVector(keystrokes);
 		Assert.assertEquals(1, result.size());
 		Assert.assertEquals(15, result.get(0).getKeystrokes().size());
-		Assert.assertArrayEquals(JavaScriptKeyWords.CONSOLE_PLUS_WORD, result.get(0).getKeyList());
+		Assert.assertArrayEquals(JavaScriptKeyWordsCodes.CONSOLE_PLUS_WORD, result.get(0).getKeyList());
 		dd.calculateVectors(result);
 		dd.getKeyDwell();
 		dd.getPressToPress();
@@ -111,7 +111,7 @@ public class OtherKeywordsTest {
 		keystrokes.add(new UserKeystrokes(69,492452053,"keydown"));
 		keystrokes.add(new UserKeystrokes(69,492452115,"keyup"));
 
-		OtherWordsGraphVectors dd = new OtherWordsGraphVectors();
+		NGraphsFeatures dd = new NGraphsFeatures();
 		List<NGraph> result = dd.prepareVector(keystrokes);
 		Assert.assertEquals(0, result.size());
 	}

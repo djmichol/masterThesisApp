@@ -5,7 +5,7 @@ import java.util.Vector;
 
 import com.michal.elearning.dao.UserMauseClick;
 
-public class MauseClickVector {
+public class MauseClickFeatures {
 
 	public static Vector<Integer> mauseClickVector(List<UserMauseClick> mauseClick){
 		Vector<Integer> dwellTimes = new Vector<Integer>();

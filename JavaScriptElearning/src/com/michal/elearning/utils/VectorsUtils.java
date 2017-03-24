@@ -6,7 +6,7 @@ import java.util.List;
 
 public class VectorsUtils {
 
-	public static <T> List<int[]> getDigraphsList(Class<T> klazz) {
+	public static <T> List<int[]> getNgraphsList(Class<T> klazz) {
 		Field[] fields = klazz.getDeclaredFields();
 		List<int[]> list = new ArrayList<int[]>();
 		for (Field field : fields) {

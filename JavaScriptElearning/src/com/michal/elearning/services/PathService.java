@@ -13,14 +13,13 @@ import com.michal.elearning.dao.LearningPath;
 import com.michal.elearning.daoServices.IPathInterface;
 import com.michal.elearning.daoServices.PathDaoService;
 
-@Path("/learningPath")
+@Path("/paths")
 public class PathService {
 
 	private IPathInterface pathService = new PathDaoService();
 	
 	@RolesAllowed("user")
     @GET
-    @Path("/allPaths")
     public Response getAllPaths() 
     {       
 		try {

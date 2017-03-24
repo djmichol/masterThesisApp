@@ -56,13 +56,10 @@ public class ConverDataService {
     @Path("/userModel")
     public Response getUserModel(@QueryParam("userId") int userId, String inputData) throws Exception 
     {   
-		List<UserInputData> data = getUserInputDataFromString(inputData, userId);
-		
-		this.userId = userId;
-		
+		List<UserInputData> data = getUserInputDataFromString(inputData, userId);		
+		this.userId = userId;		
 		List<ModelData> userModels = modelService.getUserTrainedModels(userId);
-		User user = userService.getUserByID(userId);
-    	
+		User user = userService.getUserByID(userId);    	
 		List<DataModelWithForm> dataToFile = ConvertDataUtils.getArrfFromRawData(data, user);
     	Map<String,byte[]> arffInputStream = ArffFileHelper.prepareArffInputStream(dataToFile);
 		for (Map.Entry<String, byte[]> entry : arffInputStream.entrySet())
@@ -73,10 +70,22 @@ public class ConverDataService {
 					WekaClassifierUtils.getTrainedClass(new ByteArrayInputStream(entry.getValue()), cls);
 				}
 			}
-		}			
-    	
+		}    	
     	return Response.ok().build(); 
     }
+	
+	private List<UserInputData> getUserInputDataFromString(String inputData, int userId) {
+		JSONObject inpoutData = new JSONObject(inputData);
+		UserInputData userDataObject = new UserInputData();
+		userDataObject.setKeyStrokes(inpoutData.getJSONArray("keyStroke").toString().getBytes());
+		userDataObject.setMouseMove(inpoutData.getJSONArray("mauseMove").toString().getBytes());
+		userDataObject.setMouseClicks(inpoutData.getJSONArray("mauseClick").toString().getBytes());
+		userDataObject.setUsrId(userId);
+		userDataObject.setLessonId(inpoutData.getInt("lessonId"));
+		List<UserInputData> data = new ArrayList<>();
+		data.add(userDataObject);
+		return data;
+	}
 	
 	@RolesAllowed("admin")
     @POST
@@ -106,10 +115,8 @@ public class ConverDataService {
 			for (Map.Entry<String, byte[]> entry : arffInputStream.entrySet())
 			{
 				J48 j48Classifier = new J48();	
-				WekaClassifierUtils.trainClassiffier(new ByteArrayInputStream(entry.getValue()), j48Classifier);
-				
-				tryToSaveTmpArffFile(entry);
-				
+				WekaClassifierUtils.trainClassiffier(new ByteArrayInputStream(entry.getValue()), j48Classifier);				
+				tryToSaveTmpArffFile(entry);				
 				insertUserModel(entry.getKey(), j48Classifier);
 			}			
 		} catch (Exception e) {
@@ -139,18 +146,4 @@ public class ConverDataService {
 		out.close();
 		bos.close();		
 	}
-	
-	private List<UserInputData> getUserInputDataFromString(String inputData, int userId) {
-		JSONObject inpoutData = new JSONObject(inputData);
-		UserInputData userDataObject = new UserInputData();
-		userDataObject.setKeyStrokes(inpoutData.getJSONArray("keyStroke").toString().getBytes());
-		userDataObject.setMouseMove(inpoutData.getJSONArray("mauseMove").toString().getBytes());
-		userDataObject.setMouseClicks(inpoutData.getJSONArray("mauseClick").toString().getBytes());
-		userDataObject.setUsrId(userId);
-		userDataObject.setLessonId(inpoutData.getInt("lessonId"));
-		List<UserInputData> data = new ArrayList<>();
-		data.add(userDataObject);
-		return data;
-	}
-
 }

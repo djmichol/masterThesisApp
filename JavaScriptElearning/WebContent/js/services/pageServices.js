@@ -2,7 +2,7 @@ app.service('pageService', function($http,$window,$location,$rootScope) {
 	
 	this.getAllLearningPaths = function(){
 		return $http({
-			url: $rootScope.baseUrl+"/elearningService/learningPath/allPaths",
+			url: $rootScope.baseUrl+"/elearningService/paths",
 			method: "GET",
 			headers: {
 				'Content-Type': 'text/html'
@@ -12,7 +12,7 @@ app.service('pageService', function($http,$window,$location,$rootScope) {
 	
 	this.getLessonBlockForPath = function(pathId){
 		return $http({
-			url: $rootScope.baseUrl+"/elearningService/learningLessonBlock/lessonBlock",
+			url: $rootScope.baseUrl+"/elearningService/lessonBlock",
 			method: "GET",
 			params: {pathId: pathId}
 		});

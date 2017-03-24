@@ -3,7 +3,7 @@ app.service('usersService', function($http, $rootScope, Base64) {
 	this.login = function(name, password){
 		var authToken = 'Basic ' + Base64.encode(name + ':' + password);
 		return $http({
-			url: $rootScope.baseUrl+"/elearningService/auth/login",
+			url: $rootScope.baseUrl+"/elearningService/auth",
 			method: "GET",
 			headers: {
 				'Log-On-User': authToken,
@@ -20,7 +20,7 @@ app.service('usersService', function($http, $rootScope, Base64) {
 			"mail" : mail
 		};		
 		return $http({
-			url: $rootScope.baseUrl+"/elearningService/auth/logOn",
+			url: $rootScope.baseUrl+"/elearningService/auth",
 			method: "POST",
 			data: newUser,
 			headers: {

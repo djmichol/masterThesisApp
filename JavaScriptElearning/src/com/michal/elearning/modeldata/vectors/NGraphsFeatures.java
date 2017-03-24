@@ -9,86 +9,99 @@ import java.util.Vector;
 
 import com.michal.elearning.dao.UserKeystrokes;
 import com.michal.elearning.machineLearning.MathHelperUtils;
+import com.michal.elearning.modeldata.vectors.model.JavaScriptKeyWordsCodes;
+import com.michal.elearning.modeldata.vectors.model.NGraph;
 import com.michal.elearning.utils.VectorsUtils;
 
-public class OtherWordsGraphVectors {
+public class NGraphsFeatures implements GraphsFeatures{
 
 	private Vector<Integer> pressToPress;
 	private Vector<Integer> keyDwell;
 	private Vector<Integer> wordDuration;
 	
+	public void clear(){
+		pressToPress = new Vector<>();
+		keyDwell = new Vector<>();
+		wordDuration = new Vector<>();
+	}
+	
 	public List<NGraph> prepareVector(List<UserKeystrokes> keystrokes) {
 		clear();
-		List<NGraph> digraphs = new ArrayList<NGraph>();
-
-		List<int[]> list = VectorsUtils.getDigraphsList(JavaScriptKeyWords.class);
-		
-		// sortowanie po czasie
 		Collections.sort(keystrokes);
+		
+		List<NGraph> nGraphs = new ArrayList<NGraph>();
+		List<int[]> list = VectorsUtils.getNgraphsList(JavaScriptKeyWordsCodes.class);		
 		boolean graphStarted = false;
-		Map<int[],List<UserKeystrokes>> digraph = new HashMap<int[],List<UserKeystrokes>>();
+		Map<int[],List<UserKeystrokes>> nGraph = new HashMap<int[],List<UserKeystrokes>>();
 		int index = 0;
 		if (keystrokes.size() >= 2) {
-			for (int i = 0; i < keystrokes.size(); i++) {				
-				if (keystrokes.get(i).getType().equals("keydown")) {
-					if(!graphStarted){						
-						for(int[] object : list){
-							if(object[0]==keystrokes.get(i).getCode()){
-								graphStarted = true;								
-								List<UserKeystrokes> tmp = new ArrayList<UserKeystrokes>();
-								tmp.add(keystrokes.get(i));
-								digraph.put(object,tmp);
-							}
-						}
-					}else{
-						boolean isDigraphContionue = false;
-						index++;
-						for (Map.Entry<int[],List<UserKeystrokes>> entry : digraph.entrySet())
-						{
-							
-							if(entry.getKey()[index]==keystrokes.get(i).getCode()){
-								entry.getValue().add(keystrokes.get(i));								
-								isDigraphContionue = true;
-							}
-						}
-						if(!isDigraphContionue){
-							graphStarted = false;
-							if(index>1){
-								i--;
-							}
-							index = 0;
-							digraph = new HashMap<int[],List<UserKeystrokes>>();
+			for (int i = 0; i < keystrokes.size(); i++) {			
+				try{
+					if (keystrokes.get(i).getType().equals("keydown")) {
+						if(!graphStarted){						
 							for(int[] object : list){
 								if(object[0]==keystrokes.get(i).getCode()){
 									graphStarted = true;								
 									List<UserKeystrokes> tmp = new ArrayList<UserKeystrokes>();
 									tmp.add(keystrokes.get(i));
-									digraph.put(object,tmp);
+									nGraph.put(object,tmp);
 								}
 							}
-						}
-					}
-				} else if (keystrokes.get(i).getType().equals("keyup")) {
-					if(graphStarted){
-						for (Map.Entry<int[],List<UserKeystrokes>> entry : digraph.entrySet())
-						{
-							entry.getValue().add(keystrokes.get(i));
-							int lastElement = entry.getKey().length-1;
-							if(index >= lastElement){
-								if(entry.getKey()[index]==keystrokes.get(i).getCode() && entry.getValue().size()>=3){
-									index = 0;
+						}else{
+							boolean isNGraphContionue = false;
+							index++;
+							for (Map.Entry<int[],List<UserKeystrokes>> entry : nGraph.entrySet())
+							{
+								
+								if(entry.getKey()[index]==keystrokes.get(i).getCode()){
+									entry.getValue().add(keystrokes.get(i));								
+									isNGraphContionue = true;
+								}
+							}
+							if(!isNGraphContionue){
+								graphStarted = false;
+								if(index>1){
 									i--;
-									graphStarted = false;
-									digraphs.add(new NGraph(entry.getValue(), entry.getKey()));
-									digraph = new HashMap<int[],List<UserKeystrokes>>();
+								}
+								index = 0;
+								nGraph = new HashMap<int[],List<UserKeystrokes>>();
+								for(int[] object : list){
+									if(object[0]==keystrokes.get(i).getCode()){
+										graphStarted = true;								
+										List<UserKeystrokes> tmp = new ArrayList<UserKeystrokes>();
+										tmp.add(keystrokes.get(i));
+										nGraph.put(object,tmp);
+									}
+								}
+							}
+						}
+					} else if (keystrokes.get(i).getType().equals("keyup")) {
+						if(graphStarted){
+							for (Map.Entry<int[],List<UserKeystrokes>> entry : nGraph.entrySet())
+							{
+								entry.getValue().add(keystrokes.get(i));
+								int lastElement = entry.getKey().length-1;
+								if(index >= lastElement){
+									if(entry.getKey()[index]==keystrokes.get(i).getCode() && entry.getValue().size()>=3){
+										index = 0;
+										i--;
+										graphStarted = false;
+										nGraphs.add(new NGraph(entry.getValue(), entry.getKey()));
+										nGraph = new HashMap<int[],List<UserKeystrokes>>();
+									}
 								}
 							}
 						}
 					}
+				}catch (Exception e) {
+					index = 0;
+					i--;
+					graphStarted = false;
+					nGraph = new HashMap<int[],List<UserKeystrokes>>();
 				}
 			}
 		}
-		return digraphs;
+		return nGraphs;
 	}
 	
 	public  void calculateVectors(List<NGraph> digraphs){
@@ -155,11 +168,6 @@ public class OtherWordsGraphVectors {
 		return dwell;
 	}
 	
-	private void clear(){
-		pressToPress = new Vector<>();
-		keyDwell = new Vector<>();
-		wordDuration = new Vector<>();
-	}
 	public Vector<Integer> getPressToPress() {
 		return pressToPress;
 	}
