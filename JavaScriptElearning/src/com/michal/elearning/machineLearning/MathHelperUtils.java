@@ -5,6 +5,9 @@ import java.util.Vector;
 public class MathHelperUtils {
 
 	public static int calculateMean(Vector<Integer> data){
+		if(data.size()==0){
+			return 0;
+		}
 		int suma = 0;
 		for(Integer dwell : data){
 			suma += dwell;
@@ -13,6 +16,10 @@ public class MathHelperUtils {
 	}
 	 
 	public static int calculateStandardDeviation(Vector<Integer> data){
+		if(data.size()==0){
+			return 0;
+		}
+		
 		int mean = calculateMean(data);
 		int sum = 0;
 		int deviation = 0;

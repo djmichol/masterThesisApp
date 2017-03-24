@@ -6,7 +6,7 @@ public class Features {
 	private int mauseClicksMean;
 	private int mauseClickDeviation;
 	private int mauseCliskEventCount;
-	//SingleKey
+	//SigleKey
 	private int tabFreq;
 	private int delFreq;
 	private int enterFreq;
@@ -47,13 +47,13 @@ public class Features {
 	private int triGraphPressToPressDeviation;
 	private int triGraphKeyDwellDeviation;
 	private int triGraphDurationDeviation;
-	//ngraphs
-	private int nGraphPressToPressMean;
-	private int nGraphKeyDwellMean;
-	private int nGraphWordDurationMean;
-	private int nGraphPressToPressDeviation;
-	private int nGraphKeyDwellDeviation;
-	private int nGraphWordDurationDeviation;
+	//graphs
+	private int graphPressToPressMean;
+	private int graphKeyDwellMean;
+	private int graphWordDurationMean;
+	private int graphPressToPressDeviation;
+	private int graphKeyDwellDeviation;
+	private int graphWordDurationDeviation;
 	
 	//Settery i gettery
 	public int getMauseClicksMean() {
@@ -107,20 +107,20 @@ public class Features {
 	public double getWritingSpeed() {
 		return writingSpeed;
 	}
-	public void setWritingSpeed(double writingSpeed) {
-		this.writingSpeed = writingSpeed;
+	public void setWritingSpeed(double writigSpeed) {
+		this.writingSpeed = writigSpeed;
 	}
 	public int getSingleKeyDwellMean() {
 		return singleKeyDwellMean;
 	}
-	public void setSingleKeyDwellMean(int singleKeyDwellMean) {
-		this.singleKeyDwellMean = singleKeyDwellMean;
+	public void setSingleKeyDwellMean(int sigleKeyDwellMean) {
+		this.singleKeyDwellMean = sigleKeyDwellMean;
 	}
 	public int getSingleKeyDwellDeviation() {
 		return singleKeyDwellDeviation;
 	}
-	public void setSingleKeyDwellDeviation(int singleKeyDwellDeviation) {
-		this.singleKeyDwellDeviation = singleKeyDwellDeviation;
+	public void setSingleKeyDwellDeviation(int sigleKeyDwellDeviation) {
+		this.singleKeyDwellDeviation = sigleKeyDwellDeviation;
 	}
 	public int getDiGraphFirstDwellMean() {
 		return diGraphFirstDwellMean;
@@ -302,40 +302,40 @@ public class Features {
 	public void setTriGraphDurationDeviation(int triGraphDurationDeviation) {
 		this.triGraphDurationDeviation = triGraphDurationDeviation;
 	}
-	public int getnGraphPressToPressMean() {
-		return nGraphPressToPressMean;
+	public int getGraphPressToPressMean() {
+		return graphPressToPressMean;
 	}
-	public void setnGraphPressToPressMean(int nGraphPressToPressMean) {
-		this.nGraphPressToPressMean = nGraphPressToPressMean;
+	public void setGraphPressToPressMean(int graphPressToPressMean) {
+		this.graphPressToPressMean = graphPressToPressMean;
 	}
-	public int getnGraphKeyDwellMean() {
-		return nGraphKeyDwellMean;
+	public int getGraphKeyDwellMean() {
+		return graphKeyDwellMean;
 	}
-	public void setnGraphKeyDwellMean(int nGraphKeyDwellMean) {
-		this.nGraphKeyDwellMean = nGraphKeyDwellMean;
+	public void setGraphKeyDwellMean(int graphKeyDwellMean) {
+		this.graphKeyDwellMean = graphKeyDwellMean;
 	}
-	public int getnGraphWordDurationMean() {
-		return nGraphWordDurationMean;
+	public int getGraphWordDurationMean() {
+		return graphWordDurationMean;
 	}
-	public void setnGraphWordDurationMean(int nGraphWordDurationMean) {
-		this.nGraphWordDurationMean = nGraphWordDurationMean;
+	public void setGraphWordDurationMean(int graphWordDurationMean) {
+		this.graphWordDurationMean = graphWordDurationMean;
 	}
-	public int getnGraphPressToPressDeviation() {
-		return nGraphPressToPressDeviation;
+	public int getGraphPressToPressDeviation() {
+		return graphPressToPressDeviation;
 	}
-	public void setnGraphPressToPressDeviation(int nGraphPressToPressDeviation) {
-		this.nGraphPressToPressDeviation = nGraphPressToPressDeviation;
+	public void setGraphPressToPressDeviation(int graphPressToPressDeviation) {
+		this.graphPressToPressDeviation = graphPressToPressDeviation;
 	}
-	public int getnGraphKeyDwellDeviation() {
-		return nGraphKeyDwellDeviation;
+	public int getGraphKeyDwellDeviation() {
+		return graphKeyDwellDeviation;
 	}
-	public void setnGraphKeyDwellDeviation(int nGraphKeyDwellDeviation) {
-		this.nGraphKeyDwellDeviation = nGraphKeyDwellDeviation;
+	public void setGraphKeyDwellDeviation(int graphKeyDwellDeviation) {
+		this.graphKeyDwellDeviation = graphKeyDwellDeviation;
 	}
-	public int getnGraphWordDurationDeviation() {
-		return nGraphWordDurationDeviation;
+	public int getGraphWordDurationDeviation() {
+		return graphWordDurationDeviation;
 	}
-	public void setnGraphWordDurationDeviation(int nGraphWordDurationDeviation) {
-		this.nGraphWordDurationDeviation = nGraphWordDurationDeviation;
+	public void setGraphWordDurationDeviation(int graphWordDurationDeviation) {
+		this.graphWordDurationDeviation = graphWordDurationDeviation;
 	}	
 }

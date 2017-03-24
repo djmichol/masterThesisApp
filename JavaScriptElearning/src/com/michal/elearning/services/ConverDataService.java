@@ -53,9 +53,9 @@ public class ConverDataService {
 	private int userId;
 	
 	@RolesAllowed("user")
-    @GET
+    @POST
     @Path("/predict")
-    public Response getUserModel(@QueryParam("userId") int userId, String inputData) throws Exception 
+    public Response getUserModel(String inputData) throws Exception 
     {   
 		this.userId = ((User)securityContext.getUserPrincipal()).getId();		
 		Map<String,String> predictions = new HashMap<>();

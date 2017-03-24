@@ -57,8 +57,12 @@ public class ConvertDataUtils {
 					
 					UserMauseClick mauseClick = null;
 					for(int i=0; i<mauseClicks.length();i++){
-						mauseClick = converter.fromJson(mauseClicks.getJSONObject(i).toString(), UserMauseClick.class);
-						mauseClicksList.add(mauseClick);
+						try{
+							mauseClick = converter.fromJson(mauseClicks.getJSONObject(i).toString(), UserMauseClick.class);
+							mauseClicksList.add(mauseClick);
+						}catch (Exception e) {
+							//DO NOTHING
+						}
 					}
 					
 					UserKeystrokes keystroke = null;
@@ -69,8 +73,12 @@ public class ConvertDataUtils {
 					
 					UserMauseMove mauseMove = null;
 					for(int i=0; i<mauseMoves.length();i++){
-						mauseMove = converter.fromJson(mauseMoves.getJSONObject(i).toString(), UserMauseMove.class);
-						mauseMoveList.add(mauseMove);
+						try{
+							mauseMove = converter.fromJson(mauseMoves.getJSONObject(i).toString(), UserMauseMove.class);
+							mauseMoveList.add(mauseMove);
+						}catch (Exception e) {
+							//DO NOTHING
+						}
 					}	
 					if(lesson.getType().equals("editor")){
 						rawData.add(new RawData(mauseClicksList, keystrokeList, mauseMoveList, userForm, lesson.getType(),user.getMail()));
@@ -173,12 +181,12 @@ public class ConvertDataUtils {
 		NGraphsFeatures nGraphFeatures = new NGraphsFeatures();
 		List<NGraph> result = nGraphFeatures.prepareVector(keystrokeList);
 		nGraphFeatures.calculateVectors(result);		
-		dataToAdd.getFeatures().setnGraphPressToPressMean(MathHelperUtils.calculateMean(nGraphFeatures.getPressToPress()));
-		dataToAdd.getFeatures().setnGraphKeyDwellMean(MathHelperUtils.calculateMean(nGraphFeatures.getKeyDwell()));
-		dataToAdd.getFeatures().setnGraphWordDurationMean(MathHelperUtils.calculateMean(nGraphFeatures.getWordDuration()));
-		dataToAdd.getFeatures().setnGraphPressToPressDeviation(MathHelperUtils.calculateStandardDeviation(nGraphFeatures.getPressToPress()));
-		dataToAdd.getFeatures().setnGraphKeyDwellDeviation(MathHelperUtils.calculateStandardDeviation(nGraphFeatures.getKeyDwell()));
-		dataToAdd.getFeatures().setnGraphWordDurationDeviation(MathHelperUtils.calculateStandardDeviation(nGraphFeatures.getWordDuration()));
+		dataToAdd.getFeatures().setGraphPressToPressMean(MathHelperUtils.calculateMean(nGraphFeatures.getPressToPress()));
+		dataToAdd.getFeatures().setGraphKeyDwellMean(MathHelperUtils.calculateMean(nGraphFeatures.getKeyDwell()));
+		dataToAdd.getFeatures().setGraphWordDurationMean(MathHelperUtils.calculateMean(nGraphFeatures.getWordDuration()));
+		dataToAdd.getFeatures().setGraphPressToPressDeviation(MathHelperUtils.calculateStandardDeviation(nGraphFeatures.getPressToPress()));
+		dataToAdd.getFeatures().setGraphKeyDwellDeviation(MathHelperUtils.calculateStandardDeviation(nGraphFeatures.getKeyDwell()));
+		dataToAdd.getFeatures().setGraphWordDurationDeviation(MathHelperUtils.calculateStandardDeviation(nGraphFeatures.getWordDuration()));
 	}
 	
 	private static DataModelWithForm prepareEmptyDataToAdd(RawData data){

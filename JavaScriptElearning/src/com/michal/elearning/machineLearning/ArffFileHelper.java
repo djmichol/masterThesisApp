@@ -43,6 +43,9 @@ public class ArffFileHelper {
 					String state = "get"+emotion.substring(0, 1).toUpperCase() + emotion.substring(1);
 					Method method = data.getUserForm().getClass().getMethod(state, new Class[] {});
 					Object obj2 = method.invoke(data.getUserForm(),new Object[] {});
+					if(obj2.equals("Neutral")){
+						obj2 = "Yes";
+					}
 					arffBuilder.append(obj2+"\n");
 				}else{
 					arffBuilder.append("?\n");

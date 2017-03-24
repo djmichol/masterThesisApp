@@ -30,7 +30,7 @@ app.controller("EditorController", function ($scope,$routeParams, pageService,$r
 				lessonId : lessonUtilsService.getCurrentLesson().id,
 				passed : pass
 		}	
-		
+		makePrediction();
 		if(pass){
 			$scope.saveEditor(data);
 		}else{			
@@ -45,7 +45,7 @@ app.controller("EditorController", function ($scope,$routeParams, pageService,$r
 				mauseClick : $rootScope.mauseClick,
 				lessonId : lessonUtilsService.getCurrentLesson().id
 		}
-		lessonUtilsService.makePrediction(predictionData);
+		lessonUtilsService.makePredictions(predictionData);
 	}
 	
 	function testFunction(content,test,errorInfo) {

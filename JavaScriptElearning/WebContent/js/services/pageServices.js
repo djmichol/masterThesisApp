@@ -53,7 +53,7 @@ app.service('pageService', function($http,$window,$location,$rootScope) {
 	this.makePrediction = function(data){
 		return $http({
 			url: $rootScope.baseUrl+"/elearningService/convertData/predict",
-			method: "GET",
+			method: "POST",
 			data: data
 		});
 	}
