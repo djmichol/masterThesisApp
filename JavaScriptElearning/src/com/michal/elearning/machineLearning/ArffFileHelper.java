@@ -29,7 +29,7 @@ public class ArffFileHelper {
 			for(String feature : features){
 				arffBuilder.append("@attribute "+feature+" NUMERIC \n");
 			}
-			arffBuilder.append("@attribute "+emotion+" {Neutral,Yes,No} \n");
+			arffBuilder.append("@attribute "+emotion+" {Yes,No} \n");
 			arffBuilder.append("\n");
 			arffBuilder.append("@data \n");
 			for(DataModelWithForm data : dataToFile){

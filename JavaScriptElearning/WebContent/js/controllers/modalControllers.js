@@ -64,9 +64,9 @@ app.controller('UserFormModalInstanceCtrl', function($scope, $rootScope, $uibMod
 		lessonUtilsService.redirectToNextLesson();
 	};
 
-	$scope.boredom = 'Neutral';
-	$scope.confusion = 'Neutral';
-	$scope.engaged = 'Neutral';
-	$scope.frustration = 'Neutral';
+	$scope.boredom = 'YesRather';
+	$scope.confusion = 'YesRather';
+	$scope.engaged = 'YesRather';
+	$scope.frustration = 'YesRather';
 
 });
