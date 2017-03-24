@@ -31,7 +31,7 @@ public class ConvertDataUtils {
 	
 	private static ILessonsInterface lessonService = new LessonDaoService();
 
-	public static List<DataModelWithForm> getArrfFromRawData(List<UserInputData> userDataList, User user){
+	public static List<DataModelWithForm> getVectorsFromEditorLesson(List<UserInputData> userDataList, User user){
 		List<RawData> rawData = new ArrayList<RawData>();
     	try {			
 			Gson converter = new Gson();

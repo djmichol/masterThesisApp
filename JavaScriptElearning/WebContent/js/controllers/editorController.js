@@ -25,12 +25,27 @@ app.controller("EditorController", function ($scope,$routeParams, pageService,$r
 	
 	$scope.validateContent = function(tab) {
 		var content = $scope.editor.getValue();
-		var pass = testFunction(content,tab.contentSubmit,tab.editorResult);
+		var pass = testFunction(content,tab.contentSubmit,tab.editorResult);		
+		var data = {
+				lessonId : lessonUtilsService.getCurrentLesson().id,
+				passed : pass
+		}	
+		
 		if(pass){
-			$scope.saveEditor();
-		}else{
-			lessonUtilsService.saveLessonProgress(false);
+			$scope.saveEditor(data);
+		}else{			
+			lessonUtilsService.saveLessonProgress(data);
 		}
+	}
+	
+	function makePrediction(){
+		var predictionData = {
+				keyStroke : $rootScope.keystrokes,
+				mauseMove :  $rootScope.mauseMove,
+				mauseClick : $rootScope.mauseClick,
+				lessonId : lessonUtilsService.getCurrentLesson().id
+		}
+		lessonUtilsService.makePrediction(predictionData);
 	}
 	
 	function testFunction(content,test,errorInfo) {
@@ -69,8 +84,8 @@ app.controller("EditorController", function ($scope,$routeParams, pageService,$r
 		return functionResult;
 	}
 		
-	$scope.saveEditor = function(){				
-		lessonUtilsService.saveLessonProgress(true);
+	$scope.saveEditor = function(data){				
+		lessonUtilsService.saveLessonProgress(data);
 		var value = $scope.editor.getValue();
 		$scope.toggleNextLessonModal();		
 	}

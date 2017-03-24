@@ -54,6 +54,7 @@ app.run(function ($rootScope, inputService,lessonUtilsService, adminService, $ui
     $rootScope.isKeyCollecting = false;
     $rootScope.isCollectMode = true;
     
+    $rootScope.prediction = {};
     
     $rootScope.loadModel =  function(){
 		adminService.getMode().success(function(dane,response) {

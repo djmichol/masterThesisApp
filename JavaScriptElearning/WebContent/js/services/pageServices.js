@@ -48,7 +48,15 @@ app.service('pageService', function($http,$window,$location,$rootScope) {
 			method: "GET",
 			params: {lessonId: lessonId}
 		});
-	}	
+	}
+	
+	this.makePrediction = function(data){
+		return $http({
+			url: $rootScope.baseUrl+"/elearningService/convertData/predict",
+			method: "GET",
+			data: data
+		});
+	}
 	
 	this.redirectToEditorLesson = function(lesson){
 		$location.path("/editor/"+lesson.id);

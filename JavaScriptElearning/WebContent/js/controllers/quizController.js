@@ -62,7 +62,11 @@ app.controller("QuizController", function ($scope,$routeParams,pageService,lesso
 		if($scope.active<$scope.slides.length){
 			$scope.active += 1;
 		} else if($scope.active==$scope.slides.length){
-			lessonUtilsService.saveLessonProgress(true);
+			var data = {
+					lessonId : lessonUtilsService.getCurrentLesson().id,
+					passed : true
+			}			
+			lessonUtilsService.saveLessonProgress(data);
 			$scope.toggleNextLessonModal();
 		}
 	}

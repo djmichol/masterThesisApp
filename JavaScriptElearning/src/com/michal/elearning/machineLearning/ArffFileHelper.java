@@ -15,7 +15,7 @@ import com.michal.elearning.wekaDataModel.DataModelWithForm;
 
 public class ArffFileHelper {
 	
-	public static Map<String,byte[]> prepareArffInputStream(List<DataModelWithForm> dataToFile) throws Exception {
+	public static Map<String,byte[]> prepareArffInputStream(List<DataModelWithForm> dataToFile, boolean toClassify) throws Exception {
 		List<String> emotionStates = InspectClassFields(UserInputForm.class);
 		List<String> features = InspectClassFields(Features.class);
 		
@@ -39,10 +39,15 @@ public class ArffFileHelper {
 					Object obj = method.invoke(data.getFeatures(),new Object[] {});
 					arffBuilder.append(obj+",");
 				}
-				String state = "get"+emotion.substring(0, 1).toUpperCase() + emotion.substring(1);
-				Method method = data.getUserForm().getClass().getMethod(state, new Class[] {});
-				Object obj2 = method.invoke(data.getUserForm(),new Object[] {});
-				arffBuilder.append(obj2+"\n");
+				if(!toClassify){
+					String state = "get"+emotion.substring(0, 1).toUpperCase() + emotion.substring(1);
+					Method method = data.getUserForm().getClass().getMethod(state, new Class[] {});
+					Object obj2 = method.invoke(data.getUserForm(),new Object[] {});
+					arffBuilder.append(obj2+"\n");
+				}else{
+					arffBuilder.append("?\n");
+				}
+				
 			}	
 			map.put(emotion, arffBuilder.toString().getBytes());
 		}	

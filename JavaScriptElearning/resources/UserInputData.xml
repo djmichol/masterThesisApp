@@ -18,9 +18,6 @@
 	</resultMap>
 	
 	<resultMap id="UserInLessonInputDataMap" class="UserInLessonInputData" >
-		<result property="keyStrokes" column="usr_in_lesson_keystrokes" />
-		<result property="mouseMove" column="usr_in_lesson_mause_move" />
-		<result property="mouseClicks" column="usr_in_lesson_mause_click" />	
 		<result property="passed" column="usr_in_lesson_passed" />
 		<result property="submitCount" column="usr_in_lesson_submitCount" />	
 		<result property="id" column="usr_in_lesson_id" />
@@ -49,18 +46,12 @@
    <insert id="insertUserInLessonInputData" parameterClass="UserInLessonInputData">
 	   INSERT INTO  user_in_lesson (
 		   usr_in_lesson_id,
-		   usr_in_lesson_keystrokes,
-		   usr_in_lesson_mause_move,
-		   usr_in_lesson_mause_click,
 		   usr_in_lesson_passed,
 		   usr_in_lesson_submitCount,
 		   usr_in_lesson_user_id,
 		   usr_in_lesson_lesson_id)
 	   values (
 		    #id#,
-		    #keyStrokes#,
-		    #mouseMove#,
-		    #mouseClicks#,
 		    #passed#,
 		    #submitCount#,
 		    #userId#,
@@ -71,10 +62,7 @@
    		UPDATE user_in_lesson
 		SET 
 			usr_in_lesson_submitCount=#submitCount#, 
-			usr_in_lesson_passed=#passed#,
-			usr_in_lesson_keystrokes= #keyStrokes#,
-		    usr_in_lesson_mause_move=#mouseMove#,
-		    usr_in_lesson_mause_click=#mouseClicks#
+			usr_in_lesson_passed=#passed#
 		WHERE usr_in_lesson_user_id=#userId# and usr_in_lesson_lesson_id=#lessonId#
    </update>
    

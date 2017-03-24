@@ -2,7 +2,7 @@ app.service('adminService', function($http, $rootScope) {
 	
 	this.saveModel = function(userId){
 		return $http({
-			url: $rootScope.baseUrl+"/elearningService/convertData/saveModel",
+			url: $rootScope.baseUrl+"/elearningService/convertData/generateModel",
 			method: "POST",
 			params: {userId: userId}
 		});
@@ -10,7 +10,7 @@ app.service('adminService', function($http, $rootScope) {
 	
 	this.getUserModel = function(userId, data){
 		return $http({
-			url: $rootScope.baseUrl+"/elearningService/convertData/userModel",
+			url: $rootScope.baseUrl+"/elearningService/convertData/predict",
 			method: "GET",
 			data: data,
 			params: {userId: userId}

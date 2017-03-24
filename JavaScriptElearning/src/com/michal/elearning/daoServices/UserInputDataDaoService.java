@@ -37,9 +37,6 @@ public class UserInputDataDaoService implements IUserInputData {
 			int submitcount = userExisDataObject.getSubmitCount()+1;
 			userExisDataObject.setSubmitCount(submitcount);
 			userExisDataObject.setPassed(userDataObject.isPassed());
-			userExisDataObject.setKeyStrokes(userDataObject.getKeyStrokes());
-			userExisDataObject.setMouseClicks(userDataObject.getMouseClicks());
-			userExisDataObject.setMouseMove(userDataObject.getMouseMove());
 			CoreDao.getSqlMapper().update("UserInputData.updateUserInLesson",userExisDataObject);
 		}		
 	}

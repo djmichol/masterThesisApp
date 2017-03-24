@@ -103,16 +103,18 @@ app.service('lessonUtilsService', function($http,$window, $rootScope,pageService
       return false;
     }	
 	
-	this.saveLessonProgress = function(passed,submitCount){
-		var data = {
-				keyStroke : $rootScope.keystrokes,
-				mauseMove :  $rootScope.mauseMove,
-				mauseClick : $rootScope.mauseClick,
-				lessonId : this.getCurrentLesson().id,
-				passed : passed
-		}
+	this.saveLessonProgress = function(data){
 		inputService.saveUserPassLesson(data).success(function(dane) {
 			//DO NOTHING
+        }).error(function(error) {
+        	//DO NOTHING
+        });
+	}
+	
+	this.makePredictions = function(data){
+		pageService.makePrediction(data).success(function(dane) {
+			alert(dane);
+			$rootScope.prediction = dane;
         }).error(function(error) {
         	//DO NOTHING
         });

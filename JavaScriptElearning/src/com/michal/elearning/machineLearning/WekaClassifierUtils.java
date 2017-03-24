@@ -19,7 +19,7 @@ public class WekaClassifierUtils {
 		return classifier;
 	}	
 	
-	public static Classifier getTrainedClass(InputStream dataToClassify, Classifier classifier) throws Exception{
+	public static String getTrainedClass(InputStream dataToClassify, Classifier classifier) throws Exception{
 		
 		DataSource toClassifyDataSource = new DataSource(dataToClassify);
 		Instances toClassifyInstances = toClassifyDataSource.getDataSet();
@@ -28,6 +28,6 @@ public class WekaClassifierUtils {
 		double value = classifier.classifyInstance(toClassifyInstances.instance(0));
 		String prediction = toClassifyInstances.classAttribute().value((int)value); 
 		System.out.println(prediction);
-		return classifier;
+		return prediction;
 	}	
 }

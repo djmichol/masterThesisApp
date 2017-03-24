@@ -10,6 +10,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -51,27 +52,33 @@ public class ConverDataService {
 	
 	private int userId;
 	
-	@RolesAllowed("admin")
+	@RolesAllowed("user")
     @GET
-    @Path("/userModel")
+    @Path("/predict")
     public Response getUserModel(@QueryParam("userId") int userId, String inputData) throws Exception 
     {   
+		this.userId = ((User)securityContext.getUserPrincipal()).getId();		
+		Map<String,String> predictions = new HashMap<>();
+		
 		List<UserInputData> data = getUserInputDataFromString(inputData, userId);		
-		this.userId = userId;		
 		List<ModelData> userModels = modelService.getUserTrainedModels(userId);
-		User user = userService.getUserByID(userId);    	
-		List<DataModelWithForm> dataToFile = ConvertDataUtils.getArrfFromRawData(data, user);
-    	Map<String,byte[]> arffInputStream = ArffFileHelper.prepareArffInputStream(dataToFile);
+		if(userModels==null || userModels.isEmpty()){
+			return Response.noContent().build();
+		}
+		Map<String, byte[]> arffInputStream = getDataToPredict(userId, data);    	
+		
 		for (Map.Entry<String, byte[]> entry : arffInputStream.entrySet())
 		{
 			for(ModelData trainedModel : userModels){
 				if(trainedModel.getEmotion().equals(entry.getKey())){
 					Classifier cls = (Classifier)SerializationHelper.read(new ByteArrayInputStream(trainedModel.getClassifier()));
-					WekaClassifierUtils.getTrainedClass(new ByteArrayInputStream(entry.getValue()), cls);
+					predictions.put(entry.getKey(), WekaClassifierUtils.getTrainedClass(new ByteArrayInputStream(entry.getValue()), cls));
 				}
 			}
 		}    	
-    	return Response.ok().build(); 
+		JSONObject json = new JSONObject();
+	    json.put("predictions", predictions);
+    	return Response.ok(json.toString()).build(); 
     }
 	
 	private List<UserInputData> getUserInputDataFromString(String inputData, int userId) {
@@ -87,9 +94,15 @@ public class ConverDataService {
 		return data;
 	}
 	
+	private Map<String, byte[]> getDataToPredict(int userId, List<UserInputData> data) throws SQLException, Exception {
+		List<DataModelWithForm> dataToFile = ConvertDataUtils.getVectorsFromEditorLesson(data, userService.getUserByID(userId));
+    	Map<String,byte[]> arffInputStream = ArffFileHelper.prepareArffInputStream(dataToFile,true);
+		return arffInputStream;
+	}
+	
 	@RolesAllowed("admin")
     @POST
-    @Path("/saveModel")
+    @Path("/generateModel")
     public Response saveUserModel(@QueryParam("userId") int userId) 
     {   
 		this.userId = userId;
@@ -104,14 +117,14 @@ public class ConverDataService {
 	private void prepareModel() throws SQLException{
 		List<UserInputData> userDataList = dataService.getUserData(userId);	
 		User user = userService.getUserByID(userId);
-		List<DataModelWithForm> dataToFile = ConvertDataUtils.getArrfFromRawData(userDataList, user);
+		List<DataModelWithForm> dataToFile = ConvertDataUtils.getVectorsFromEditorLesson(userDataList, user);
 		tryToInsertUserLernedModel(dataToFile);
 	}
 
 	private void tryToInsertUserLernedModel(List<DataModelWithForm> dataToFile) {
 		try {
 			modelService.deleteUserModels(userId);
-			Map<String,byte[]> arffInputStream = ArffFileHelper.prepareArffInputStream(dataToFile);
+			Map<String,byte[]> arffInputStream = ArffFileHelper.prepareArffInputStream(dataToFile,false);
 			for (Map.Entry<String, byte[]> entry : arffInputStream.entrySet())
 			{
 				J48 j48Classifier = new J48();	
