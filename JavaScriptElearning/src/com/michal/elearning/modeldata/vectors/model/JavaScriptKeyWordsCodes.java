@@ -13,5 +13,6 @@ public class JavaScriptKeyWordsCodes {
 	public static int[] WHILE_PLUS_WORD = {87,72,73,76,69};
 	public static int[] ALERT_PLUS_WORD = {65,76,69,82,84};
 	public static int[] LENGTH_PLUS_WORD = {76,69,78,71,84,72};
+	public static int[] FUNCTION_WORD = {70,85,78,67,84,73,79,78};
 	
 }

@@ -35,6 +35,8 @@ app.controller("EditorController", function ($scope,$routeParams, pageService,$r
 			$scope.saveEditor(data);
 		}else{			
 			lessonUtilsService.saveLessonProgress(data);
+			document.getElementById("result").innerHTML += " Bledne rozwiazania!!!!";
+			alert('Bledne rozwiazanie');
 		}
 	}
 	

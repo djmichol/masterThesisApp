@@ -113,7 +113,7 @@ app.service('lessonUtilsService', function($http,$window, $rootScope,pageService
 	
 	this.makePredictions = function(data){
 		pageService.makePrediction(data).success(function(dane) {
-			alert(dane);
+			//alert(dane.predictions.boredom);
 			$rootScope.prediction = dane;
         }).error(function(error) {
         	//DO NOTHING

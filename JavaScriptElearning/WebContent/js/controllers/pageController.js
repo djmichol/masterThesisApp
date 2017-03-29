@@ -11,8 +11,11 @@ app.controller("MenuController", function ($scope, $window) {
 	};
 });
 
-app.controller("FooterController", function ($scope, $interval) {
+app.controller("FooterController", function ($scope, $interval, $rootScope) {
 	$scope.theTime = new Date().toLocaleTimeString();
+	
+	$scope.prediction = $rootScope.prediction;
+	
     $interval(function () {
         $scope.theTime = new Date().toLocaleTimeString();
     }, 1000);
