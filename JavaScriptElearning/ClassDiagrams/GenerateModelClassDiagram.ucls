@@ -55,7 +55,7 @@
   <class id="6" language="java" name="com.michal.elearning.utils.ConvertDataUtils" project="JavaScriptElearning" 
     file="/JavaScriptElearning/src/com/michal/elearning/utils/ConvertDataUtils.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1031" y="-1084"/>    
+    <position height="-1" width="-1" x="1034" y="-1052"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -97,7 +97,7 @@
     project="JavaScriptElearning" 
     file="/JavaScriptElearning/src/com/michal/elearning/machineLearning/WekaClassifierUtils.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="683" y="-741"/>    
+    <position height="-1" width="-1" x="682" y="-700"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -116,7 +116,7 @@
   <class id="12" language="java" name="com.michal.elearning.daoServices.LessonDaoService" project="JavaScriptElearning" 
     file="/JavaScriptElearning/src/com/michal/elearning/daoServices/LessonDaoService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1572" y="-1702"/>    
+    <position height="-1" width="-1" x="1609" y="-1741"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -125,7 +125,7 @@
   </class>  
   <class id="13" language="java" name="com.michal.elearning.dao.UserMauseMove" project="JavaScriptElearning" 
     file="/JavaScriptElearning/src/com/michal/elearning/dao/UserMauseMove.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1361" y="-1008"/>    
+    <position height="-1" width="-1" x="1394" y="-979"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -152,7 +152,7 @@
   </class>  
   <class id="16" language="java" name="com.michal.elearning.dao.UserInputForm" project="JavaScriptElearning" 
     file="/JavaScriptElearning/src/com/michal/elearning/dao/UserInputForm.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="147" width="152" x="1291" y="-945"/>    
+    <position height="147" width="152" x="1344" y="-910"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -170,7 +170,7 @@
   </class>  
   <class id="18" language="java" name="com.michal.elearning.dao.UserInputData" project="JavaScriptElearning" 
     file="/JavaScriptElearning/src/com/michal/elearning/dao/UserInputData.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="420" y="-729"/>    
+    <position height="-1" width="-1" x="417" y="-686"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -181,7 +181,7 @@
     project="JavaScriptElearning" 
     file="/JavaScriptElearning/src/com/michal/elearning/modeldata/vectors/TriGraphFeatures.java" binary="false" 
     corner="BOTTOM_LEFT">    
-    <position height="-1" width="-1" x="322" y="-1252"/>    
+    <position height="-1" width="-1" x="301" y="-1388"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -192,7 +192,7 @@
     project="JavaScriptElearning" 
     file="/JavaScriptElearning/src/com/michal/elearning/modeldata/vectors/GraphsFeatures.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1276" y="-1591"/>    
+    <position height="-1" width="-1" x="1282" y="-1546"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -203,7 +203,7 @@
     project="JavaScriptElearning" 
     file="/JavaScriptElearning/src/com/michal/elearning/modeldata/vectors/NGraphsFeatures.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="618" y="-1556"/>    
+    <position height="-1" width="-1" x="626" y="-1625"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -214,7 +214,7 @@
     project="JavaScriptElearning" 
     file="/JavaScriptElearning/src/com/michal/elearning/modeldata/vectors/SingleKeyFeatures.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="107" y="-745"/>    
+    <position height="-1" width="-1" x="111" y="-734"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -235,7 +235,7 @@
     project="JavaScriptElearning" 
     file="/JavaScriptElearning/src/com/michal/elearning/wekaDataModel/JavaScriptKeyWordsCodes.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="311" y="-1819"/>    
+    <position height="-1" width="-1" x="113" y="-1851"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -286,7 +286,7 @@
     project="JavaScriptElearning" 
     file="/JavaScriptElearning/src/com/michal/elearning/modeldata/vectors/MauseClickFeatures.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1456" y="-1146"/>    
+    <position height="-1" width="-1" x="1469" y="-1126"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -297,7 +297,7 @@
     project="JavaScriptElearning" 
     file="/JavaScriptElearning/src/com/michal/elearning/wekaDataModel/DataModelWithForm.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1071" y="-778"/>    
+    <position height="-1" width="-1" x="1077" y="-748"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -306,7 +306,7 @@
   </class>  
   <class id="31" language="java" name="com.michal.elearning.utils.VectorsUtils" project="JavaScriptElearning" 
     file="/JavaScriptElearning/src/com/michal/elearning/utils/VectorsUtils.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="541" y="-1917"/>    
+    <position height="-1" width="-1" x="369" y="-1948"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -317,17 +317,17 @@
     project="JavaScriptElearning" 
     file="/JavaScriptElearning/src/com/michal/elearning/machineLearning/MathHelperUtils.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="632" y="-1051"/>    
+    <position height="-1" width="-1" x="623" y="-1056"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
   <class id="33" language="java" name="com.michal.elearning.wekaDataModel.Features" project="JavaScriptElearning" 
     file="/JavaScriptElearning/src/com/michal/elearning/wekaDataModel/Features.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1560" y="-427"/>    
+    <position height="-1" width="-1" x="1632" y="-422"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -344,449 +344,449 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <dependency id="35">    
-    <end type="SOURCE" refId="29"/>    
-    <end type="TARGET" refId="14"/>  
-  </dependency>  
-  <dependency id="36">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="18"/>  
-  </dependency>  
-  <dependency id="37">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="4"/>  
-  </dependency>  
-  <association id="38">    
+  <association id="35">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="39" name="modelService">        
+      <attribute id="36" name="userService">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="40" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="41">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="30"/>  
-  </dependency>  
-  <association id="42">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="43" name="userForm">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="44" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="16" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="45">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="17"/>  
-  </dependency>  
-  <dependency id="46">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="29"/>  
-  </dependency>  
-  <association id="47">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="48" name="securityContext">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="49" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="34" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="50">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="22"/>  
-  </dependency>  
-  <dependency id="51">    
-    <end type="SOURCE" refId="22"/>    
-    <end type="TARGET" refId="26"/>  
-  </dependency>  
-  <dependency id="52">    
-    <end type="SOURCE" refId="22"/>    
-    <end type="TARGET" refId="26"/>  
-  </dependency>  
-  <dependency id="53">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="17"/>  
-  </dependency>  
-  <dependency id="54">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="25"/>  
-  </dependency>  
-  <dependency id="55">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="33"/>  
-  </dependency>  
-  <dependency id="56">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="17"/>  
-  </dependency>  
-  <dependency id="57">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="30"/>  
-  </dependency>  
-  <dependency id="58">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="18"/>  
-  </dependency>  
-  <dependency id="59">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="16"/>  
-  </dependency>  
-  <dependency id="60">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="21"/>  
-  </dependency>  
-  <dependency id="61">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="32"/>  
-  </dependency>  
-  <dependency id="62">    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="32"/>  
-  </dependency>  
-  <association id="63">    
-    <end type="SOURCE" refId="30" navigable="false">      
-      <attribute id="64" name="features">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="65" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="33" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <dependency id="66">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="19"/>  
-  </dependency>  
-  <dependency id="67">    
-    <end type="SOURCE" refId="25"/>    
-    <end type="TARGET" refId="27"/>  
-  </dependency>  
-  <dependency id="68">    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="31"/>  
-  </dependency>  
-  <dependency id="69">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="12"/>  
-  </dependency>  
-  <dependency id="70">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="19"/>  
-  </dependency>  
-  <dependency id="71">    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="27"/>  
-  </dependency>  
-  <realization id="72">    
-    <end type="SOURCE" refId="25"/>    
-    <end type="TARGET" refId="20"/>  
-  </realization>  
-  <dependency id="73">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="18"/>  
-  </dependency>  
-  <dependency id="74">    
-    <end type="SOURCE" refId="25"/>    
-    <end type="TARGET" refId="27"/>  
-  </dependency>  
-  <dependency id="75">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="16"/>  
-  </dependency>  
-  <dependency id="76">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="30"/>  
-  </dependency>  
-  <dependency id="77">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="33"/>  
-  </dependency>  
-  <realization id="78">    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="20"/>  
-  </realization>  
-  <dependency id="79">    
-    <end type="SOURCE" refId="20"/>    
-    <end type="TARGET" refId="27"/>  
-  </dependency>  
-  <dependency id="80">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="10"/>  
-  </dependency>  
-  <dependency id="81">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="27"/>  
-  </dependency>  
-  <dependency id="82">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="17"/>  
-  </dependency>  
-  <dependency id="83">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="27"/>  
-  </dependency>  
-  <dependency id="84">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="33"/>  
-  </dependency>  
-  <dependency id="85">    
-    <end type="SOURCE" refId="20"/>    
-    <end type="TARGET" refId="27"/>  
-  </dependency>  
-  <dependency id="86">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="25"/>  
-  </dependency>  
-  <dependency id="87">    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="24"/>  
-  </dependency>  
-  <association id="88">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="89" name="userService">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="90" minimum="0" maximum="1">        
+      <multiplicity id="37" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="91">    
+  <association id="38">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="39" name="features">        
+        <position height="0" width="0" x="72" y="5"/>      
+      </attribute>      
+      <multiplicity id="40" minimum="0" maximum="1">        
+        <position height="0" width="0" x="72" y="5"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="41">    
     <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="32"/>  
-  </dependency>  
-  <dependency id="92">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="11"/>  
-  </dependency>  
-  <dependency id="93">    
-    <end type="SOURCE" refId="25"/>    
-    <end type="TARGET" refId="23"/>  
-  </dependency>  
-  <dependency id="94">    
-    <end type="SOURCE" refId="25"/>    
     <end type="TARGET" refId="31"/>  
   </dependency>  
-  <dependency id="95">    
+  <dependency id="42">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="30"/>  
+  </dependency>  
+  <dependency id="43">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <dependency id="44">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="14"/>  
+  </dependency>  
+  <dependency id="45">    
     <end type="SOURCE" refId="19"/>    
     <end type="TARGET" refId="32"/>  
   </dependency>  
-  <dependency id="96">    
+  <dependency id="46">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="10"/>  
+  </dependency>  
+  <dependency id="47">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="33"/>  
+  </dependency>  
+  <dependency id="48">    
     <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="15"/>  
   </dependency>  
-  <dependency id="97">    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="31"/>  
+  <dependency id="49">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="29"/>  
   </dependency>  
-  <dependency id="98">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="11"/>  
-  </dependency>  
-  <dependency id="99">    
+  <dependency id="50">    
     <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="28"/>  
+    <end type="TARGET" refId="32"/>  
   </dependency>  
-  <dependency id="100">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="30"/>  
-  </dependency>  
-  <association id="101">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="102" name="mauseMoveList">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="103" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="104">    
+  <association id="51">    
     <end type="SOURCE" refId="30" navigable="false">      
-      <attribute id="105" name="userForm">        
-        <position height="0" width="0" x="0" y="0"/>      
+      <attribute id="52" name="userForm">        
+        <position height="0" width="0" x="53" y="35"/>      
       </attribute>      
-      <multiplicity id="106" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
+      <multiplicity id="53" minimum="0" maximum="1">        
+        <position height="0" width="0" x="53" y="35"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="16" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="107">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="18"/>  
+  <dependency id="54">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="33"/>  
   </dependency>  
-  <realization id="108">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="8"/>  
-  </realization>  
-  <dependency id="109">    
-    <end type="SOURCE" refId="19"/>    
+  <dependency id="55">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="13"/>  
+  </dependency>  
+  <dependency id="56">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="16"/>  
+  </dependency>  
+  <dependency id="57">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <dependency id="58">    
+    <end type="SOURCE" refId="25"/>    
     <end type="TARGET" refId="27"/>  
   </dependency>  
-  <association id="110">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="111" name="dataService">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="112" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="113">    
+  <realization id="59">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <dependency id="60">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="14"/>  
+  </dependency>  
+  <association id="61">    
     <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="114" name="lessonService">        
+      <attribute id="62" name="lessonService">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="115" minimum="0" maximum="1">        
+      <multiplicity id="63" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="116">    
-    <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="20"/>  
-  </realization>  
-  <dependency id="117">    
+  <dependency id="64">    
     <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="21"/>  
   </dependency>  
-  <dependency id="118">    
+  <dependency id="65">    
     <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="30"/>  
   </dependency>  
-  <realization id="119">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="3"/>  
-  </realization>  
-  <dependency id="120">    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="32"/>  
-  </dependency>  
-  <dependency id="121">    
+  <dependency id="66">    
     <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="32"/>  
-  </dependency>  
-  <dependency id="122">    
-    <end type="SOURCE" refId="19"/>    
     <end type="TARGET" refId="27"/>  
   </dependency>  
-  <dependency id="123">    
+  <realization id="67">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <dependency id="68">    
     <end type="SOURCE" refId="21"/>    
     <end type="TARGET" refId="27"/>  
   </dependency>  
-  <dependency id="124">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="17"/>  
+  <dependency id="69">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="32"/>  
   </dependency>  
-  <dependency id="125">    
-    <end type="SOURCE" refId="29"/>    
-    <end type="TARGET" refId="14"/>  
+  <dependency id="70">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="25"/>  
   </dependency>  
-  <dependency id="126">    
+  <dependency id="71">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="30"/>  
+  </dependency>  
+  <dependency id="72">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="9"/>  
   </dependency>  
-  <dependency id="127">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="13"/>  
+  <dependency id="73">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="18"/>  
   </dependency>  
-  <dependency id="128">    
+  <dependency id="74">    
     <end type="SOURCE" refId="19"/>    
     <end type="TARGET" refId="28"/>  
   </dependency>  
-  <dependency id="129">    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="24"/>  
-  </dependency>  
-  <dependency id="130">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="16"/>  
-  </dependency>  
-  <dependency id="131">    
+  <dependency id="75">    
     <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="22"/>  
   </dependency>  
-  <realization id="132">    
+  <dependency id="76">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="12"/>  
+  </dependency>  
+  <dependency id="77">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="17"/>  
+  </dependency>  
+  <association id="78">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="79" name="dataService">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="80" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="81">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
+  <dependency id="82">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="17"/>  
+  </dependency>  
+  <realization id="83">    
     <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="5"/>  
   </realization>  
-  <dependency id="133">    
+  <realization id="84">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <dependency id="85">    
     <end type="SOURCE" refId="25"/>    
     <end type="TARGET" refId="23"/>  
   </dependency>  
-  <dependency id="134">    
+  <dependency id="86">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="6"/>  
   </dependency>  
-  <dependency id="135">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="2"/>  
+  <dependency id="87">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="17"/>  
   </dependency>  
-  <dependency id="136">    
+  <dependency id="88">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="26"/>  
+  </dependency>  
+  <dependency id="89">    
     <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="29"/>  
+    <end type="TARGET" refId="22"/>  
   </dependency>  
-  <dependency id="137">    
-    <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="31"/>  
-  </dependency>  
-  <dependency id="138">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="30"/>  
-  </dependency>  
-  <dependency id="139">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="33"/>  
-  </dependency>  
-  <dependency id="140">    
-    <end type="SOURCE" refId="25"/>    
-    <end type="TARGET" refId="31"/>  
-  </dependency>  
-  <association id="141">    
+  <association id="90">    
     <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="142" name="mauseClicksList">        
+      <attribute id="91" name="mauseClicksList">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="143" minimum="0" maximum="2147483647">        
+      <multiplicity id="92" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="14" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="144">    
+  <association id="93">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="94" name="securityContext">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="95" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="34" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="96">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
+  <dependency id="97">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="27"/>  
+  </dependency>  
+  <dependency id="98">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="27"/>  
+  </dependency>  
+  <dependency id="99">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="21"/>  
+  </dependency>  
+  <dependency id="100">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="30"/>  
+  </dependency>  
+  <dependency id="101">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="16"/>  
+  </dependency>  
+  <dependency id="102">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
+  <dependency id="103">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="27"/>  
+  </dependency>  
+  <dependency id="104">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="32"/>  
+  </dependency>  
+  <dependency id="105">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="24"/>  
+  </dependency>  
+  <dependency id="106">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="28"/>  
+  </dependency>  
+  <dependency id="107">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="24"/>  
+  </dependency>  
+  <dependency id="108">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="23"/>  
+  </dependency>  
+  <realization id="109">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <dependency id="110">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
+  <dependency id="111">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <dependency id="112">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="31"/>  
+  </dependency>  
+  <realization id="113">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="8"/>  
+  </realization>  
+  <dependency id="114">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="32"/>  
+  </dependency>  
+  <dependency id="115">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="31"/>  
+  </dependency>  
+  <association id="116">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="117" name="modelService">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="118" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="119">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="33"/>  
+  </dependency>  
+  <dependency id="120">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="31"/>  
+  </dependency>  
+  <dependency id="121">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="19"/>  
+  </dependency>  
+  <dependency id="122">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="17"/>  
+  </dependency>  
+  <dependency id="123">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="27"/>  
+  </dependency>  
+  <dependency id="124">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="30"/>  
+  </dependency>  
+  <dependency id="125">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="31"/>  
+  </dependency>  
+  <dependency id="126">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="30"/>  
+  </dependency>  
+  <dependency id="127">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="27"/>  
+  </dependency>  
+  <dependency id="128">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="31"/>  
+  </dependency>  
+  <dependency id="129">    
     <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="14"/>  
   </dependency>  
+  <dependency id="130">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <dependency id="131">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="16"/>  
+  </dependency>  
+  <association id="132">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="133" name="userForm">        
+        <position height="0" width="0" x="53" y="35"/>      
+      </attribute>      
+      <multiplicity id="134" minimum="0" maximum="1">        
+        <position height="0" width="0" x="53" y="35"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="135">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="27"/>  
+  </dependency>  
+  <dependency id="136">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="33"/>  
+  </dependency>  
+  <dependency id="137">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="27"/>  
+  </dependency>  
+  <dependency id="138">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="26"/>  
+  </dependency>  
+  <dependency id="139">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="29"/>  
+  </dependency>  
+  <association id="140">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="141" name="mauseMoveList">        
+        <position height="0" width="0" x="33" y="29"/>      
+      </attribute>      
+      <multiplicity id="142" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="33" y="29"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="143">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="32"/>  
+  </dependency>  
+  <dependency id="144">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="17"/>  
+  </dependency>  
   <dependency id="145">    
-    <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="31"/>  
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="25"/>  
   </dependency>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    

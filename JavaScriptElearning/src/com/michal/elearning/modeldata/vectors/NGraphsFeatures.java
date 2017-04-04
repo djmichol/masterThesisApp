@@ -134,7 +134,7 @@ public class NGraphsFeatures implements GraphsFeatures{
 		if(dwellMean.size()==0){
 			return 0;
 		}
-		return MathHelperUtils.calculateMean(dwellMean);
+		return (int)MathHelperUtils.calculateMean(dwellMean);
 	}
 
 	private Integer getDwell(NGraph digraph) {
@@ -157,7 +157,7 @@ public class NGraphsFeatures implements GraphsFeatures{
 		if(dwellMean.size()==0){
 			return 0;
 		}
-		return MathHelperUtils.calculateMean(dwellMean);
+		return (int)MathHelperUtils.calculateMean(dwellMean);
 	}
 
 	private Integer getDigraphDuration(NGraph digraph) {

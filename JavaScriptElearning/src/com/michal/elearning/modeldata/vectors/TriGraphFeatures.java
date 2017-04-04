@@ -145,7 +145,7 @@ public class TriGraphFeatures implements GraphsFeatures{
 			}
 		}
 		if(dwellMean.size()!=0){
-			pressToPress.add(MathHelperUtils.calculateMean(dwellMean));
+			pressToPress.add((int)MathHelperUtils.calculateMean(dwellMean));
 		}
 	}
 	
@@ -169,7 +169,7 @@ public class TriGraphFeatures implements GraphsFeatures{
 			} 
 		}
 		if(dwellMean.size()!=0){
-			keyDwell.add(MathHelperUtils.calculateMean(dwellMean));
+			keyDwell.add((int)MathHelperUtils.calculateMean(dwellMean));
 		}
 	}
 	

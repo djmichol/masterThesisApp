@@ -1,10 +1,19 @@
 package com.michal.elearning.dao;
 
-public class UserMauseMove {
+public class UserMauseMove implements Comparable<UserMauseMove>{
 	
 	private int posX;
 	private int posY;
-	private int time;
+	private Integer time;
+	
+	public UserMauseMove(){}
+	
+	public UserMauseMove(Integer time,int posX,int posY){
+		this.posX = posX;
+		this.posY = posY;
+		this.time = time;
+	}
+	
 	public int getPosX() {
 		return posX;
 	}
@@ -17,11 +26,16 @@ public class UserMauseMove {
 	public void setPosY(int posY) {
 		this.posY = posY;
 	}
-	public int getTime() {
+	public Integer getTime() {
 		return time;
 	}
-	public void setTime(int time) {
+	public void setTime(Integer time) {
 		this.time = time;
+	}
+	
+	@Override
+	public int compareTo(UserMauseMove o) {
+		return this.getTime().compareTo(o.getTime());
 	}
 
 }

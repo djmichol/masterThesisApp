@@ -57,12 +57,34 @@ public class ConverDataService {
     public Response getUserModel(String inputData) throws Exception 
     {   
 		this.userId = ((User)securityContext.getUserPrincipal()).getId();		
+		JSONObject json = predict(inputData);
+		if(json==null){
+			Response.noContent().build();
+		}
+    	return Response.ok(json.toString()).build(); 
+    }
+	
+	@RolesAllowed("admin")
+    @POST
+    @Path("/generateModel")
+    public Response saveUserModel(@QueryParam("userId") int userId) 
+    {   
+		this.userId = userId;
+    	try {
+			prepareModel();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}    	
+    	return Response.ok().build(); 
+    }
+	
+	private JSONObject predict(String inputData) throws SQLException, Exception {
 		Map<String,String> predictions = new HashMap<>();
 		
 		List<UserInputData> data = getUserInputDataFromString(inputData, userId);		
 		List<ModelData> userModels = modelService.getUserTrainedModels(userId);
 		if(userModels==null || userModels.isEmpty()){
-			return Response.noContent().build();
+			return null;
 		}
 		Map<String, byte[]> arffInputStream = getDataToPredict(userId, data);    	
 		
@@ -77,8 +99,8 @@ public class ConverDataService {
 		}    	
 		JSONObject json = new JSONObject();
 	    json.put("predictions", predictions);
-    	return Response.ok(json.toString()).build(); 
-    }
+		return json;
+	}
 	
 	private List<UserInputData> getUserInputDataFromString(String inputData, int userId) {
 		JSONObject inpoutData = new JSONObject(inputData);
@@ -97,21 +119,7 @@ public class ConverDataService {
 		List<DataModelWithForm> dataToFile = ConvertDataUtils.getVectorsFromEditorLesson(data, userService.getUserByID(userId));
     	Map<String,byte[]> arffInputStream = ArffFileHelper.prepareArffInputStream(dataToFile,true);
 		return arffInputStream;
-	}
-	
-	@RolesAllowed("admin")
-    @POST
-    @Path("/generateModel")
-    public Response saveUserModel(@QueryParam("userId") int userId) 
-    {   
-		this.userId = userId;
-    	try {
-			prepareModel();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}    	
-    	return Response.ok().build(); 
-    }
+	}	
 	
 	private void prepareModel() throws SQLException{
 		List<UserInputData> userDataList = dataService.getUserData(userId);	

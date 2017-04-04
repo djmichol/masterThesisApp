@@ -3,8 +3,8 @@ package com.michal.elearning.wekaDataModel;
 public class Features {
 
 	// mause
-	private int mauseClicksMean;
-	private int mauseClickDeviation;
+	private double mauseClicksMean;
+	private double mauseClickDeviation;
 	private int mauseCliskEventCount;
 	// SigleKey
 	private int tabFreq;
@@ -13,422 +13,327 @@ public class Features {
 	private int backSpaceFreq;
 	private int spaceFreq;
 	private double writingSpeed;
-	private int singleKeyDwellMean;
-	private int singleKeyDwellDeviation;
+	private double singleKeyDwellMean;
+	private double singleKeyDwellDeviation;
 	// digraphs
-	private int diGraphFirstDwellMean;
-	private int diGraphSecondDwellMean;
-	private int diGraphPressToPressMean;
-	private int diGraphFlightMean;
-	private int digraphDurationMean;
-	private int diGraphFirstDwellDeviation;
-	private int diGraphSecondDwellDeviation;
-	private int diGraphPressToPressDeviation;
-	private int diGraphFlightDeviation;
-	private int digraphDurationDeviation;
+	private double diGraphFirstDwellMean;
+	private double diGraphSecondDwellMean;
+	private double diGraphPressToPressMean;
+	private double diGraphFlightMean;
+	private double digraphDurationMean;
+	private double diGraphFirstDwellDeviation;
+	private double diGraphSecondDwellDeviation;
+	private double diGraphPressToPressDeviation;
+	private double diGraphFlightDeviation;
+	private double digraphDurationDeviation;
 	// trigraphs
-	private int triGraphDwellFirstMean;
-	private int triGraphDwellSecondMean;
-	private int triGraphDwellThirdMean;
-	private int triGraphPressFirstSecMean;
-	private int triGraphPressSecThirdMean;
-	private int triGraphFlightFirstSecMean;
-	private int triGraphFlightSecThirdMean;
-	private int triGraphPressToPressMean;
-	private int triGraphKeyDwellMean;
-	private int triGraphDurationMean;
-	private int triGraphDwellFirstDeviation;
-	private int triGraphDwellSecondDeviation;
-	private int triGraphDwellThirdDeviation;
-	private int triGraphPressFirstSecDeviation;
-	private int triGraphPressSecThirdDeviation;
-	private int triGraphFlightFirstSecDeviation;
-	private int triGraphFlightSecThirdDeviation;
-	private int triGraphPressToPressDeviation;
-	private int triGraphKeyDwellDeviation;
-	private int triGraphDurationDeviation;
+	private double triGraphDwellFirstMean;
+	private double triGraphDwellSecondMean;
+	private double triGraphDwellThirdMean;
+	private double triGraphPressFirstSecMean;
+	private double triGraphPressSecThirdMean;
+	private double triGraphFlightFirstSecMean;
+	private double triGraphFlightSecThirdMean;
+	private double triGraphPressToPressMean;
+	private double triGraphKeyDwellMean;
+	private double triGraphDurationMean;
+	private double triGraphDwellFirstDeviation;
+	private double triGraphDwellSecondDeviation;
+	private double triGraphDwellThirdDeviation;
+	private double triGraphPressFirstSecDeviation;
+	private double triGraphPressSecThirdDeviation;
+	private double triGraphFlightFirstSecDeviation;
+	private double triGraphFlightSecThirdDeviation;
+	private double triGraphPressToPressDeviation;
+	private double triGraphKeyDwellDeviation;
+	private double triGraphDurationDeviation;
 	// graphs
-	private int graphPressToPressMean;
-	private int graphKeyDwellMean;
-	private int graphWordDurationMean;
-	private int graphPressToPressDeviation;
-	private int graphKeyDwellDeviation;
-	private int graphWordDurationDeviation;
-
-	// Settery i gettery
-	public int getMauseClicksMean() {
+	private double graphPressToPressMean;
+	private double graphKeyDwellMean;
+	private double graphWordDurationMean;
+	private double graphPressToPressDeviation;
+	private double graphKeyDwellDeviation;
+	private double graphWordDurationDeviation;
+	public double getMauseClicksMean() {
 		return mauseClicksMean;
 	}
-
-	public void setMauseClicksMean(int mauseClicksMean) {
+	public void setMauseClicksMean(double mauseClicksMean) {
 		this.mauseClicksMean = mauseClicksMean;
 	}
-
-	public int getMauseClickDeviation() {
+	public double getMauseClickDeviation() {
 		return mauseClickDeviation;
 	}
-
-	public void setMauseClickDeviation(int mauseClickDeviation) {
+	public void setMauseClickDeviation(double mauseClickDeviation) {
 		this.mauseClickDeviation = mauseClickDeviation;
 	}
-
 	public int getMauseCliskEventCount() {
 		return mauseCliskEventCount;
 	}
-
 	public void setMauseCliskEventCount(int mauseCliskEventCount) {
 		this.mauseCliskEventCount = mauseCliskEventCount;
 	}
-
 	public int getTabFreq() {
 		return tabFreq;
 	}
-
 	public void setTabFreq(int tabFreq) {
 		this.tabFreq = tabFreq;
 	}
-
 	public int getDelFreq() {
 		return delFreq;
 	}
-
 	public void setDelFreq(int delFreq) {
 		this.delFreq = delFreq;
 	}
-
 	public int getEnterFreq() {
 		return enterFreq;
 	}
-
 	public void setEnterFreq(int enterFreq) {
 		this.enterFreq = enterFreq;
 	}
-
 	public int getBackSpaceFreq() {
 		return backSpaceFreq;
 	}
-
 	public void setBackSpaceFreq(int backSpaceFreq) {
 		this.backSpaceFreq = backSpaceFreq;
 	}
-
 	public int getSpaceFreq() {
 		return spaceFreq;
 	}
-
 	public void setSpaceFreq(int spaceFreq) {
 		this.spaceFreq = spaceFreq;
 	}
-
 	public double getWritingSpeed() {
 		return writingSpeed;
 	}
-
-	public void setWritingSpeed(double writigSpeed) {
-		this.writingSpeed = writigSpeed;
+	public void setWritingSpeed(double writingSpeed) {
+		this.writingSpeed = writingSpeed;
 	}
-
-	public int getSingleKeyDwellMean() {
+	public double getSingleKeyDwellMean() {
 		return singleKeyDwellMean;
 	}
-
-	public void setSingleKeyDwellMean(int sigleKeyDwellMean) {
-		this.singleKeyDwellMean = sigleKeyDwellMean;
+	public void setSingleKeyDwellMean(double singleKeyDwellMean) {
+		this.singleKeyDwellMean = singleKeyDwellMean;
 	}
-
-	public int getSingleKeyDwellDeviation() {
+	public double getSingleKeyDwellDeviation() {
 		return singleKeyDwellDeviation;
 	}
-
-	public void setSingleKeyDwellDeviation(int sigleKeyDwellDeviation) {
-		this.singleKeyDwellDeviation = sigleKeyDwellDeviation;
+	public void setSingleKeyDwellDeviation(double singleKeyDwellDeviation) {
+		this.singleKeyDwellDeviation = singleKeyDwellDeviation;
 	}
-
-	public int getDiGraphFirstDwellMean() {
+	public double getDiGraphFirstDwellMean() {
 		return diGraphFirstDwellMean;
 	}
-
-	public void setDiGraphFirstDwellMean(int diGraphFirstDwellMean) {
+	public void setDiGraphFirstDwellMean(double diGraphFirstDwellMean) {
 		this.diGraphFirstDwellMean = diGraphFirstDwellMean;
 	}
-
-	public int getDiGraphSecondDwellMean() {
+	public double getDiGraphSecondDwellMean() {
 		return diGraphSecondDwellMean;
 	}
-
-	public void setDiGraphSecondDwellMean(int diGraphSecondDwellMean) {
+	public void setDiGraphSecondDwellMean(double diGraphSecondDwellMean) {
 		this.diGraphSecondDwellMean = diGraphSecondDwellMean;
 	}
-
-	public int getDiGraphPressToPressMean() {
+	public double getDiGraphPressToPressMean() {
 		return diGraphPressToPressMean;
 	}
-
-	public void setDiGraphPressToPressMean(int diGraphPressToPressMean) {
+	public void setDiGraphPressToPressMean(double diGraphPressToPressMean) {
 		this.diGraphPressToPressMean = diGraphPressToPressMean;
 	}
-
-	public int getDiGraphFlightMean() {
+	public double getDiGraphFlightMean() {
 		return diGraphFlightMean;
 	}
-
-	public void setDiGraphFlightMean(int diGraphFlightMean) {
+	public void setDiGraphFlightMean(double diGraphFlightMean) {
 		this.diGraphFlightMean = diGraphFlightMean;
 	}
-
-	public int getDigraphDurationMean() {
+	public double getDigraphDurationMean() {
 		return digraphDurationMean;
 	}
-
-	public void setDigraphDurationMean(int digraphDurationMean) {
+	public void setDigraphDurationMean(double digraphDurationMean) {
 		this.digraphDurationMean = digraphDurationMean;
 	}
-
-	public int getDiGraphFirstDwellDeviation() {
+	public double getDiGraphFirstDwellDeviation() {
 		return diGraphFirstDwellDeviation;
 	}
-
-	public void setDiGraphFirstDwellDeviation(int diGraphFirstDwellDeviation) {
+	public void setDiGraphFirstDwellDeviation(double diGraphFirstDwellDeviation) {
 		this.diGraphFirstDwellDeviation = diGraphFirstDwellDeviation;
 	}
-
-	public int getDiGraphSecondDwellDeviation() {
+	public double getDiGraphSecondDwellDeviation() {
 		return diGraphSecondDwellDeviation;
 	}
-
-	public void setDiGraphSecondDwellDeviation(int diGraphSecondDwellDeviation) {
+	public void setDiGraphSecondDwellDeviation(double diGraphSecondDwellDeviation) {
 		this.diGraphSecondDwellDeviation = diGraphSecondDwellDeviation;
 	}
-
-	public int getDiGraphPressToPressDeviation() {
+	public double getDiGraphPressToPressDeviation() {
 		return diGraphPressToPressDeviation;
 	}
-
-	public void setDiGraphPressToPressDeviation(int diGraphPressToPressDeviation) {
+	public void setDiGraphPressToPressDeviation(double diGraphPressToPressDeviation) {
 		this.diGraphPressToPressDeviation = diGraphPressToPressDeviation;
 	}
-
-	public int getDiGraphFlightDeviation() {
+	public double getDiGraphFlightDeviation() {
 		return diGraphFlightDeviation;
 	}
-
-	public void setDiGraphFlightDeviation(int diGraphFlightDeviation) {
+	public void setDiGraphFlightDeviation(double diGraphFlightDeviation) {
 		this.diGraphFlightDeviation = diGraphFlightDeviation;
 	}
-
-	public int getDigraphDurationDeviation() {
+	public double getDigraphDurationDeviation() {
 		return digraphDurationDeviation;
 	}
-
-	public void setDigraphDurationDeviation(int digraphDurationDeviation) {
+	public void setDigraphDurationDeviation(double digraphDurationDeviation) {
 		this.digraphDurationDeviation = digraphDurationDeviation;
 	}
-
-	public int getTriGraphDwellFirstMean() {
+	public double getTriGraphDwellFirstMean() {
 		return triGraphDwellFirstMean;
 	}
-
-	public void setTriGraphDwellFirstMean(int triGraphDwellFirstMean) {
+	public void setTriGraphDwellFirstMean(double triGraphDwellFirstMean) {
 		this.triGraphDwellFirstMean = triGraphDwellFirstMean;
 	}
-
-	public int getTriGraphDwellSecondMean() {
+	public double getTriGraphDwellSecondMean() {
 		return triGraphDwellSecondMean;
 	}
-
-	public void setTriGraphDwellSecondMean(int triGraphDwellSecondMean) {
+	public void setTriGraphDwellSecondMean(double triGraphDwellSecondMean) {
 		this.triGraphDwellSecondMean = triGraphDwellSecondMean;
 	}
-
-	public int getTriGraphDwellThirdMean() {
+	public double getTriGraphDwellThirdMean() {
 		return triGraphDwellThirdMean;
 	}
-
-	public void setTriGraphDwellThirdMean(int triGraphDwellThirdMean) {
+	public void setTriGraphDwellThirdMean(double triGraphDwellThirdMean) {
 		this.triGraphDwellThirdMean = triGraphDwellThirdMean;
 	}
-
-	public int getTriGraphPressFirstSecMean() {
+	public double getTriGraphPressFirstSecMean() {
 		return triGraphPressFirstSecMean;
 	}
-
-	public void setTriGraphPressFirstSecMean(int triGraphPressFirstSecMean) {
+	public void setTriGraphPressFirstSecMean(double triGraphPressFirstSecMean) {
 		this.triGraphPressFirstSecMean = triGraphPressFirstSecMean;
 	}
-
-	public int getTriGraphPressSecThirdMean() {
+	public double getTriGraphPressSecThirdMean() {
 		return triGraphPressSecThirdMean;
 	}
-
-	public void setTriGraphPressSecThirdMean(int triGraphPressSecThirdMean) {
+	public void setTriGraphPressSecThirdMean(double triGraphPressSecThirdMean) {
 		this.triGraphPressSecThirdMean = triGraphPressSecThirdMean;
 	}
-
-	public int getTriGraphFlightFirstSecMean() {
+	public double getTriGraphFlightFirstSecMean() {
 		return triGraphFlightFirstSecMean;
 	}
-
-	public void setTriGraphFlightFirstSecMean(int triGraphFlightFirstSecMean) {
+	public void setTriGraphFlightFirstSecMean(double triGraphFlightFirstSecMean) {
 		this.triGraphFlightFirstSecMean = triGraphFlightFirstSecMean;
 	}
-
-	public int getTriGraphFlightSecThirdMean() {
+	public double getTriGraphFlightSecThirdMean() {
 		return triGraphFlightSecThirdMean;
 	}
-
-	public void setTriGraphFlightSecThirdMean(int triGraphFlightSecThirdMean) {
+	public void setTriGraphFlightSecThirdMean(double triGraphFlightSecThirdMean) {
 		this.triGraphFlightSecThirdMean = triGraphFlightSecThirdMean;
 	}
-
-	public int getTriGraphPressToPressMean() {
+	public double getTriGraphPressToPressMean() {
 		return triGraphPressToPressMean;
 	}
-
-	public void setTriGraphPressToPressMean(int triGraphPressToPressMean) {
+	public void setTriGraphPressToPressMean(double triGraphPressToPressMean) {
 		this.triGraphPressToPressMean = triGraphPressToPressMean;
 	}
-
-	public int getTriGraphKeyDwellMean() {
+	public double getTriGraphKeyDwellMean() {
 		return triGraphKeyDwellMean;
 	}
-
-	public void setTriGraphKeyDwellMean(int triGraphKeyDwellMean) {
+	public void setTriGraphKeyDwellMean(double triGraphKeyDwellMean) {
 		this.triGraphKeyDwellMean = triGraphKeyDwellMean;
 	}
-
-	public int getTriGraphDurationMean() {
+	public double getTriGraphDurationMean() {
 		return triGraphDurationMean;
 	}
-
-	public void setTriGraphDurationMean(int triGraphDurationMean) {
+	public void setTriGraphDurationMean(double triGraphDurationMean) {
 		this.triGraphDurationMean = triGraphDurationMean;
 	}
-
-	public int getTriGraphDwellFirstDeviation() {
+	public double getTriGraphDwellFirstDeviation() {
 		return triGraphDwellFirstDeviation;
 	}
-
-	public void setTriGraphDwellFirstDeviation(int triGraphDwellFirstDeviation) {
+	public void setTriGraphDwellFirstDeviation(double triGraphDwellFirstDeviation) {
 		this.triGraphDwellFirstDeviation = triGraphDwellFirstDeviation;
 	}
-
-	public int getTriGraphDwellSecondDeviation() {
+	public double getTriGraphDwellSecondDeviation() {
 		return triGraphDwellSecondDeviation;
 	}
-
-	public void setTriGraphDwellSecondDeviation(int triGraphDwellSecondDeviation) {
+	public void setTriGraphDwellSecondDeviation(double triGraphDwellSecondDeviation) {
 		this.triGraphDwellSecondDeviation = triGraphDwellSecondDeviation;
 	}
-
-	public int getTriGraphDwellThirdDeviation() {
+	public double getTriGraphDwellThirdDeviation() {
 		return triGraphDwellThirdDeviation;
 	}
-
-	public void setTriGraphDwellThirdDeviation(int triGraphDwellThirdDeviation) {
+	public void setTriGraphDwellThirdDeviation(double triGraphDwellThirdDeviation) {
 		this.triGraphDwellThirdDeviation = triGraphDwellThirdDeviation;
 	}
-
-	public int getTriGraphPressFirstSecDeviation() {
+	public double getTriGraphPressFirstSecDeviation() {
 		return triGraphPressFirstSecDeviation;
 	}
-
-	public void setTriGraphPressFirstSecDeviation(int triGraphPressFirstSecDeviation) {
+	public void setTriGraphPressFirstSecDeviation(double triGraphPressFirstSecDeviation) {
 		this.triGraphPressFirstSecDeviation = triGraphPressFirstSecDeviation;
 	}
-
-	public int getTriGraphPressSecThirdDeviation() {
+	public double getTriGraphPressSecThirdDeviation() {
 		return triGraphPressSecThirdDeviation;
 	}
-
-	public void setTriGraphPressSecThirdDeviation(int triGraphPressSecThirdDeviation) {
+	public void setTriGraphPressSecThirdDeviation(double triGraphPressSecThirdDeviation) {
 		this.triGraphPressSecThirdDeviation = triGraphPressSecThirdDeviation;
 	}
-
-	public int getTriGraphFlightFirstSecDeviation() {
+	public double getTriGraphFlightFirstSecDeviation() {
 		return triGraphFlightFirstSecDeviation;
 	}
-
-	public void setTriGraphFlightFirstSecDeviation(int triGraphFlightFirstSecDeviation) {
+	public void setTriGraphFlightFirstSecDeviation(double triGraphFlightFirstSecDeviation) {
 		this.triGraphFlightFirstSecDeviation = triGraphFlightFirstSecDeviation;
 	}
-
-	public int getTriGraphFlightSecThirdDeviation() {
+	public double getTriGraphFlightSecThirdDeviation() {
 		return triGraphFlightSecThirdDeviation;
 	}
-
-	public void setTriGraphFlightSecThirdDeviation(int triGraphFlightSecThirdDeviation) {
+	public void setTriGraphFlightSecThirdDeviation(double triGraphFlightSecThirdDeviation) {
 		this.triGraphFlightSecThirdDeviation = triGraphFlightSecThirdDeviation;
 	}
-
-	public int getTriGraphPressToPressDeviation() {
+	public double getTriGraphPressToPressDeviation() {
 		return triGraphPressToPressDeviation;
 	}
-
-	public void setTriGraphPressToPressDeviation(int triGraphPressToPressDeviation) {
+	public void setTriGraphPressToPressDeviation(double triGraphPressToPressDeviation) {
 		this.triGraphPressToPressDeviation = triGraphPressToPressDeviation;
 	}
-
-	public int getTriGraphKeyDwellDeviation() {
+	public double getTriGraphKeyDwellDeviation() {
 		return triGraphKeyDwellDeviation;
 	}
-
-	public void setTriGraphKeyDwellDeviation(int triGraphKeyDwellDeviation) {
+	public void setTriGraphKeyDwellDeviation(double triGraphKeyDwellDeviation) {
 		this.triGraphKeyDwellDeviation = triGraphKeyDwellDeviation;
 	}
-
-	public int getTriGraphDurationDeviation() {
+	public double getTriGraphDurationDeviation() {
 		return triGraphDurationDeviation;
 	}
-
-	public void setTriGraphDurationDeviation(int triGraphDurationDeviation) {
+	public void setTriGraphDurationDeviation(double triGraphDurationDeviation) {
 		this.triGraphDurationDeviation = triGraphDurationDeviation;
 	}
-
-	public int getGraphPressToPressMean() {
+	public double getGraphPressToPressMean() {
 		return graphPressToPressMean;
 	}
-
-	public void setGraphPressToPressMean(int graphPressToPressMean) {
+	public void setGraphPressToPressMean(double graphPressToPressMean) {
 		this.graphPressToPressMean = graphPressToPressMean;
 	}
-
-	public int getGraphKeyDwellMean() {
+	public double getGraphKeyDwellMean() {
 		return graphKeyDwellMean;
 	}
-
-	public void setGraphKeyDwellMean(int graphKeyDwellMean) {
+	public void setGraphKeyDwellMean(double graphKeyDwellMean) {
 		this.graphKeyDwellMean = graphKeyDwellMean;
 	}
-
-	public int getGraphWordDurationMean() {
+	public double getGraphWordDurationMean() {
 		return graphWordDurationMean;
 	}
-
-	public void setGraphWordDurationMean(int graphWordDurationMean) {
+	public void setGraphWordDurationMean(double graphWordDurationMean) {
 		this.graphWordDurationMean = graphWordDurationMean;
 	}
-
-	public int getGraphPressToPressDeviation() {
+	public double getGraphPressToPressDeviation() {
 		return graphPressToPressDeviation;
 	}
-
-	public void setGraphPressToPressDeviation(int graphPressToPressDeviation) {
+	public void setGraphPressToPressDeviation(double graphPressToPressDeviation) {
 		this.graphPressToPressDeviation = graphPressToPressDeviation;
 	}
-
-	public int getGraphKeyDwellDeviation() {
+	public double getGraphKeyDwellDeviation() {
 		return graphKeyDwellDeviation;
 	}
-
-	public void setGraphKeyDwellDeviation(int graphKeyDwellDeviation) {
+	public void setGraphKeyDwellDeviation(double graphKeyDwellDeviation) {
 		this.graphKeyDwellDeviation = graphKeyDwellDeviation;
 	}
-
-	public int getGraphWordDurationDeviation() {
+	public double getGraphWordDurationDeviation() {
 		return graphWordDurationDeviation;
 	}
-
-	public void setGraphWordDurationDeviation(int graphWordDurationDeviation) {
+	public void setGraphWordDurationDeviation(double graphWordDurationDeviation) {
 		this.graphWordDurationDeviation = graphWordDurationDeviation;
 	}
 }

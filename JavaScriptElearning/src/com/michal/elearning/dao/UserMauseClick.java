@@ -4,6 +4,14 @@ public class UserMauseClick implements Comparable<UserMauseClick>{
 
 	private String type;
 	private Integer time;
+	
+	public UserMauseClick(){}
+	
+	public UserMauseClick(String type, Integer time){
+		this.type = type;
+		this.time = time;
+	}
+	
 	public String getType() {
 		return type;
 	}

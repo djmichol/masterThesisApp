@@ -43,7 +43,7 @@ public class WekaTest {
 			+"5937,4151,11,0,0,4,0,0,185.4850581480936,105,20,109,78,218,109,296,15,31,15,0,15,?";
 
 	private ModelDaoService modelService = new ModelDaoService();	
-	@Test
+	//@Test
 	public void testClassifi() throws Exception{
 		
 		int userId = 1;
