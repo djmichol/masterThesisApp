@@ -32,7 +32,7 @@ public class UserInputDataDaoService implements IUserInputData {
 	}
 
 	@Override
-	public void updateuserInLesson(UserInLessons userDataObject, UserInLessons userExisDataObject) throws SQLException {
+	public void updateUserInLesson(UserInLessons userDataObject, UserInLessons userExisDataObject) throws SQLException {
 		if(userExisDataObject.isPassed()==0){
 			int submitcount = userExisDataObject.getSubmitCount()+1;
 			userExisDataObject.setSubmitCount(submitcount);

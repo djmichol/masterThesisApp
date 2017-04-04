@@ -8,8 +8,8 @@ import org.junit.Test;
 
 import com.michal.elearning.dao.UserKeystrokes;
 import com.michal.elearning.modeldata.vectors.TriGraphFeatures;
-import com.michal.elearning.modeldata.vectors.model.NGraph;
-import com.michal.elearning.modeldata.vectors.model.TriGraphsCodes;
+import com.michal.elearning.wekaDataModel.NGraph;
+import com.michal.elearning.wekaDataModel.TriGraphsCodes;
 
 public class TriGraphTest {
 

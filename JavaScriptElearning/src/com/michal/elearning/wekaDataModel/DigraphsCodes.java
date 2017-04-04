@@ -1,4 +1,4 @@
-package com.michal.elearning.modeldata.vectors.model;
+package com.michal.elearning.wekaDataModel;
 
 public class DigraphsCodes {
 

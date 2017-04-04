@@ -14,10 +14,9 @@ import com.michal.elearning.utils.CoreDao;
 public class UserDaoService implements IUserInterface{
 
 	@Override
-	public User getLoggedUser(String mail, String password) throws SQLException {
+	public User getLoggedUser(String mail) throws SQLException {
 		Map<String, Object> params = new HashMap<>();
 		params.put("mail", mail);
-		params.put("password", password);
 		User loggedUser = (User) CoreDao.getSqlMapper().queryForObject("User.getUser", params);
 		return loggedUser;
 	}
@@ -43,8 +42,8 @@ public class UserDaoService implements IUserInterface{
 	/**
 	 * Try to authenticate user
 	 */
-	public User authentificationUser(String mail,String password) throws SQLException{		
-		User user = getLoggedUser(mail,password);
+	public User authentificationUser(String mail) throws SQLException{		
+		User user = getLoggedUser(mail);
 		if(user==null){
 			throw new WebApplicationException(Response.Status.UNAUTHORIZED);
 		}

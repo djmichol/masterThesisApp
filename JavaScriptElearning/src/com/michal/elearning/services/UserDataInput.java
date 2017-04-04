@@ -65,7 +65,7 @@ public class UserDataInput {
 			if(userExisDataObject==null){
 				dataService.insertUserInLesson(userDataObject);
 			}else{
-				dataService.updateuserInLesson(userDataObject,userExisDataObject);
+				dataService.updateUserInLesson(userDataObject,userExisDataObject);
 			}
 		} catch (SQLException e) {
 			Response.status(Response.Status.SERVICE_UNAVAILABLE).entity("Blad dodawania danych.").build();

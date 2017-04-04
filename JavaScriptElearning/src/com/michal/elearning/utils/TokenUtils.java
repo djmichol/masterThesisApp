@@ -17,61 +17,60 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 public class TokenUtils {
-	
-	public final static String apiKey="928617f50b35130f48dd9a09d6183636";
 
-	private static String issueToken(User user){
-		//alg to sign token
+	public final static String apiKey = "928617f50b35130f48dd9a09d6183636";
+
+	private static String issueToken(User user) {
+		// alg to sign token
 		SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
-		//date 
+		// date
 		long nowMillis = System.currentTimeMillis();
 		Date now = new Date(nowMillis);
-		//random id
+		// random id
 		UUID idOne = UUID.randomUUID();
-		//construct JWT
-		JwtBuilder builder = Jwts.builder().setId(idOne.toString())
-				.setIssuedAt(now).setSubject("auth")
-				.setIssuer("/login").claim("userId", user.getId())
-				.claim("userName", user.getName()).claim("userRoles", user.getRole())
-				.claim("userMail", user.getRole()).signWith(signatureAlgorithm, apiKey);
+		// construct JWT
+		JwtBuilder builder = Jwts.builder().setId(idOne.toString()).setIssuedAt(now).setSubject("auth").setIssuer("/login").claim("userId", user.getId()).claim("userName", user.getName())
+				.claim("userRoles", user.getRole()).claim("userMail", user.getRole()).signWith(signatureAlgorithm, apiKey);
 
 		return builder.compact();
 	}
-	
+
 	/**
 	 * Check if token send by user is valid
+	 * 
 	 * @param token
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public static User validateToken(String token){
-		if(token == null){
+	public static User validateToken(String token) {
+		if (token == null) {
 			throw new WebApplicationException(StandardRequestFilter.ACCESS_DENIED);
 		}
-		
+
 		Claims claims = Jwts.parser().setSigningKey(TokenUtils.apiKey).parseClaimsJws(token).getBody();
-		//when no info about user in token
-		if(claims.get("userId")==null || claims.get("userName")==null || claims.get("userRoles")==null){
+		// when no info about user in token
+		if (claims.get("userId") == null || claims.get("userName") == null || claims.get("userRoles") == null) {
 			throw new WebApplicationException(StandardRequestFilter.ACCESS_DENIED);
 		}
-		//when no addional data
-		if(claims.getSubject()==null || claims.getIssuer()==null){
+		// when no addional data
+		if (claims.getSubject() == null || claims.getIssuer() == null) {
 			throw new WebApplicationException(StandardRequestFilter.ACCESS_DENIED);
 		}
-		//return logged user
+		// return logged user
 		User validUser = new User();
 		validUser.setId((int) claims.get("userId"));
 		validUser.setName((String) claims.get("userName"));
 		validUser.setRole((List<String>) claims.get("userRoles"));
-		return validUser;		
+		return validUser;
 	}
-	
+
 	/**
 	 * Get JWT token with info anout user
+	 * 
 	 * @param user
 	 * @return
 	 */
-	public static String getUserToken(User user){		
+	public static String getUserToken(User user) {
 		String token = issueToken(user);
 		JSONObject tokenJson = new JSONObject();
 		tokenJson.put("token", token);

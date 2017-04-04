@@ -7,7 +7,7 @@ import com.michal.elearning.dao.User;
 
 public interface IUserInterface {
 	
-	User getLoggedUser(String mail, String password) throws SQLException;
+	User getLoggedUser(String mail) throws SQLException;
 	
 	User getUserByID(int usrId) throws SQLException;
 	
@@ -15,5 +15,5 @@ public interface IUserInterface {
 	
 	List<String> getUserRoles(int user)  throws SQLException;
 	
-	User authentificationUser(String mail,String password) throws SQLException;
+	User authentificationUser(String mail) throws SQLException;
 }

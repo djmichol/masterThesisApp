@@ -9,9 +9,9 @@ import java.util.Map;
 import java.util.Vector;
 
 import com.michal.elearning.dao.UserKeystrokes;
-import com.michal.elearning.modeldata.vectors.model.DigraphsCodes;
-import com.michal.elearning.modeldata.vectors.model.NGraph;
 import com.michal.elearning.utils.VectorsUtils;
+import com.michal.elearning.wekaDataModel.DigraphsCodes;
+import com.michal.elearning.wekaDataModel.NGraph;
 
 public class DiGraphFeatures implements GraphsFeatures{
 

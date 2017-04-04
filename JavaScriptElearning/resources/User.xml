@@ -20,7 +20,6 @@
 	   	users 
 	   where 
 	    usr_mail = #mail#
-	   	and usr_password = #password#
 	</select>
 	
 	<select id="getUserById" resultMap="UserMap" parameterClass="int">

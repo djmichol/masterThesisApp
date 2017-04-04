@@ -8,8 +8,8 @@ import org.junit.Test;
 
 import com.michal.elearning.dao.UserKeystrokes;
 import com.michal.elearning.modeldata.vectors.NGraphsFeatures;
-import com.michal.elearning.modeldata.vectors.model.JavaScriptKeyWordsCodes;
-import com.michal.elearning.modeldata.vectors.model.NGraph;
+import com.michal.elearning.wekaDataModel.JavaScriptKeyWordsCodes;
+import com.michal.elearning.wekaDataModel.NGraph;
 
 public class OtherKeywordsTest {
 	

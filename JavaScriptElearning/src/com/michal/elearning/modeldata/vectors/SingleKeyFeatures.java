@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Vector;
 
 import com.michal.elearning.dao.UserKeystrokes;
-import com.michal.elearning.modeldata.vectors.model.KeyCodes;
+import com.michal.elearning.wekaDataModel.KeyCodes;
 
 public class SingleKeyFeatures {
 

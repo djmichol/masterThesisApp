@@ -14,7 +14,7 @@ public interface IUserInputData {
 
 	UserInLessons getUserLesson(int lessonId, int userId) throws SQLException;
 
-	void updateuserInLesson(UserInLessons userDataObject, UserInLessons userExisDataObject) throws SQLException;
+	void updateUserInLesson(UserInLessons userDataObject, UserInLessons userExisDataObject) throws SQLException;
 
 	void insertUserInLesson(UserInLessons userDataObject) throws SQLException;
 

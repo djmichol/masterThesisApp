@@ -12,80 +12,89 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
 import org.json.JSONObject;
 
 import com.michal.elearning.dao.User;
 import com.michal.elearning.daoServices.IUserInterface;
 import com.michal.elearning.daoServices.UserDaoService;
 import com.michal.elearning.utils.Base64Utils;
+import com.michal.elearning.utils.PasswordUtils;
 import com.michal.elearning.utils.TokenUtils;
 
 @Path("/auth")
 public class AuthService {
-	
-	private IUserInterface userService = new UserDaoService();	
+
+	private IUserInterface userService = new UserDaoService();
 	private static final Response NOT_ACCEPT_USRER = Response.status(Response.Status.NOT_ACCEPTABLE).entity("B³¹d logowania.").build();
-	
+
 	@GET
 	@PermitAll
 	public Response validateUser(@Context HttpHeaders headers) {
 		String userAuth = headers.getHeaderString("log-on-user");
-		if(!isUserHeaderValid(userAuth)){
+		if (!isUserHeaderValid(userAuth)) {
 			return NOT_ACCEPT_USRER;
 		}
-        String[] decodedUserInfo = Base64Utils.decode(userAuth);
-        if(!isDecodetHeaderValid(decodedUserInfo)) {
-        	return NOT_ACCEPT_USRER;
-        }
-        User authentificationResult = null;
+		String[] decodedUserInfo = Base64Utils.decode(userAuth);
+		if (!isDecodetHeaderValid(decodedUserInfo)) {
+			return NOT_ACCEPT_USRER;
+		}
+		User authentificationResult = null;
 		try {
-			authentificationResult = userService.authentificationUser(decodedUserInfo[0], decodedUserInfo[1]);
+			authentificationResult = userService.authentificationUser(decodedUserInfo[0]);
+			if(!PasswordUtils.validatePassword(decodedUserInfo[1], authentificationResult.getPassword())){
+				return NOT_ACCEPT_USRER;
+			}
 			String token = TokenUtils.getUserToken(authentificationResult);
 			return Response.ok(token).build();
 		} catch (Exception e) {
 			return NOT_ACCEPT_USRER;
-		}	
+		}
 	}
-	
-	private boolean isUserHeaderValid(String userHeader){
-		if(userHeader==null){
+
+	private boolean isUserHeaderValid(String userHeader) {
+		if (userHeader == null) {
 			return false;
 		}
 		return true;
 	}
-	
-	private boolean isDecodetHeaderValid(String[] decodedHeader){
-		 if(decodedHeader == null || decodedHeader.length != 2) {
-        	return false;
-        }
+
+	private boolean isDecodetHeaderValid(String[] decodedHeader) {
+		if (decodedHeader == null || decodedHeader.length != 2) {
+			return false;
+		}
 		return true;
 	}
-	
+
 	@POST
 	@PermitAll
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createUser(String user) throws IOException{
-		if(user== null){
+	public Response createUser(String user) throws IOException {
+		if (user == null) {
 			return Response.status(Response.Status.NO_CONTENT).entity("Przes³ane dane s¹ puste").build();
 		}
 		JSONObject userJson = new JSONObject(user);
-		User newUser = new User(userJson.getString("name"),userJson.getString("password"),userJson.getString("mail"));
+		String hash;
+		try {
+			hash = PasswordUtils.generateStorngPasswordHash(userJson.getString("password"));
+		} catch (Exception e) {
+			return Response.status(Response.Status.PRECONDITION_FAILED).entity("Nie mozna utworzyc has³a.").build();
+		} 
+		User newUser = new User(userJson.getString("name"), hash, userJson.getString("mail"));
 		try {
 			Object result = userService.insertUser(newUser);
-			if(result!=null){
+			if (result != null) {
 				String token = TokenUtils.getUserToken(newUser);
 				return Response.ok(token).build();
-			}else{
+			} else {
 				return Response.status(Response.Status.PRECONDITION_FAILED).entity("Nie mozna dodaæ uzytkownika.").build();
 			}
 		} catch (SQLException e) {
-			if(e.getCause().getClass().equals(com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException.class)){
+			if (e.getCause().getClass().equals(com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException.class)) {
 				return Response.status(Response.Status.PRECONDITION_FAILED).entity("Mail ju¿ istnieje w bazie danych.").build();
-			}else{
+			} else {
 				e.printStackTrace();
-				return Response.status(Response.Status.PRECONDITION_FAILED).entity("Inny b³¹d.").build();				
+				return Response.status(Response.Status.PRECONDITION_FAILED).entity("Inny b³¹d.").build();
 			}
-		} 		
+		}
 	}
 }

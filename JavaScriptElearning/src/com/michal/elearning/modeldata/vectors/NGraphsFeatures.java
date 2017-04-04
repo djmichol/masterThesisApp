@@ -9,9 +9,9 @@ import java.util.Vector;
 
 import com.michal.elearning.dao.UserKeystrokes;
 import com.michal.elearning.machineLearning.MathHelperUtils;
-import com.michal.elearning.modeldata.vectors.model.JavaScriptKeyWordsCodes;
-import com.michal.elearning.modeldata.vectors.model.NGraph;
 import com.michal.elearning.utils.VectorsUtils;
+import com.michal.elearning.wekaDataModel.JavaScriptKeyWordsCodes;
+import com.michal.elearning.wekaDataModel.NGraph;
 
 public class NGraphsFeatures implements GraphsFeatures{
 

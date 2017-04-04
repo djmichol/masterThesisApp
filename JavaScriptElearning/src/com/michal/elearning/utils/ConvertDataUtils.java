@@ -23,9 +23,9 @@ import com.michal.elearning.daoServices.ILessonsInterface;
 import com.michal.elearning.daoServices.LessonDaoService;
 import com.michal.elearning.machineLearning.MathHelperUtils;
 import com.michal.elearning.modeldata.vectors.*;
-import com.michal.elearning.modeldata.vectors.model.NGraph;
 import com.michal.elearning.wekaDataModel.DataModelWithForm;
 import com.michal.elearning.wekaDataModel.Features;
+import com.michal.elearning.wekaDataModel.NGraph;
 
 public class ConvertDataUtils {
 	

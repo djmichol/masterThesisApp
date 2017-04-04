@@ -21,6 +21,7 @@ import com.michal.elearning.daoServices.PathDaoService;
 public class BlockService {
 	
 	private IBlockInterface blockService = new LessonBlockDaoService();
+	private IPathInterface pathService = new PathDaoService();
 	
 	@RolesAllowed("user")
     @GET
@@ -28,7 +29,7 @@ public class BlockService {
     {       
 		try {
 			List<LessonBlock> lessonBlock = blockService.getLessonBlockByPathId(pathId);
-			LearningPath pathInfo = getPathService().getPathById(pathId);
+			LearningPath pathInfo = pathService.getPathById(pathId);
 			JSONObject path = new JSONObject(pathInfo);
 			JSONObject lessonBlockJson = new JSONObject();  
 			lessonBlockJson.put("lessonsBlocks", lessonBlock);
@@ -38,9 +39,4 @@ public class BlockService {
 			return Response.status(Response.Status.SERVICE_UNAVAILABLE).entity("B³¹d ³adowania blokow lekcji.").build();
 		}	
     }
-	
-	private IPathInterface getPathService(){
-		return new PathDaoService();
-	}
-
 }
