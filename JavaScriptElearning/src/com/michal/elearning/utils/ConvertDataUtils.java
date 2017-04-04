@@ -107,10 +107,22 @@ public class ConvertDataUtils {
 			setDigraphFeatures(data.getKeystrokeList(), dataToAdd);
 			setTriGraphFeatuers(data.getKeystrokeList(), dataToAdd);
 			setNGraphFeatures(data.getKeystrokeList(), dataToAdd);
+			setMouseMoveFeatures(data.getMauseMoveList(),data.getMauseClicksList(), dataToAdd);
 			
 			dataToFile.add(dataToAdd);
 		}
 		return dataToFile;			
+	}
+
+	private static void setMouseMoveFeatures(List<UserMauseMove> mauseMoveList, List<UserMauseClick> mauseClicksList, DataModelWithForm dataToAdd) {
+		MauseMoveFeatures mauseMoveFeatures = new MauseMoveFeatures();
+		mauseMoveFeatures.clear();
+		mauseMoveFeatures.prepareVector(mauseMoveList, mauseClicksList);		
+		dataToAdd.getFeatures().setMauseSpeed(mauseMoveFeatures.getMauseSpeed());
+		dataToAdd.getFeatures().setClickToClickDistanceToTotalPathLengthRatioMean(MathHelperUtils.calculateDoubleMean(mauseMoveFeatures.getClickToClickDistanceToTotalPathLengthRatio()));
+		dataToAdd.getFeatures().setClickToClickDistanceToTotalPathLengthRatioDeviation(MathHelperUtils.calculateDoubleStandardDeviation(mauseMoveFeatures.getClickToClickDistanceToTotalPathLengthRatio()));
+		dataToAdd.getFeatures().setHorizontalToTotalRatio(mauseMoveFeatures.getHorizontalToTotalRatio());
+		dataToAdd.getFeatures().setVerticalToTotalRatio(mauseMoveFeatures.getVerticalToTotalRatio());
 	}
 
 	private static void setMauceClickFeatures(List<UserMauseClick> mauseClicks, DataModelWithForm dataToAdd) {

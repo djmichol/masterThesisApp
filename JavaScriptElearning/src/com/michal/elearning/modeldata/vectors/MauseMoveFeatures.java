@@ -19,6 +19,9 @@ public class MauseMoveFeatures {
 	
 	public void clear(){
 		mauseSpeed = 0;
+		horizontalToTotalRatio = 0;
+		verticalToTotalRatio = 0;
+		clickToClickDistanceToTotalPathLengthRatio = new Vector<>();
 	}
 	
 	public void prepareVector(List<UserMauseMove> mauseMoves, List<UserMauseClick> mauseClicks){

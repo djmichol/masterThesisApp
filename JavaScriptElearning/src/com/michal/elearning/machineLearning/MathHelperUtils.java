@@ -19,7 +19,43 @@ public class MathHelperUtils {
 		}
 		return (double)suma / (double)data.size();
 	}
+	
+	public static double calculateDoubleMean(Vector<Double> data) {
+		if(data==null){
+			return 0;
+		}
+		if (data.size() == 0) {
+			return 0;
+		}
+		int suma = 0;
+		for (Double dwell : data) {
+			suma += dwell;
+		}
+		return (double)suma / (double)data.size();
+	}
+	
+	public static double calculateDoubleStandardDeviation(Vector<Double> data) {
+		if(data==null){
+			return 0;
+		}
+		if (data.size() == 0) {
+			return 0;
+		}
 
+		double mean = calculateDoubleMean(data);
+		double sum = 0;
+		double deviation = 0;
+
+		for (Double dwell : data) {
+			deviation = Math.pow(dwell - mean, 2);
+			sum += deviation;
+		}
+
+		double standardDeviation = sum / (double)data.size();
+		return Math.sqrt(standardDeviation);
+	}
+
+	
 	public static double calculateStandardDeviation(Vector<Integer> data) {
 		if(data==null){
 			return 0;

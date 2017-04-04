@@ -6,6 +6,12 @@ public class Features {
 	private double mauseClicksMean;
 	private double mauseClickDeviation;
 	private int mauseCliskEventCount;
+	//mouse move
+	private double mauseSpeed;
+	private double horizontalToTotalRatio;
+	private double verticalToTotalRatio;
+	private double clickToClickDistanceToTotalPathLengthRatioMean;
+	private double clickToClickDistanceToTotalPathLengthRatioDeviation;
 	// SigleKey
 	private int tabFreq;
 	private int delFreq;
@@ -335,5 +341,35 @@ public class Features {
 	}
 	public void setGraphWordDurationDeviation(double graphWordDurationDeviation) {
 		this.graphWordDurationDeviation = graphWordDurationDeviation;
+	}
+	public double getMauseSpeed() {
+		return mauseSpeed;
+	}
+	public void setMauseSpeed(double mauseSpeed) {
+		this.mauseSpeed = mauseSpeed;
+	}
+	public double getHorizontalToTotalRatio() {
+		return horizontalToTotalRatio;
+	}
+	public void setHorizontalToTotalRatio(double horizontalToTotalRatio) {
+		this.horizontalToTotalRatio = horizontalToTotalRatio;
+	}
+	public double getVerticalToTotalRatio() {
+		return verticalToTotalRatio;
+	}
+	public void setVerticalToTotalRatio(double verticalToTotalRatio) {
+		this.verticalToTotalRatio = verticalToTotalRatio;
+	}
+	public double getClickToClickDistanceToTotalPathLengthRatioMean() {
+		return clickToClickDistanceToTotalPathLengthRatioMean;
+	}
+	public void setClickToClickDistanceToTotalPathLengthRatioMean(double clickToClickDistanceToTotalPathLengthRatioMean) {
+		this.clickToClickDistanceToTotalPathLengthRatioMean = clickToClickDistanceToTotalPathLengthRatioMean;
+	}
+	public double getClickToClickDistanceToTotalPathLengthRatioDeviation() {
+		return clickToClickDistanceToTotalPathLengthRatioDeviation;
+	}
+	public void setClickToClickDistanceToTotalPathLengthRatioDeviation(double clickToClickDistanceToTotalPathLengthRatioDeviation) {
+		this.clickToClickDistanceToTotalPathLengthRatioDeviation = clickToClickDistanceToTotalPathLengthRatioDeviation;
 	}
 }
