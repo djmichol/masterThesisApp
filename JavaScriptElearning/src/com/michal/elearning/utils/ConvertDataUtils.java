@@ -35,7 +35,7 @@ public class ConvertDataUtils {
 		List<RawData> rawData = new ArrayList<RawData>();
     	try {			
 			Gson converter = new Gson();
-			if(userDataList!=null){
+			if(userDataList!=null && userDataList.size()>0){
 				for(UserInputData userData : userDataList){					
 					JSONArray mauseClicks = new JSONArray(new String(userData.getMouseClicks(), StandardCharsets.UTF_8));
 					JSONArray keystrokes = new JSONArray(new String(userData.getKeyStrokes(), StandardCharsets.UTF_8));

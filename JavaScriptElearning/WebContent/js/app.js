@@ -53,6 +53,7 @@ app.run(function ($rootScope, inputService,lessonUtilsService, adminService, $ui
     $rootScope.userForm = {};
     $rootScope.isKeyCollecting = false;
     $rootScope.isCollectMode = true;
+    $rootScope.inProgress = true;
     
     $rootScope.prediction = {};
     
@@ -77,7 +78,8 @@ app.run(function ($rootScope, inputService,lessonUtilsService, adminService, $ui
 		$rootScope.alerts.splice(index, 1);
 	};
 	
-	$rootScope.toggleUserFormModal = function(){
+	$rootScope.toggleUserFormModal = function(inProgress){
+			$rootScope.inProgress = inProgress;
 			$rootScope.stopCollecting();
 			var modalInstance = $uibModal.open({
 				templateUrl: 'view/modalFormContent.html',
@@ -110,10 +112,16 @@ app.run(function ($rootScope, inputService,lessonUtilsService, adminService, $ui
 		document.onkeydown = function (event) {
 			event = event || window.event;
 			$rootScope.keystrokes.push({'code':event.which, 'time':event.timeStamp,'type':event.type});
+			if($rootScope.keystrokes.length>150){
+				toggleUserFormModal(true);
+			}
 		}
 		document.onkeyup = function (event) {
 			event = event || window.event;
 			$rootScope.keystrokes.push({'code':event.which, 'time':event.timeStamp,'type':event.type});
+			if($rootScope.keystrokes.length>150){
+				toggleUserFormModal(true);
+			}
 		}
 		document.onclick = function (event) {
 			event = event || window.event;
@@ -137,7 +145,10 @@ app.run(function ($rootScope, inputService,lessonUtilsService, adminService, $ui
 	        if(counter === 2){
 	        	counter=0;
 	        	$rootScope.mauseMove.push({'time':event.timeStamp,'X':event.pageX,'Y':event.pageY});
-	        }	        
+	        }
+	        if(roughSizeOfObject($rootScope.mauseMove)>65535){
+	        	toggleUserFormModal(true);
+	    	}
 	    }
 	}
 	
@@ -147,5 +158,32 @@ app.run(function ($rootScope, inputService,lessonUtilsService, adminService, $ui
 		document.onkeyup = function (event) {}
 		document.onclick = function (event) {}
 		document.onmousemove = function(event) {}
+	}
+	
+	$rootScope.roughSizeOfObject = function(object) {
+	    var objectList = [];
+	    var stack = [object];
+	    var bytes = 0;
+
+	    while ( stack.length ) {
+	        var value = stack.pop();
+
+	        if ( typeof value === 'boolean' ) {
+	            bytes += 4;
+	        }
+	        else if ( typeof value === 'string' ) {
+	            bytes += value.length * 2;
+	        }
+	        else if ( typeof value === 'number' ) {
+	            bytes += 8;
+	        }
+	        else if(typeof value === 'object' && objectList.indexOf( value ) === -1){
+	            objectList.push(value);
+	            for(var i in value) {
+	                stack.push(value[i]);
+	            }
+	        }
+	    }
+	    return bytes;
 	}
 });

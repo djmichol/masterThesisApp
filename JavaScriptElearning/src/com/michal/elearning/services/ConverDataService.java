@@ -125,6 +125,9 @@ public class ConverDataService {
 		List<UserInputData> userDataList = dataService.getUserData(userId);	
 		User user = userService.getUserByID(userId);
 		List<DataModelWithForm> dataToFile = ConvertDataUtils.getVectorsFromEditorLesson(userDataList, user);
+		if(dataToFile==null){
+			return;
+		}
 		tryToInsertUserLernedModel(dataToFile);
 	}
 

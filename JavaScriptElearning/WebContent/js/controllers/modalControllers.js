@@ -7,7 +7,7 @@ app.controller('NextLessonModalInstanceCtrl', function($scope, $rootScope, $uibM
 		$uibModalInstance.close(this);			
 		lessonUtilsService.setNextLessonIndex();
 		if(lessonUtilsService.checkIfLastEditorLesson()){
-			$rootScope.toggleUserFormModal();
+			$rootScope.toggleUserFormModal(false);
 		}else{
 			lessonUtilsService.redirectToNextLesson();
 		}
@@ -20,7 +20,7 @@ app.controller('QuizResultModalInstanceCtrl', function($scope, $rootScope, $uibM
 	
 	$scope.ok = function() {
 		$uibModalInstance.close(this);
-		$rootScope.toggleUserFormModal();
+		$rootScope.toggleUserFormModal(false);
 		lessonUtilsService.setNextLessonIndex();
 	};
 });
@@ -60,10 +60,15 @@ app.controller('UserFormModalInstanceCtrl', function($scope, $rootScope, $uibMod
 		}
 		$rootScope.userForm = ankieta;
 		$rootScope.saveUserInput();
+		$rootScope.collectKeystrokes();
 		$uibModalInstance.close(this);
-		lessonUtilsService.redirectToNextLesson();
+		
+		if(!$rootScope.inProgress){
+			lessonUtilsService.redirectToNextLesson();
+		}
 	};
 
+	//default settings
 	$scope.boredom = 'YesRather';
 	$scope.confusion = 'YesRather';
 	$scope.engaged = 'YesRather';
