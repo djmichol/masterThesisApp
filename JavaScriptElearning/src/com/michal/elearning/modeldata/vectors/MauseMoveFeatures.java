@@ -17,11 +17,18 @@ public class MauseMoveFeatures {
 	private double verticalToTotalRatio;
 	private Vector<Double> clickToClickDistanceToTotalPathLengthRatio;
 	
+	private Vector<Double> pausesTimes;
+	private int pauses;
+	
+	private static final int minPauseTimeInMilis = 3000; //3sek
+	
 	public void clear(){
 		mauseSpeed = 0;
 		horizontalToTotalRatio = 0;
 		verticalToTotalRatio = 0;
+		pauses = 0;
 		clickToClickDistanceToTotalPathLengthRatio = new Vector<>();
+		pausesTimes = new Vector<>();
 	}
 	
 	public void prepareVector(List<UserMauseMove> mauseMoves, List<UserMauseClick> mauseClicks){
@@ -51,6 +58,12 @@ public class MauseMoveFeatures {
 					path = new ArrayList<>();
 					clickIndex++;
 				}
+			}
+			
+			Integer timeBetween = mauseMoves.get(i+1).getTime()-mauseMoves.get(i).getTime();
+			if(timeBetween>=minPauseTimeInMilis){
+				pauses++;
+				pausesTimes.add((double) timeBetween);
 			}
 			
 			int elapsedTime  =  MathHelperUtils.calculateElapsedTime(mauseMoves.get(i), mauseMoves.get(i+1));
@@ -100,6 +113,14 @@ public class MauseMoveFeatures {
 
 	public Vector<Double> getClickToClickDistanceToTotalPathLengthRatio() {
 		return clickToClickDistanceToTotalPathLengthRatio;
+	}
+
+	public Vector<Double> getPausesTimes() {
+		return pausesTimes;
+	}
+
+	public int getPauses() {
+		return pauses;
 	}
 
 }

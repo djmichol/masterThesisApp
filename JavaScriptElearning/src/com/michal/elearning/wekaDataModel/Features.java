@@ -12,6 +12,9 @@ public class Features {
 	private double verticalToTotalRatio;
 	private double clickToClickDistanceToTotalPathLengthRatioMean;
 	private double clickToClickDistanceToTotalPathLengthRatioDeviation;
+	private int pausesCount;
+	private double pausesTimeMean;
+	private double pausesTimeDeviation;
 	// SigleKey
 	private int tabFreq;
 	private int delFreq;
@@ -371,5 +374,23 @@ public class Features {
 	}
 	public void setClickToClickDistanceToTotalPathLengthRatioDeviation(double clickToClickDistanceToTotalPathLengthRatioDeviation) {
 		this.clickToClickDistanceToTotalPathLengthRatioDeviation = clickToClickDistanceToTotalPathLengthRatioDeviation;
+	}
+	public int getPausesCount() {
+		return pausesCount;
+	}
+	public void setPausesCount(int pausesCount) {
+		this.pausesCount = pausesCount;
+	}
+	public double getPausesTimeMean() {
+		return pausesTimeMean;
+	}
+	public void setPausesTimeMean(double pausesTimeMean) {
+		this.pausesTimeMean = pausesTimeMean;
+	}
+	public double getPausesTimeDeviation() {
+		return pausesTimeDeviation;
+	}
+	public void setPausesTimeDeviation(double pausesTimeDeviation) {
+		this.pausesTimeDeviation = pausesTimeDeviation;
 	}
 }

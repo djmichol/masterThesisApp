@@ -123,6 +123,9 @@ public class ConvertDataUtils {
 		dataToAdd.getFeatures().setClickToClickDistanceToTotalPathLengthRatioDeviation(MathHelperUtils.calculateDoubleStandardDeviation(mauseMoveFeatures.getClickToClickDistanceToTotalPathLengthRatio()));
 		dataToAdd.getFeatures().setHorizontalToTotalRatio(mauseMoveFeatures.getHorizontalToTotalRatio());
 		dataToAdd.getFeatures().setVerticalToTotalRatio(mauseMoveFeatures.getVerticalToTotalRatio());
+		dataToAdd.getFeatures().setPausesCount(mauseMoveFeatures.getPauses());
+		dataToAdd.getFeatures().setPausesTimeMean(MathHelperUtils.calculateDoubleMean(mauseMoveFeatures.getPausesTimes()));
+		dataToAdd.getFeatures().setPausesTimeDeviation(MathHelperUtils.calculateDoubleStandardDeviation(mauseMoveFeatures.getPausesTimes()));
 	}
 
 	private static void setMauceClickFeatures(List<UserMauseClick> mauseClicks, DataModelWithForm dataToAdd) {
