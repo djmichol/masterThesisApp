@@ -1,6 +1,8 @@
 package com.michal.elearning.services;
 
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
@@ -30,8 +32,15 @@ public class ModeService {
 	@RolesAllowed("admin")
 	@POST
 	public Response setMode(String data) throws SQLException {
-		//int active = (int) CoreDao.getSqlMapper().queryForObject("Mode.getMode","collect");
-		//boolean isCollectMode = active == 1 ? true : false;
+		boolean isCollectMode = data.equals("false") ? false : true;
+		Map<String,Object> params = new HashMap<>();
+		params.put("mode", "collect");
+		params.put("value", isCollectMode ? 1 : 0);
+		CoreDao.getSqlMapper().update("Mode.setMode",params);
+		params = new HashMap<>();
+		params.put("mode", "predict");
+		params.put("value", isCollectMode ? 0 : 1);
+		CoreDao.getSqlMapper().update("Mode.setMode",params);
 		return Response.ok().build();
 	}
 	

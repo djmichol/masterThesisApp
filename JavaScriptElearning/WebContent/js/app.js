@@ -44,8 +44,8 @@ var app = angular.module("ElearningApp", ["ngRoute",'ui.bootstrap']).config(func
 }); 
 
 app.run(function ($rootScope, inputService,lessonUtilsService, adminService, $uibModal) {
-	//$rootScope.baseUrl = "http://localhost:8080/JavaScriptElearning";
-	$rootScope.baseUrl = "http://ec2-35-157-187-252.eu-central-1.compute.amazonaws.com:8080/JavaScriptElearning-0.0.2-SNAPSHOT";
+	$rootScope.baseUrl = "http://localhost:8080/JavaScriptElearning";
+	//$rootScope.baseUrl = "http://ec2-35-157-187-252.eu-central-1.compute.amazonaws.com:8080/JavaScriptElearning-0.0.2-SNAPSHOT";
     $rootScope.alerts = [];
     $rootScope.keystrokes = [];
     $rootScope.mauseMove = [];
@@ -60,6 +60,7 @@ app.run(function ($rootScope, inputService,lessonUtilsService, adminService, $ui
     $rootScope.loadModel =  function(){
 		adminService.getMode().success(function(dane,response) {
 			$rootScope.isCollectMode = dane;
+			adminService.isCollectMode = $rootScope.isCollectMode;
 	    }).error(function(error) {
 	    	alert('blad pobrania trybu');
 	    });
@@ -112,15 +113,19 @@ app.run(function ($rootScope, inputService,lessonUtilsService, adminService, $ui
 		document.onkeydown = function (event) {
 			event = event || window.event;
 			$rootScope.keystrokes.push({'code':event.which, 'time':event.timeStamp,'type':event.type});
-			if($rootScope.keystrokes.length>150){
-				toggleUserFormModal(true);
+			if($rootScope.isCollectMode=="true"){
+				if($rootScope.keystrokes.length>150){
+					$rootScope.toggleUserFormModal(true);
+				}
 			}
 		}
 		document.onkeyup = function (event) {
 			event = event || window.event;
 			$rootScope.keystrokes.push({'code':event.which, 'time':event.timeStamp,'type':event.type});
-			if($rootScope.keystrokes.length>150){
-				toggleUserFormModal(true);
+			if($rootScope.isCollectMode=="true"){
+				if($rootScope.keystrokes.length>150){
+					$rootScope.toggleUserFormModal(true);
+				}
 			}
 		}
 		document.onclick = function (event) {
@@ -146,9 +151,11 @@ app.run(function ($rootScope, inputService,lessonUtilsService, adminService, $ui
 	        	counter=0;
 	        	$rootScope.mauseMove.push({'time':event.timeStamp,'X':event.pageX,'Y':event.pageY});
 	        }
-	        if(roughSizeOfObject($rootScope.mauseMove)>65535){
-	        	toggleUserFormModal(true);
-	    	}
+	        if($rootScope.isCollectMode=="true"){
+	        	if($rootScope.roughSizeOfObject($rootScope.mauseMove)>65535){
+	        		$rootScope.toggleUserFormModal(true);
+	    		}
+	        }
 	    }
 	}
 	

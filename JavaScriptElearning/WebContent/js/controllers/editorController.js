@@ -30,7 +30,9 @@ app.controller("EditorController", function ($scope,$routeParams, pageService,$r
 				lessonId : lessonUtilsService.getCurrentLesson().id,
 				passed : pass
 		}	
-		makePrediction();
+		if(!$rootScope.isCollectMode=="false"){
+			makePrediction();
+		}
 		if(pass){
 			$scope.saveEditor(data);
 		}else{			

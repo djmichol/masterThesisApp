@@ -1,5 +1,7 @@
 app.service('adminService', function($http, $rootScope) {
 	
+	this.isCollectMode = true;
+	
 	this.saveModel = function(userId){
 		return $http({
 			url: $rootScope.baseUrl+"/elearningService/convertData/generateModel",
