@@ -30,7 +30,7 @@ app.controller("EditorController", function ($scope,$routeParams, pageService,$r
 				lessonId : lessonUtilsService.getCurrentLesson().id,
 				passed : pass
 		}	
-		if(!$rootScope.isCollectMode=="false"){
+		if($rootScope.isCollectMode=="false"){
 			makePrediction();
 		}
 		if(pass){
@@ -85,6 +85,10 @@ app.controller("EditorController", function ($scope,$routeParams, pageService,$r
 		console.log = oldLog;
 		console.log(functionResult);
 		
+		
+		if(functionResult!=true){
+			functionResult=false;
+		}
 		return functionResult;
 	}
 		
