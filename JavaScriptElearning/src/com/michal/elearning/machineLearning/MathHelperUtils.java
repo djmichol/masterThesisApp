@@ -94,7 +94,7 @@ public class MathHelperUtils {
 			return 0;
 		}
 		
-		return stop.getTime() - start.getTime();
+		return stop.getTime().intValue() - start.getTime().intValue();
 	}
 
 	public static final int LEFT = 1;

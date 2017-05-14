@@ -44,11 +44,11 @@ public class SingleKeyFeatures {
 					}
 					if(keystrokes.get(i).getCode()>=48 && keystrokes.get(i).getCode()<=111){
 						keyCode = keystrokes.get(i).getCode();
-						time1 = keystrokes.get(i).getTime();
+						time1 = keystrokes.get(i).getTime().intValue();
 					}
 				}else if(keystrokes.get(i).getType().equals("keyup")){
 					if(keystrokes.get(i).getCode()==keyCode){
-						time2 = keystrokes.get(i).getTime();
+						time2 = keystrokes.get(i).getTime().intValue();
 						dwellTimes.add(time2-time1);
 					}
 				}
@@ -61,8 +61,8 @@ public class SingleKeyFeatures {
 	private double getWriteSpeed(List<UserKeystrokes> keystrokes) {
 		double result = 0.0;
 		if(keystrokes.size()>2){
-			int start = keystrokes.get(0).getTime();
-			int stop =  keystrokes.get(keystrokes.size()-1).getTime();
+			int start = keystrokes.get(0).getTime().intValue();
+			int stop =  keystrokes.get(keystrokes.size()-1).getTime().intValue();
 			double time = (double) stop-start ;
 			double allTimeInMin = (time/1000.0)/60.0;
 			int size = keystrokes.size();

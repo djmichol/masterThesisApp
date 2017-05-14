@@ -1,14 +1,20 @@
 package com.michal.elearning.dao;
 
+import java.math.BigDecimal;
+
+import com.google.gson.annotations.SerializedName;
+
 public class UserMauseMove implements Comparable<UserMauseMove>{
-	
+	@SerializedName("X")
 	private int posX;
+	@SerializedName("Y")
 	private int posY;
-	private Integer time;
+	@SerializedName("time")
+	private BigDecimal time;
 	
 	public UserMauseMove(){}
 	
-	public UserMauseMove(Integer time,int posX,int posY){
+	public UserMauseMove(BigDecimal time,int posX,int posY){
 		this.posX = posX;
 		this.posY = posY;
 		this.time = time;
@@ -26,10 +32,10 @@ public class UserMauseMove implements Comparable<UserMauseMove>{
 	public void setPosY(int posY) {
 		this.posY = posY;
 	}
-	public Integer getTime() {
+	public BigDecimal getTime() {
 		return time;
 	}
-	public void setTime(Integer time) {
+	public void setTime(BigDecimal time) {
 		this.time = time;
 	}
 	

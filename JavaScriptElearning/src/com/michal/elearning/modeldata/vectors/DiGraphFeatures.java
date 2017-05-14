@@ -96,8 +96,8 @@ public class DiGraphFeatures implements GraphsFeatures{
 
 	private Integer getDigraphDuration(NGraph digraph) {
 		Integer dwell = 0;
-		int stop = digraph.getKeystrokes().get(digraph.getKeystrokes().size()-1).getTime();
-		int start = digraph.getKeystrokes().get(0).getTime();
+		int stop = digraph.getKeystrokes().get(digraph.getKeystrokes().size()-1).getTime().intValue();
+		int start = digraph.getKeystrokes().get(0).getTime().intValue();
 		dwell = stop-start;
 		return dwell;
 	}
@@ -109,14 +109,14 @@ public class DiGraphFeatures implements GraphsFeatures{
 		int counter = 0;
 		for (UserKeystrokes key : digraph.getKeystrokes()) {
 			if (key.getCode() == digraph.getKeyList()[0] && key.getType().equals("keyup")) {
-				start = key.getTime();
+				start = key.getTime().intValue();
 				break;
 			} 
 		}
 		for (UserKeystrokes key : digraph.getKeystrokes()) {
 			if(digraph.getKeyList()[1]!=digraph.getKeyList()[0] || counter == 1){
 				if (key.getCode() == digraph.getKeyList()[1] && key.getType().equals("keydown")){
-					stop = key.getTime();
+					stop = key.getTime().intValue();
 					break;
 				}
 			}
@@ -130,13 +130,13 @@ public class DiGraphFeatures implements GraphsFeatures{
 
 	private Integer getTimeBetweenFirstAndSecondPress(NGraph digraph) {
 		Integer dwell = 0;
-		int start = digraph.getKeystrokes().get(0).getTime();
+		int start = digraph.getKeystrokes().get(0).getTime().intValue();
 		int stop = 0;
 		int counter = 0;
 		for(UserKeystrokes key : digraph.getKeystrokes()){
 			if(digraph.getKeyList()[1]!=digraph.getKeyList()[0] || counter == 1){
 				if(key.getCode() == digraph.getKeyList()[1] && key.getType().equals("keydown")){
-					stop = key.getTime();
+					stop = key.getTime().intValue();
 					break;
 				}
 			}else{
@@ -150,16 +150,16 @@ public class DiGraphFeatures implements GraphsFeatures{
 	private Integer getSecondDwell(NGraph digraph) {
 		Collections.sort(digraph.getKeystrokes(), new Comparator<UserKeystrokes>() {
 			public int compare(UserKeystrokes o1, UserKeystrokes o2) {
-				return Integer.compare(o2.getTime(), o1.getTime());
+				return Integer.compare(o2.getTime().intValue(), o1.getTime().intValue());
 			}
 		});
 
 		Integer dwell = 0;
-		int stop = digraph.getKeystrokes().get(0).getTime();
+		int stop = digraph.getKeystrokes().get(0).getTime().intValue();
 		int start = 0;
 		for(UserKeystrokes key : digraph.getKeystrokes()){
 			if(key.getCode() == digraph.getKeyList()[1] && key.getType().equals("keydown")){
-				start = key.getTime();
+				start = key.getTime().intValue();
 				break;
 			}
 		}
@@ -169,11 +169,11 @@ public class DiGraphFeatures implements GraphsFeatures{
 
 	private Integer getFirstDwell(NGraph digraph) {
 		Integer dwell = 0;
-		int start = digraph.getKeystrokes().get(0).getTime();
+		int start = digraph.getKeystrokes().get(0).getTime().intValue();
 		int stop = 0;
 		for(UserKeystrokes key : digraph.getKeystrokes()){
 			if(key.getCode() == digraph.getKeyList()[0] && key.getType().equals("keyup")){
-				stop = key.getTime();
+				stop = key.getTime().intValue();
 				break;
 			}
 		}

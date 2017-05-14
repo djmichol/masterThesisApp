@@ -134,11 +134,11 @@ public class TriGraphFeatures implements GraphsFeatures{
 		int keyCode = 0;
 		for (UserKeystrokes key : digraph.getKeystrokes()) {
 			if (key.getType().equals("keydown")) {
-				start = key.getTime();
+				start = key.getTime().intValue();
 				keyCode = key.getCode();
 			} else if (key.getType().equals("keyup")) {
 				if(key.getCode()==keyCode){
-					stop = key.getTime();
+					stop = key.getTime().intValue();
 					dwellMean.add(stop-start);
 					keyCode = 0;
 				}
@@ -158,9 +158,9 @@ public class TriGraphFeatures implements GraphsFeatures{
 			if (key.getType().equals("keydown")) {
 				if(!isAdded){
 					isAdded = true;
-					start = key.getTime();
+					start = key.getTime().intValue();
 				}else{
-					stop = key.getTime();
+					stop = key.getTime().intValue();
 					dwellMean.add(stop-start);
 					start = stop;
 					stop = 0;
@@ -175,8 +175,8 @@ public class TriGraphFeatures implements GraphsFeatures{
 	
 	private void setTrigraphDuration(NGraph triGraph) {
 		Integer dwell = 0;
-		int stop = triGraph.getKeystrokes().get(triGraph.getKeystrokes().size()-1).getTime();
-		int start = triGraph.getKeystrokes().get(0).getTime();
+		int stop = triGraph.getKeystrokes().get(triGraph.getKeystrokes().size()-1).getTime().intValue();
+		int start = triGraph.getKeystrokes().get(0).getTime().intValue();
 		dwell = stop-start;
 		wordDuration.add(dwell);
 	}
@@ -188,11 +188,11 @@ public class TriGraphFeatures implements GraphsFeatures{
 		int keyCode = 0;
 		for (UserKeystrokes key : trigraph.getKeystrokes()) {
 			if (key.getType().equals("keydown")) {
-				start = key.getTime();
+				start = key.getTime().intValue();
 				keyCode = key.getCode();
 			} else if (key.getType().equals("keyup")) {
 				if(key.getCode()==keyCode){
-					stop = key.getTime();
+					stop = key.getTime().intValue();
 					dwellMean.add(stop-start);
 					keyCode = 0;
 				}
@@ -210,14 +210,14 @@ public class TriGraphFeatures implements GraphsFeatures{
 		int stop = 0;
 		for (UserKeystrokes key : trigraph.getKeystrokes()) {
 			if(key.getCode()==trigraph.getKeyList()[0] && key.getType().equals("keydown")){
-				start = key.getTime();
+				start = key.getTime().intValue();
 			}else if(key.getCode()==trigraph.getKeyList()[1] && key.getType().equals("keydown")){
-				stop = key.getTime();
+				stop = key.getTime().intValue();
 				pressFirstSec.add(stop-start);
 				start = stop;
 				stop = 0;				
 			}else if(key.getCode()==trigraph.getKeyList()[2] && key.getType().equals("keydown")){
-				stop = key.getTime();
+				stop = key.getTime().intValue();
 				pressSecThird.add(stop-start);
 			}
 		}
@@ -228,16 +228,16 @@ public class TriGraphFeatures implements GraphsFeatures{
 		int stop = 0;
 		for (UserKeystrokes key : trigraph.getKeystrokes()) {
 			if(key.getCode()==trigraph.getKeyList()[0] && key.getType().equals("keyup")){
-				start = key.getTime();
+				start = key.getTime().intValue();
 			}else if(key.getCode()==trigraph.getKeyList()[1] && key.getType().equals("keydown")){
-				stop = key.getTime();
+				stop = key.getTime().intValue();
 				flightFirstSec.add(stop-start);
 				stop = 0;
 				start = 0;
 			}else if(key.getCode()==trigraph.getKeyList()[1] && key.getType().equals("keyup")){
-				start = key.getTime();
+				start = key.getTime().intValue();
 			}else if(key.getCode()==trigraph.getKeyList()[2] && key.getType().equals("keydown")){
-				stop = key.getTime();
+				stop = key.getTime().intValue();
 				flightSecThird.add(stop-start);
 				stop = 0;
 				start = 0;

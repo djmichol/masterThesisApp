@@ -11,8 +11,8 @@ public class MauseClickFeatures {
 		Vector<Integer> dwellTimes = new Vector<Integer>();
 		if(mauseClick.size()>=2){
 			for(int i=1; i<mauseClick.size();i++){
-				int time1 = mauseClick.get(i-1).getTime();
-				int time2 = mauseClick.get(i).getTime();
+				int time1 = mauseClick.get(i-1).getTime().intValue();
+				int time2 = mauseClick.get(i).getTime().intValue();
 				if(time1!=0 && time2!=0){
 					dwellTimes.add(time2-time1);
 				}

@@ -121,9 +121,9 @@ public class NGraphsFeatures implements GraphsFeatures{
 			if (key.getType().equals("keydown")) {
 				if(!isAdded){
 					isAdded = true;
-					start = key.getTime();
+					start = key.getTime().intValue();
 				}else{
-					stop = key.getTime();
+					stop = key.getTime().intValue();
 					dwellMean.add(stop-start);
 					start = stop;
 					stop = 0;
@@ -144,11 +144,11 @@ public class NGraphsFeatures implements GraphsFeatures{
 		int keyCode = 0;
 		for (UserKeystrokes key : digraph.getKeystrokes()) {
 			if (key.getType().equals("keydown")) {
-				start = key.getTime();
+				start = key.getTime().intValue();
 				keyCode = key.getCode();
 			} else if (key.getType().equals("keyup")) {
 				if(key.getCode()==keyCode){
-					stop = key.getTime();
+					stop = key.getTime().intValue();
 					dwellMean.add(stop-start);
 					keyCode = 0;
 				}
@@ -162,8 +162,8 @@ public class NGraphsFeatures implements GraphsFeatures{
 
 	private Integer getDigraphDuration(NGraph digraph) {
 		Integer dwell = 0;
-		int stop = digraph.getKeystrokes().get(digraph.getKeystrokes().size()-1).getTime();
-		int start = digraph.getKeystrokes().get(0).getTime();
+		int stop = digraph.getKeystrokes().get(digraph.getKeystrokes().size()-1).getTime().intValue();
+		int start = digraph.getKeystrokes().get(0).getTime().intValue();
 		dwell = stop-start;
 		return dwell;
 	}

@@ -1,13 +1,15 @@
 package com.michal.elearning.dao;
 
+import java.math.BigDecimal;
+
 public class UserMauseClick implements Comparable<UserMauseClick>{
 
 	private String type;
-	private Integer time;
+	private BigDecimal time;
 	
 	public UserMauseClick(){}
 	
-	public UserMauseClick(String type, Integer time){
+	public UserMauseClick(String type, BigDecimal time){
 		this.type = type;
 		this.time = time;
 	}
@@ -18,10 +20,10 @@ public class UserMauseClick implements Comparable<UserMauseClick>{
 	public void setType(String type) {
 		this.type = type;
 	}
-	public Integer getTime() {
+	public BigDecimal getTime() {
 		return time;
 	}
-	public void setTime(Integer time) {
+	public void setTime(BigDecimal time) {
 		this.time = time;
 	}
 	

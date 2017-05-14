@@ -49,9 +49,9 @@ public class MauseMoveFeatures {
 		for(int i=0;i<mauseMoves.size()-1;i++){
 				
 			if(clickIndex+1<mauseClicks.size()){
-				if(mauseClicks.get(clickIndex).getTime()<mauseMoves.get(i).getTime() && mauseClicks.get(clickIndex+1).getTime()>mauseMoves.get(i).getTime()){
+				if(mauseClicks.get(clickIndex).getTime().intValue()<mauseMoves.get(i).getTime().intValue() && mauseClicks.get(clickIndex+1).getTime().intValue()>mauseMoves.get(i).getTime().intValue()){
 					path.add(mauseMoves.get(i));
-				}else if(mauseClicks.get(clickIndex+1).getTime()<=mauseMoves.get(i).getTime()){
+				}else if(mauseClicks.get(clickIndex+1).getTime().intValue()<=mauseMoves.get(i).getTime().intValue()){
 					if(path.size()>1){
 						paths.add(path);
 					}
@@ -60,7 +60,7 @@ public class MauseMoveFeatures {
 				}
 			}
 			
-			Integer timeBetween = mauseMoves.get(i+1).getTime()-mauseMoves.get(i).getTime();
+			Integer timeBetween = mauseMoves.get(i+1).getTime().intValue()-mauseMoves.get(i).getTime().intValue();
 			if(timeBetween>=minPauseTimeInMilis){
 				pauses++;
 				pausesTimes.add((double) timeBetween);
@@ -81,8 +81,14 @@ public class MauseMoveFeatures {
 		}
 		double allTimeInSec = (allTime/1000.0);
 		mauseSpeed = allDistance/allTimeInSec;
-		horizontalToTotalRatio = (allHorizontalDistance/allDistance)*100;
-		verticalToTotalRatio = (allVerticalDistance/allDistance)*100;
+		if(allDistance>0){
+			horizontalToTotalRatio = (allHorizontalDistance/allDistance)*100.0;
+			verticalToTotalRatio = (allVerticalDistance/allDistance)*100.0;
+		}else{
+			horizontalToTotalRatio = 0.0;
+			verticalToTotalRatio =0.0;
+		}
+		
 		clickToClickDistanceToTotalPathLengthRatio = calculateDistanceToPathRatio(paths);		
 	}
 	

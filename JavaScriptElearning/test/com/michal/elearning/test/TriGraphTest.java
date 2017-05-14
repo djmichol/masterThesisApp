@@ -13,7 +13,7 @@ import com.michal.elearning.wekaDataModel.TriGraphsCodes;
 
 public class TriGraphTest {
 
-	@Test
+	/*@Test
 	public void testGetKeydownsList() throws IllegalArgumentException, IllegalAccessException{
 		List<UserKeystrokes> keystrokes = new ArrayList<UserKeystrokes>();
 		//public static int[] FOR_TRI = {70,79,82};
@@ -83,6 +83,6 @@ public class TriGraphTest {
 		Assert.assertEquals((Integer)62,dd.getDwellFirst().get(0)); //62
 		Assert.assertEquals((Integer)62,dd.getDwellSecond().get(0)); //62
 		Assert.assertEquals((Integer)262,dd.getWordDuration().get(0)); //262
-	}
+	}*/
 	
 }

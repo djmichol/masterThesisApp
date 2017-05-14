@@ -1,16 +1,18 @@
 package com.michal.elearning.dao;
 
+import java.math.BigDecimal;
+
 public class UserKeystrokes implements Comparable<UserKeystrokes>{
 	
 	private int code;
-	private Integer time;
+	private BigDecimal time;
 	private String type;
 	
 	private int[] foundGraph;
 	
 	public UserKeystrokes(){}
 	
-	public UserKeystrokes(int code, Integer time, String type){
+	public UserKeystrokes(int code, BigDecimal time, String type){
 		this.code = code;
 		this.time = time;
 		this.type = type;
@@ -22,10 +24,10 @@ public class UserKeystrokes implements Comparable<UserKeystrokes>{
 	public void setCode(int code) {
 		this.code = code;
 	}
-	public Integer getTime() {
+	public BigDecimal getTime() {
 		return time;
 	}
-	public void setTime(Integer time) {
+	public void setTime(BigDecimal time) {
 		this.time = time;
 	}
 	public String getType() {

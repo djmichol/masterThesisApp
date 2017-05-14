@@ -61,7 +61,7 @@ public class ConvertDataUtils {
 							mauseClick = converter.fromJson(mauseClicks.getJSONObject(i).toString(), UserMauseClick.class);
 							mauseClicksList.add(mauseClick);
 						}catch (Exception e) {
-							//DO NOTHING
+							e.printStackTrace();
 						}
 					}
 					
@@ -77,7 +77,7 @@ public class ConvertDataUtils {
 							mauseMove = converter.fromJson(mauseMoves.getJSONObject(i).toString(), UserMauseMove.class);
 							mauseMoveList.add(mauseMove);
 						}catch (Exception e) {
-							//DO NOTHING
+							e.printStackTrace();
 						}
 					}	
 					if(lesson.getType().equals("editor")){

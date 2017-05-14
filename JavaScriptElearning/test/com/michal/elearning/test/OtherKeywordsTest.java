@@ -13,7 +13,7 @@ import com.michal.elearning.wekaDataModel.NGraph;
 
 public class OtherKeywordsTest {
 	
-	@Test
+	/*@Test
 	public void testGetKeydownsList() throws IllegalArgumentException, IllegalAccessException{
 		List<UserKeystrokes> keystrokes = new ArrayList<UserKeystrokes>();
 		//alert {65,76,69,82,84};
@@ -114,6 +114,6 @@ public class OtherKeywordsTest {
 		NGraphsFeatures dd = new NGraphsFeatures();
 		List<NGraph> result = dd.prepareVector(keystrokes);
 		Assert.assertEquals(0, result.size());
-	}
+	}*/
 
 }

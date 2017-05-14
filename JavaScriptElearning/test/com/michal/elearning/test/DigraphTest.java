@@ -1,5 +1,6 @@
 package com.michal.elearning.test;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,17 +18,17 @@ public class DigraphTest {
 	public static List<UserKeystrokes> keystrokes = new ArrayList<UserKeystrokes>();
 	static{
 		//++
-		keystrokes.add(new UserKeystrokes(107,472451453,"keydown"));
-		keystrokes.add(new UserKeystrokes(107,472451515,"keyup"));
-		keystrokes.add(new UserKeystrokes(107,472451593,"keydown"));
-		keystrokes.add(new UserKeystrokes(107,472451718,"keyup"));
+		keystrokes.add(new UserKeystrokes(107,new BigDecimal(472451453),"keydown"));
+		keystrokes.add(new UserKeystrokes(107,new BigDecimal(472451515),"keyup"));
+		keystrokes.add(new UserKeystrokes(107,new BigDecimal(472451593),"keydown"));
+		keystrokes.add(new UserKeystrokes(107,new BigDecimal(472451718),"keyup"));
 		//if 3 
-		keystrokes.add(new UserKeystrokes(107,480894356,"keydown"));
-		keystrokes.add(new UserKeystrokes(73,480894406,"keydown"));
-		keystrokes.add(new UserKeystrokes(107,480894456,"keyup"));
-		keystrokes.add(new UserKeystrokes(70,480894530,"keydown"));	
-		keystrokes.add(new UserKeystrokes(73,480894540,"keyup"));					
-		keystrokes.add(new UserKeystrokes(70,480894640,"keyup"));
+		keystrokes.add(new UserKeystrokes(107,new BigDecimal(480894356),"keydown"));
+		keystrokes.add(new UserKeystrokes(73,new BigDecimal(480894406),"keydown"));
+		keystrokes.add(new UserKeystrokes(107,new BigDecimal(480894456),"keyup"));
+		keystrokes.add(new UserKeystrokes(70,new BigDecimal(480894530),"keydown"));	
+		keystrokes.add(new UserKeystrokes(73,new BigDecimal(480894540),"keyup"));					
+		keystrokes.add(new UserKeystrokes(70,new BigDecimal(480894640),"keyup"));
 	}
 	
 	@Test
@@ -42,27 +43,27 @@ public class DigraphTest {
 	public void testGetKeydownsList() throws IllegalArgumentException, IllegalAccessException{
 		List<UserKeystrokes> keystrokes = new ArrayList<UserKeystrokes>();
 		//++
-		keystrokes.add(new UserKeystrokes(107,472451453,"keydown"));
-		keystrokes.add(new UserKeystrokes(107,472451515,"keyup"));
-		keystrokes.add(new UserKeystrokes(107,472451593,"keydown"));
-		keystrokes.add(new UserKeystrokes(107,472451718,"keyup"));
+		keystrokes.add(new UserKeystrokes(107,new BigDecimal(472451453),"keydown"));
+		keystrokes.add(new UserKeystrokes(107,new BigDecimal(472451515),"keyup"));
+		keystrokes.add(new UserKeystrokes(107,new BigDecimal(472451593),"keydown"));
+		keystrokes.add(new UserKeystrokes(107,new BigDecimal(472451718),"keyup"));
 		//if
-		keystrokes.add(new UserKeystrokes(73,470883406,"keydown"));
-		keystrokes.add(new UserKeystrokes(73,470883500,"keyup"));
-		keystrokes.add(new UserKeystrokes(70,470883531,"keydown"));
-		keystrokes.add(new UserKeystrokes(70,470883640,"keyup"));
+		keystrokes.add(new UserKeystrokes(73,new BigDecimal(470883406),"keydown"));
+		keystrokes.add(new UserKeystrokes(73,new BigDecimal(470883500),"keyup"));
+		keystrokes.add(new UserKeystrokes(70,new BigDecimal(470883531),"keydown"));
+		keystrokes.add(new UserKeystrokes(70,new BigDecimal(470883640),"keyup"));
 		//if 2 
-		keystrokes.add(new UserKeystrokes(73,470884406,"keydown"));
-		keystrokes.add(new UserKeystrokes(70,470884500,"keydown"));
-		keystrokes.add(new UserKeystrokes(73,470884530,"keyup"));		
-		keystrokes.add(new UserKeystrokes(70,470884640,"keyup"));
+		keystrokes.add(new UserKeystrokes(73,new BigDecimal(470884406),"keydown"));
+		keystrokes.add(new UserKeystrokes(70,new BigDecimal(470884500),"keydown"));
+		keystrokes.add(new UserKeystrokes(73,new BigDecimal(470884530),"keyup"));		
+		keystrokes.add(new UserKeystrokes(70,new BigDecimal(470884640),"keyup"));
 		//if 3 
-		keystrokes.add(new UserKeystrokes(107,480894356,"keydown"));
-		keystrokes.add(new UserKeystrokes(73,480894406,"keydown"));
-		keystrokes.add(new UserKeystrokes(107,480894456,"keyup"));
-		keystrokes.add(new UserKeystrokes(70,480894530,"keydown"));	
-		keystrokes.add(new UserKeystrokes(73,480894540,"keyup"));					
-		keystrokes.add(new UserKeystrokes(70,480894640,"keyup"));
+		keystrokes.add(new UserKeystrokes(107,new BigDecimal(480894356),"keydown"));
+		keystrokes.add(new UserKeystrokes(73,new BigDecimal(480894406),"keydown"));
+		keystrokes.add(new UserKeystrokes(107,new BigDecimal(480894456),"keyup"));
+		keystrokes.add(new UserKeystrokes(70,new BigDecimal(480894530),"keydown"));	
+		keystrokes.add(new UserKeystrokes(73,new BigDecimal(480894540),"keyup"));					
+		keystrokes.add(new UserKeystrokes(70,new BigDecimal(480894640),"keyup"));
 		DiGraphFeatures dd = new DiGraphFeatures();
 		List<NGraph> result = dd.prepareVector(keystrokes);
 		Assert.assertEquals(4, result.size());
@@ -121,12 +122,12 @@ public class DigraphTest {
 	public void noDigraphTest() throws IllegalArgumentException, IllegalAccessException{
 		List<UserKeystrokes> keystrokes = new ArrayList<UserKeystrokes>();
 		//==
-		keystrokes.add(new UserKeystrokes(107,472451453,"keydown"));
-		keystrokes.add(new UserKeystrokes(70,472451515,"keydown"));
-		keystrokes.add(new UserKeystrokes(107,472451593,"keyup"));
-		keystrokes.add(new UserKeystrokes(70,472451718,"keyup"));
-		keystrokes.add(new UserKeystrokes(68,472451818,"keydown"));
-		keystrokes.add(new UserKeystrokes(68,472451918,"keyup"));
+		keystrokes.add(new UserKeystrokes(107,new BigDecimal(472451453),"keydown"));
+		keystrokes.add(new UserKeystrokes(70,new BigDecimal(472451515),"keydown"));
+		keystrokes.add(new UserKeystrokes(107,new BigDecimal(472451593),"keyup"));
+		keystrokes.add(new UserKeystrokes(70,new BigDecimal(472451718),"keyup"));
+		keystrokes.add(new UserKeystrokes(68,new BigDecimal(472451818),"keydown"));
+		keystrokes.add(new UserKeystrokes(68,new BigDecimal(472451918),"keyup"));
 		DiGraphFeatures dd = new DiGraphFeatures();
 		List<NGraph> result = dd.prepareVector(keystrokes);
 		Assert.assertEquals(0, result.size());
