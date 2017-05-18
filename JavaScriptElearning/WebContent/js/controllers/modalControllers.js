@@ -25,12 +25,19 @@ app.controller('QuizResultModalInstanceCtrl', function($scope, $rootScope, $uibM
 	};
 });
 
-app.controller('PredictionModalInstanceCtrl', function($scope, $rootScope, $uibModalInstance) {
+app.controller('PredictionModalInstanceCtrl', function($scope, $rootScope, $uibModalInstance, lessonUtilsService) {
 	$scope.message = '';
 	
 	$scope.init = function(){
-		//TODO
-		$scope.message = $rootScope.prediction;
+		if(frustration==='Yes'){
+			$scope.message = 'frustration';
+		}else if(confusion==='Yes'){
+			$scope.message = 'confusion';
+		}else if(boredom==='Yes'){
+			$scope.message = 'boredom';
+		}else if(engaged==='Yes'){
+			$scope.message = 'engaged';
+		}
 	}
 	
 	$scope.ok = function() {
