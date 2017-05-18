@@ -43,7 +43,7 @@ var app = angular.module("ElearningApp", ["ngRoute",'ui.bootstrap']).config(func
     });
 }); 
 
-app.run(function ($rootScope, inputService,lessonUtilsService, adminService, $uibModal) {
+app.run(function ($rootScope, inputService,lessonUtilsService, adminService, $uibModal, pageService) {
 	$rootScope.baseUrl = "http://localhost:8080/JavaScriptElearning";
 	//$rootScope.baseUrl = "http://ec2-35-157-187-252.eu-central-1.compute.amazonaws.com:8080/JavaScriptElearning-0.0.2-SNAPSHOT";
     $rootScope.alerts = [];
@@ -89,6 +89,29 @@ app.run(function ($rootScope, inputService,lessonUtilsService, adminService, $ui
 			})
 		};
 	
+	$rootScope.togglePredictModel = function(dane){
+			$rootScope.stopCollecting();
+			var modalInstance = $uibModal.open({
+				templateUrl: 'view/PredictionModal.html',
+				backdrop: false,
+				controller: 'PredictionModalInstanceCtrl'
+			})
+		};	
+		
+	$rootScope.makePrediction = function(){
+		var predictionData = {
+				keyStroke : $rootScope.keystrokes,
+				mauseMove :  $rootScope.mauseMove,
+				mauseClick : $rootScope.mauseClick,
+				lessonId : lessonUtilsService.getCurrentLesson().id
+		}
+		pageService.makePrediction(data).success(function(dane) {
+			togglePredictModel(JSON.stringify(dane.predictions));
+			$rootScope.prediction = JSON.stringify(dane.predictions);
+        }).error(function(error) {
+        });
+	}	
+		
 	$rootScope.saveUserInput = function(){
 		var lessonId = lessonUtilsService.getCurrentLesson().id;
 		var data = {

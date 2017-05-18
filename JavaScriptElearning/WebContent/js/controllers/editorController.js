@@ -31,7 +31,7 @@ app.controller("EditorController", function ($scope,$routeParams, pageService,$r
 				passed : pass
 		}	
 		if($rootScope.isCollectMode=="false"){
-			makePrediction();
+			//makePrediction();
 		}
 		if(pass){
 			$scope.saveEditor(data);
@@ -40,16 +40,6 @@ app.controller("EditorController", function ($scope,$routeParams, pageService,$r
 			document.getElementById("result").innerHTML += " Bledne rozwiazania!!!!";
 			alert('Bledne rozwiazanie');
 		}
-	}
-	
-	function makePrediction(){
-		var predictionData = {
-				keyStroke : $rootScope.keystrokes,
-				mauseMove :  $rootScope.mauseMove,
-				mauseClick : $rootScope.mauseClick,
-				lessonId : lessonUtilsService.getCurrentLesson().id
-		}
-		lessonUtilsService.makePredictions(predictionData);
 	}
 	
 	function testFunction(content,test,errorInfo) {

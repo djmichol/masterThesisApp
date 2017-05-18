@@ -25,6 +25,20 @@ app.controller('QuizResultModalInstanceCtrl', function($scope, $rootScope, $uibM
 	};
 });
 
+app.controller('PredictionModalInstanceCtrl', function($scope, $rootScope, $uibModalInstance) {
+	$scope.message = '';
+	
+	$scope.init = function(){
+		//TODO
+		$scope.message = $rootScope.prediction;
+	}
+	
+	$scope.ok = function() {
+		$rootScope.collectKeystrokes();
+		$uibModalInstance.close(this);
+	};
+});
+
 app.controller('UserFormModalInstanceCtrl', function($scope, $rootScope, $uibModalInstance, lessonUtilsService) {
 
 	$scope.ok = function() {
