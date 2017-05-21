@@ -15,7 +15,7 @@ import com.michal.elearning.wekaDataModel.DataModelWithForm;
 
 public class ArffFileHelper {
 	
-	public static Map<String,byte[]> prepareArffInputStream(List<DataModelWithForm> dataToFile, boolean toClassify) throws Exception {
+	public static Map<String,byte[]> prepareArffInputStream(List<DataModelWithForm> dataToFile, boolean toClassify, String type) throws Exception {
 		List<String> emotionStates = InspectClassFields(UserInputForm.class);
 		List<String> features = InspectClassFields(Features.class);
 		

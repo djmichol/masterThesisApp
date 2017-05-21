@@ -78,6 +78,44 @@ public class ConverDataService {
     	return Response.ok().build(); 
     }
 	
+	@RolesAllowed("admin")
+    @POST
+    @Path("/generateModelTest")
+    public Response saveUserTestModel(@QueryParam("userId") int userId) 
+    {   
+		this.userId = userId;
+    	try {
+			prepareTestModel();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}    	
+    	return Response.ok().build(); 
+    }
+	
+	private void prepareTestModel() throws SQLException {
+		List<UserInputData> userDataList = dataService.getUserData(userId);	
+		User user = userService.getUserByID(userId);
+		List<DataModelWithForm> dataToFile = ConvertDataUtils.getVectorsFromEditorLesson(userDataList, user, "quiz");
+		if(dataToFile==null){
+			return;
+		}
+		tryToInsertQuizUserLernedModel(dataToFile,"quiz");		
+	}
+	
+	private void tryToInsertQuizUserLernedModel(List<DataModelWithForm> dataToFile, String type) {
+		try {
+			Map<String,byte[]> arffInputStream = ArffFileHelper.prepareArffInputStream(dataToFile,false,"quiz");
+			for (Map.Entry<String, byte[]> entry : arffInputStream.entrySet())
+			{
+				J48 j48Classifier = new J48();	
+				WekaClassifierUtils.trainClassiffier(new ByteArrayInputStream(entry.getValue()), j48Classifier);				
+				tryToSaveTmpArffFile(entry, type);
+			}			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	private JSONObject predict(String inputData) throws SQLException, Exception {
 		Map<String,String> predictions = new HashMap<>();
 		
@@ -116,30 +154,30 @@ public class ConverDataService {
 	}
 	
 	private Map<String, byte[]> getDataToPredict(int userId, List<UserInputData> data) throws SQLException, Exception {
-		List<DataModelWithForm> dataToFile = ConvertDataUtils.getVectorsFromEditorLesson(data, userService.getUserByID(userId));
-    	Map<String,byte[]> arffInputStream = ArffFileHelper.prepareArffInputStream(dataToFile,true);
+		List<DataModelWithForm> dataToFile = ConvertDataUtils.getVectorsFromEditorLesson(data, userService.getUserByID(userId),"editor");
+    	Map<String,byte[]> arffInputStream = ArffFileHelper.prepareArffInputStream(dataToFile,true,"editor");
 		return arffInputStream;
 	}	
 	
 	private void prepareModel() throws SQLException{
 		List<UserInputData> userDataList = dataService.getUserData(userId);	
 		User user = userService.getUserByID(userId);
-		List<DataModelWithForm> dataToFile = ConvertDataUtils.getVectorsFromEditorLesson(userDataList, user);
+		List<DataModelWithForm> dataToFile = ConvertDataUtils.getVectorsFromEditorLesson(userDataList, user, "editor");
 		if(dataToFile==null){
 			return;
 		}
-		tryToInsertUserLernedModel(dataToFile);
+		tryToInsertUserLernedModel(dataToFile,"editor");
 	}
 
-	private void tryToInsertUserLernedModel(List<DataModelWithForm> dataToFile) {
+	private void tryToInsertUserLernedModel(List<DataModelWithForm> dataToFile, String type) {
 		try {
 			modelService.deleteUserModels(userId);
-			Map<String,byte[]> arffInputStream = ArffFileHelper.prepareArffInputStream(dataToFile,false);
+			Map<String,byte[]> arffInputStream = ArffFileHelper.prepareArffInputStream(dataToFile,false,"editor");
 			for (Map.Entry<String, byte[]> entry : arffInputStream.entrySet())
 			{
 				J48 j48Classifier = new J48();	
 				WekaClassifierUtils.trainClassiffier(new ByteArrayInputStream(entry.getValue()), j48Classifier);				
-				tryToSaveTmpArffFile(entry);				
+				tryToSaveTmpArffFile(entry, type);	
 				insertUserModel(entry.getKey(), j48Classifier);
 			}			
 		} catch (Exception e) {
@@ -147,8 +185,8 @@ public class ConverDataService {
 		}
 	}
 
-	private void tryToSaveTmpArffFile(Map.Entry<String, byte[]> entry) throws IOException {		
-		File targetFile = new File("C:\\DataWeka\\"+ entry.getKey()+".arff");
+	private void tryToSaveTmpArffFile(Map.Entry<String, byte[]> entry, String type) throws IOException {		
+		File targetFile = new File("C:\\DataWeka\\"+ entry.getKey()+"-"+type+".arff");
 	    OutputStream outStream = new FileOutputStream(targetFile);
 	    outStream.write(entry.getValue());
 	    outStream.close();

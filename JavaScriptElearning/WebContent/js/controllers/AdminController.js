@@ -13,6 +13,13 @@ app.controller("AdminController", function ($scope,$rootScope, adminService) {
 	    	alert('blad zapisu model do bazy');
 	    });
 	}
+	$scope.prepareQuizModel = function(){
+		adminService.saveQuizModel($scope.userId).success(function(dane,response) {
+			alert('stworzono model quiz');
+	    }).error(function(error) {
+	    	alert('blad');
+	    });
+	}
 	
 	$scope.getUserModel = function(){
 		adminService.getUserModel($scope.userId, $scope.userData).success(function(dane,response) {

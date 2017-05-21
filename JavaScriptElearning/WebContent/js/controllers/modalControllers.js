@@ -7,7 +7,11 @@ app.controller('NextLessonModalInstanceCtrl', function($scope, $rootScope, $uibM
 		$uibModalInstance.close(this);			
 		lessonUtilsService.setNextLessonIndex();
 		if(lessonUtilsService.checkIfLastEditorLesson()){
-			$rootScope.toggleUserFormModal(false);
+			if($rootScope.isCollectMode=="true"){
+				$rootScope.toggleUserFormModal(false);
+    		}else{
+    			$rootScope.makePrediction(false);
+    		}			
 		}else{
 			lessonUtilsService.redirectToNextLesson();
 		}
@@ -20,7 +24,11 @@ app.controller('QuizResultModalInstanceCtrl', function($scope, $rootScope, $uibM
 	
 	$scope.ok = function() {
 		$uibModalInstance.close(this);
-		$rootScope.toggleUserFormModal(false);
+		if($rootScope.isCollectMode=="true"){
+			$rootScope.toggleUserFormModal(false);
+		}else{
+			$rootScope.makePrediction(false);
+		}	
 		lessonUtilsService.setNextLessonIndex();
 	};
 });
@@ -29,13 +37,13 @@ app.controller('PredictionModalInstanceCtrl', function($scope, $rootScope, $uibM
 	$scope.message = '';
 	
 	$scope.init = function(){
-		if(frustration==='Yes'){
+		if($rootScope.prediction.frustration==='Yes'){
 			$scope.message = 'frustration';
-		}else if(confusion==='Yes'){
+		}else if($rootScope.prediction.confusion==='Yes'){
 			$scope.message = 'confusion';
-		}else if(boredom==='Yes'){
+		}else if($rootScope.prediction.boredom==='Yes'){
 			$scope.message = 'boredom';
-		}else if(engaged==='Yes'){
+		}else if($rootScope.prediction.engaged==='Yes'){
 			$scope.message = 'engaged';
 		}
 	}
@@ -43,6 +51,11 @@ app.controller('PredictionModalInstanceCtrl', function($scope, $rootScope, $uibM
 	$scope.ok = function() {
 		$rootScope.collectKeystrokes();
 		$uibModalInstance.close(this);
+		
+		if(!$rootScope.inProgress){
+			lessonUtilsService.redirectToNextLesson();
+		}
+		
 	};
 });
 

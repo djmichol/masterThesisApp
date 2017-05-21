@@ -31,7 +31,7 @@ public class ConvertDataUtils {
 	
 	private static ILessonsInterface lessonService = new LessonDaoService();
 
-	public static List<DataModelWithForm> getVectorsFromEditorLesson(List<UserInputData> userDataList, User user){
+	public static List<DataModelWithForm> getVectorsFromEditorLesson(List<UserInputData> userDataList, User user, String type){
 		List<RawData> rawData = new ArrayList<RawData>();
     	try {			
 			Gson converter = new Gson();
@@ -80,7 +80,7 @@ public class ConvertDataUtils {
 							e.printStackTrace();
 						}
 					}	
-					if(lesson.getType().equals("editor")){
+					if(lesson.getType().equals(type)){
 						rawData.add(new RawData(mauseClicksList, keystrokeList, mauseMoveList, userForm, lesson.getType(),user.getMail()));
 					}
 				}

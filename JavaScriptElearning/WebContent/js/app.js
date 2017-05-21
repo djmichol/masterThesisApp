@@ -98,16 +98,21 @@ app.run(function ($rootScope, inputService,lessonUtilsService, adminService, $ui
 			})
 		};	
 		
-	$rootScope.makePrediction = function(){
+	$rootScope.makePrediction = function(inProgress){
+		$rootScope.inProgress = inProgress;
 		var predictionData = {
 				keyStroke : $rootScope.keystrokes,
 				mauseMove :  $rootScope.mauseMove,
 				mauseClick : $rootScope.mauseClick,
 				lessonId : lessonUtilsService.getCurrentLesson().id
 		}
-		pageService.makePrediction(data).success(function(dane) {
-			togglePredictModel(JSON.stringify(dane.predictions));
-			$rootScope.prediction = JSON.stringify(dane.predictions);
+		$rootScope.keystrokes = [];
+	    $rootScope.mauseMove = [];
+	    $rootScope.mauseClick = [];
+	    $rootScope.userForm = {};
+		pageService.makePrediction(predictionData).success(function(dane) {
+			$rootScope.togglePredictModel(JSON.stringify(dane.predictions));
+			$rootScope.prediction = dane.predictions;
         }).error(function(error) {
         });
 	}	
@@ -135,21 +140,26 @@ app.run(function ($rootScope, inputService,lessonUtilsService, adminService, $ui
 		$rootScope.isKeyCollecting = true;
 		document.onkeydown = function (event) {
 			event = event || window.event;
-			$rootScope.keystrokes.push({'code':event.which, 'time':event.timeStamp,'type':event.type});
-			if($rootScope.isCollectMode=="true"){
+			$rootScope.keystrokes.push({'code':event.which, 'time':event.timeStamp,'type':event.type});			
 				if($rootScope.keystrokes.length>150){
-					$rootScope.toggleUserFormModal(true);
+					if($rootScope.isCollectMode=="true"){
+						$rootScope.toggleUserFormModal(true);
+					}else{
+						$rootScope.makePrediction(true);
+					}
 				}
 			}
 		}
 		document.onkeyup = function (event) {
 			event = event || window.event;
-			$rootScope.keystrokes.push({'code':event.which, 'time':event.timeStamp,'type':event.type});
-			if($rootScope.isCollectMode=="true"){
-				if($rootScope.keystrokes.length>150){
+			$rootScope.keystrokes.push({'code':event.which, 'time':event.timeStamp,'type':event.type});			
+			if($rootScope.keystrokes.length>150){
+				if($rootScope.isCollectMode=="true"){
 					$rootScope.toggleUserFormModal(true);
+				}else{
+					$rootScope.makePrediction(true);
 				}
-			}
+			}			
 		}
 		document.onclick = function (event) {
 			event = event || window.event;
@@ -174,13 +184,16 @@ app.run(function ($rootScope, inputService,lessonUtilsService, adminService, $ui
 	        	counter=0;
 	        	$rootScope.mauseMove.push({'time':event.timeStamp,'X':event.pageX,'Y':event.pageY});
 	        }
-	        if($rootScope.isCollectMode=="true"){
-	        	if($rootScope.roughSizeOfObject($rootScope.mauseMove)>65535){
-	        		$rootScope.toggleUserFormModal(true);
-	    		}
-	        }
+	        
+        	if($rootScope.roughSizeOfObject($rootScope.mauseMove)>65535){
+        		if($rootScope.isCollectMode=="true"){
+        			$rootScope.toggleUserFormModal(true);
+        		}else{
+        			$rootScope.makePrediction(true);
+        		}
+    		}
+	        
 	    }
-	}
 	
 	$rootScope.stopCollecting = function(){
 		$rootScope.isKeyCollecting = false;

@@ -10,6 +10,14 @@ app.service('adminService', function($http, $rootScope) {
 		});
 	}
 	
+	this.saveQuizModel = function(userId){
+		return $http({
+			url: $rootScope.baseUrl+"/elearningService/convertData/generateModelTest",
+			method: "POST",
+			params: {userId: userId}
+		});
+	}
+	
 	this.getUserModel = function(userId, data){
 		return $http({
 			url: $rootScope.baseUrl+"/elearningService/convertData/predict",
