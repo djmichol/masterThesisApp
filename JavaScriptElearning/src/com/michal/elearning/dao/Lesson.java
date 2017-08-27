@@ -14,8 +14,10 @@ public class Lesson {
 	private LessonVideo video;
 	private List<LessonQuizQuestion> quiz;
 	private String type;
+	private String helpMessage;
 	private int order;
 	private boolean passed;
+	private String boredMessage;
 	
 	public int getId() {
 		return id;
@@ -89,4 +91,18 @@ public class Lesson {
 	public void setPassed(boolean passed) {
 		this.passed = passed;
 	}
+	public String getHelpMessage() {
+		return helpMessage;
+	}
+	public void setHelpMessage(String helpMessage) {
+		this.helpMessage = helpMessage;
+	}
+	public String getBoredMessage() {
+		return boredMessage;
+	}
+	public void setBoredMessage(String boredMessage) {
+		this.boredMessage = boredMessage;
+	}
+	
+	
 }

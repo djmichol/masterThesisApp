@@ -186,7 +186,7 @@ public class ConverDataService {
 	}
 
 	private void tryToSaveTmpArffFile(Map.Entry<String, byte[]> entry, String type) throws IOException {		
-		File targetFile = new File("C:\\DataWeka\\"+ entry.getKey()+"-"+type+".arff");
+		File targetFile = new File("C:\\DataWeka\\"+ entry.getKey()+"-"+type+userId+".arff");
 	    OutputStream outStream = new FileOutputStream(targetFile);
 	    outStream.write(entry.getValue());
 	    outStream.close();

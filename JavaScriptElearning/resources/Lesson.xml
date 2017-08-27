@@ -17,6 +17,8 @@
 		<result property="article" column="lesson_article" />	
 		<result property="type" column="lesson_type" />	
 		<result property="order" column="lesson_order" />
+		<result property="helpMessage" column="lesson_help" />
+		<result property="boredMessage" column="lesson_bored_message" />
 	</resultMap>
 	
 	<resultMap id="LessonMapSimple" class="Lesson" >
@@ -56,7 +58,7 @@
 	</resultMap>
 	
 	<select id="getLessonById" resultMap="LessonMap" parameterClass="int">
-		 select lesson_id,lesson_title,lesson_brief,lesson_article,lesson_block_id,lesson_type,lesson_order from lessons where lesson_id=#value#
+		 select lesson_id,lesson_title,lesson_brief,lesson_article,lesson_block_id,lesson_type,lesson_order, lesson_help, lesson_bored_message from lessons where lesson_id=#value#
 	</select>
 
 	<select id="getLessonsForBlock" resultMap="LessonMapSimple" parameterClass="int">

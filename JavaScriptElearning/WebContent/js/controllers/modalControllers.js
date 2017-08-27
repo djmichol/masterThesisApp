@@ -36,15 +36,21 @@ app.controller('QuizResultModalInstanceCtrl', function($scope, $rootScope, $uibM
 app.controller('PredictionModalInstanceCtrl', function($scope, $rootScope, $uibModalInstance, lessonUtilsService) {
 	$scope.message = '';
 	
+	var engagedMessage = ['Tak trzymaj!!', 'Super!!'];
+	
 	$scope.init = function(){
+		var currentLesson = lessonUtilsService.getCurrentLesson();
+		//$scope.message = "System wykryl zaangazowanie! \r\n" +  engagedMessage[Math.floor(Math.random() * engagedMessage.length)];
 		if($rootScope.prediction.frustration==='Yes'){
-			$scope.message = 'frustration';
+			$scope.message = "System wykryl frustracje! \r\n" + currentLesson.helpMessage;
 		}else if($rootScope.prediction.confusion==='Yes'){
-			$scope.message = 'confusion';
+			$scope.message = "System wykryl zmieszanie! \r\n" + currentLesson.helpMessage;
 		}else if($rootScope.prediction.boredom==='Yes'){
-			$scope.message = 'boredom';
+			$scope.message = "System wykryl znudzenie! \r\n" + currentLesson.boredMessage;
 		}else if($rootScope.prediction.engaged==='Yes'){
-			$scope.message = 'engaged';
+			$scope.message = "System wykryl zaangazowanie! \r\n" +  engagedMessage[Math.floor(Math.random() * arr.length)];
+		}else{
+			$scope.ok();
 		}
 	}
 	
